@@ -1,0 +1,51 @@
+; [translate:Facts] about genres
+(genre fiction)
+(genre fantasy)
+(genre science-fiction)
+(genre romance)
+(genre thriller)
+(genre biography)
+(genre history)
+(genre self-help)
+(genre education)
+
+; [translate:Facts] about reader preferences
+(preference genre fantasy)
+(preference genre thriller)
+(preference genre biography)
+(preference length short)
+(preference length long)
+(preference language russian)
+(preference language english)
+(preference format ebook)
+(preference format hardcover)
+(preference age-group adult)
+(preference age-group children)
+(preference age-group young-adult)
+
+; [translate:Facts] about books
+(book book1 (title "The Lord of the Rings") (genre fantasy) (length long) (language russian) (format hardcover))
+(book book2 (title "1984") (genre science-fiction) (length medium) (language english) (format ebook))
+(book book3 (title "Influence: The Psychology of Persuasion") (genre self-help) (length short) (language russian) (format paperback))
+(book book4 (title "Thriller No.1") (genre thriller) (length medium) (language russian) (format hardcover))
+(book book5 (title "History of Russia") (genre history) (length long) (language russian) (format hardcover))
+(book book6 (title "Albert Einstein Biography") (genre biography) (length medium) (language english) (format ebook))
+
+; [translate:Facts] about users (sample profiles)
+(user user1 (age-group adult) (language-preference russian) (preferred-genre fantasy) (preferred-length long) (preferred-format hardcover))
+(user user2 (age-group young-adult) (language-preference english) (preferred-genre science-fiction) (preferred-length medium) (preferred-format ebook))
+
+; [translate:Ratings] and popularity of books
+(rating book1 4.8)
+(rating book2 4.5)
+(rating book3 4.0)
+(rating book4 3.9)
+(rating book5 4.2)
+(rating book6 4.6)
+
+(popularity book1 high)
+(popularity book2 medium)
+(popularity book3 low)
+(popularity book4 medium)
+(popularity book5 medium)
+(popularity book6 high)

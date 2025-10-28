@@ -1,0 +1,3 @@
+         CLIPS (6.30 3/17/15)
+CLIPS> (deffacts colors (color red)(color green) (color blue))
+CLIPS> 
