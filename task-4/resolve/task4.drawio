@@ -1,44 +1,44 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
   <diagram name="Страница — 1" id="uCsr0VBgmde8ibieJ8oe">
-    <mxGraphModel dx="3657" dy="2300" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="7130" dy="4330" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="book-lotr" value="&lt;font&gt;&lt;b&gt;Властелин колец&amp;nbsp;&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#FFFFFF;strokeColor=#2D7600;labelBackgroundColor=none;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-          <mxGeometry x="-1662.2" y="414.3" width="344" height="297" as="geometry" />
+          <mxGeometry x="-1760" y="400" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="book-1984" value="&lt;font&gt;&lt;b&gt;1984&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-          <mxGeometry x="-962.2" y="414.3" width="344" height="297" as="geometry" />
+          <mxGeometry x="-990" y="414.29999999999995" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="book-thriller1" value="&lt;font&gt;&lt;b&gt;Триллер №1&amp;nbsp;&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-          <mxGeometry x="-618.2" y="414.29999999999995" width="344" height="297" as="geometry" />
+          <mxGeometry x="-630" y="420" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="book-sherlock" value="&lt;font&gt;&lt;b&gt;Шерлок Холмс&amp;nbsp;&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-          <mxGeometry x="-274.2" y="414.3" width="344" height="297" as="geometry" />
+          <mxGeometry x="-274.20000000000005" y="440" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="book-pride" value="&lt;font&gt;&lt;b&gt;Гордость и предубеждение&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-          <mxGeometry x="69.80000000000001" y="414.29999999999995" width="344" height="297" as="geometry" />
+          <mxGeometry x="78.79999999999995" y="420" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="book-einstein" value="&lt;font&gt;&lt;b&gt;Альберт Эйнштейн Биография&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-          <mxGeometry x="422.79999999999995" y="414.3" width="344" height="297" as="geometry" />
+          <mxGeometry x="426" y="410" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="book-russia" value="&lt;font&gt;&lt;b&gt;История России&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-          <mxGeometry x="766.8" y="414.3" width="344" height="297" as="geometry" />
+          <mxGeometry x="774" y="420" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="book-influence" value="&lt;font&gt;&lt;b&gt;Психология Влияния&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-          <mxGeometry x="1109.8" y="400" width="344" height="297" as="geometry" />
+          <mxGeometry x="1118" y="420" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="book-sapiens" value="&lt;font&gt;&lt;b&gt;Sapiens&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-          <mxGeometry x="1453.8" y="414.3" width="344" height="297" as="geometry" />
+          <mxGeometry x="1480" y="420" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="book-harry" value="&lt;font&gt;&lt;b&gt;Гарри Поттер&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-          <mxGeometry x="-1318.2" y="414.3" width="344" height="297" as="geometry" />
+          <mxGeometry x="-1380" y="410" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="j8eD9IXPpESuBY232fKf-15" value="&lt;font style=&quot;font-size: 50px;&quot;&gt;Выбор книги&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;" parent="1" vertex="1">
           <mxGeometry x="-220" y="-970" width="570" height="230" as="geometry" />
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-2" value="&lt;font style=&quot;font-size: 35px;&quot;&gt;Жанр&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;swimlaneFillColor=#8DECFF;" vertex="1" parent="1">
-          <mxGeometry x="-1800" y="-405" width="1370" height="140" as="geometry" />
+          <mxGeometry x="-1890" y="-405" width="1460" height="140" as="geometry" />
         </mxCell>
         <mxCell id="cat-fantasy" value="&lt;b&gt;Фантастика&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="GE_0eAFPz4kt7BSk_G4X-2" vertex="1">
           <mxGeometry x="65" y="40" width="120" height="80" as="geometry" />
@@ -64,8 +64,11 @@
         <mxCell id="cat-education" value="&lt;b&gt;Образование&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="GE_0eAFPz4kt7BSk_G4X-2" vertex="1">
           <mxGeometry x="1185" y="40" width="120" height="80" as="geometry" />
         </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-139" value="&lt;b&gt;Детектив&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="GE_0eAFPz4kt7BSk_G4X-2">
+          <mxGeometry x="1320" y="40" width="120" height="80" as="geometry" />
+        </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-3" value="&lt;span style=&quot;font-size: 35px;&quot;&gt;Рейтинг&lt;/span&gt;" style="swimlane;whiteSpace=wrap;html=1;swimlaneFillColor=#FFD9AE;" vertex="1" parent="1">
-          <mxGeometry x="-350" y="-405" width="576" height="140" as="geometry" />
+          <mxGeometry x="-340" y="-400" width="580" height="140" as="geometry" />
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-12" value="&lt;font style=&quot;font-size: 40px;&quot;&gt;&amp;gt;2&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeColor=#8B633D;fillColor=#FFB570;" vertex="1" parent="GE_0eAFPz4kt7BSk_G4X-3">
           <mxGeometry x="46" y="30" width="100" height="100" as="geometry" />
@@ -80,7 +83,7 @@
           <mxGeometry x="446" y="30" width="100" height="100" as="geometry" />
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-16" value="&lt;span style=&quot;font-size: 35px;&quot;&gt;Длинна&lt;/span&gt;" style="swimlane;whiteSpace=wrap;html=1;swimlaneFillColor=#EEB6FF;" vertex="1" parent="1">
-          <mxGeometry x="330" y="-405" width="440" height="150" as="geometry" />
+          <mxGeometry x="334" y="-415" width="440" height="150" as="geometry" />
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-17" value="&lt;span&gt;short&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeColor=#FFB366;fillColor=#FFE1F8;fontSize=25;" vertex="1" parent="GE_0eAFPz4kt7BSk_G4X-16">
           <mxGeometry x="46" y="30" width="100" height="100" as="geometry" />
@@ -118,64 +121,30 @@
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-33" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-fantasy" target="book-harry">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-52" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-33">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-52" value="0.4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-33">
           <mxGeometry x="-0.0466" y="4" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-36" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-15" target="book-pride">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-36" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-15" target="GE_0eAFPz4kt7BSk_G4X-145">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-37" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-36">
-          <mxGeometry x="0.1794" relative="1" as="geometry">
-            <mxPoint x="-1" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-38" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-15" target="book-einstein">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-38" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=25;fontFamily=Lucida Console;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-15" target="GE_0eAFPz4kt7BSk_G4X-147">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-39" value="0.3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-38">
-          <mxGeometry x="0.0864" y="-6" relative="1" as="geometry">
-            <mxPoint x="-1" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-40" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-15" target="book-sapiens">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-41" value="0.1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-40">
-          <mxGeometry x="0.2527" y="-5" relative="1" as="geometry">
-            <mxPoint x="-1" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-42" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-64" target="book-1984">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-44" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-64" target="book-1984">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-40" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-15" target="GE_0eAFPz4kt7BSk_G4X-169">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-46" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-thriller" target="book-thriller1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-99" value="0.6" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-46">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-99" value="0.5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-46">
           <mxGeometry x="0.1247" y="2" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-48" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-romance" target="book-sherlock">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-50" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-romance" target="GE_0eAFPz4kt7BSk_G4X-145">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-49" value="0.1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-48">
-          <mxGeometry x="0.0917" y="-2" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-50" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-romance" target="book-pride">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-51" value="0.5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-50">
-          <mxGeometry x="-0.0366" y="-1" relative="1" as="geometry">
-            <mxPoint x="1" as="offset" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-57" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-fantasy" target="GE_0eAFPz4kt7BSk_G4X-59">
           <mxGeometry relative="1" as="geometry">
@@ -190,28 +159,35 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-59" value="0.9" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=25;fontFamily=Lucida Console;" vertex="1" parent="1">
-          <mxGeometry x="-1530.2" y="110" width="80" height="80" as="geometry" />
+          <mxGeometry x="-1628" y="160" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-62" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-scifi" target="GE_0eAFPz4kt7BSk_G4X-64">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-62" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-scifi" target="book-1984">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-1515" y="-285" as="sourcePoint" />
-            <mxPoint x="-790" y="414" as="targetPoint" />
+            <mxPoint x="-790.1999999999998" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-65" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-fantasy" target="GE_0eAFPz4kt7BSk_G4X-64">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-120" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-62">
+          <mxGeometry x="-0.1099" y="-4" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-65" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-fantasy" target="book-1984">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-1675" y="-285" as="sourcePoint" />
-            <mxPoint x="-790" y="414" as="targetPoint" />
+            <mxPoint x="-790.1999999999998" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-64" value="0.8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=25;fontFamily=Lucida Console;" vertex="1" parent="1">
-          <mxGeometry x="-830.2" y="220" width="80" height="80" as="geometry" />
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-121" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-65">
+          <mxGeometry x="0.0159" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-73" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-71" target="book-russia">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-71" value="0.8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=25;fontFamily=Lucida Console;" vertex="1" parent="1">
-          <mxGeometry x="898.8" y="220" width="80" height="80" as="geometry" />
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-71" value="0.6" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=25;fontFamily=Lucida Console;" vertex="1" parent="1">
+          <mxGeometry x="924" y="290" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-67" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-27" target="GE_0eAFPz4kt7BSk_G4X-71">
           <mxGeometry relative="1" as="geometry">
@@ -223,9 +199,14 @@
             <mxPoint x="980" y="240" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-70" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-history" target="GE_0eAFPz4kt7BSk_G4X-71">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-70" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-history" target="book-russia">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="790" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-153" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-70">
+          <mxGeometry x="0.5124" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-68" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-19" target="GE_0eAFPz4kt7BSk_G4X-71">
@@ -233,49 +214,29 @@
             <mxPoint x="920" y="320" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-74" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="cat-selfhelp" target="book-influence">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-74" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Lucida Console;fontSize=25;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cat-selfhelp" target="book-influence">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-76" value="0.8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-74">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-76" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-74">
           <mxGeometry x="-0.2048" y="-3" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-77" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="book-sapiens">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-77" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Lucida Console;fontSize=25;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="GE_0eAFPz4kt7BSk_G4X-169">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-87" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-77">
-          <mxGeometry x="-0.0776" y="5" relative="1" as="geometry">
-            <mxPoint y="-1" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-78" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-23" target="book-sapiens">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-78" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-23" target="GE_0eAFPz4kt7BSk_G4X-169">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-88" value="0.1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-78">
-          <mxGeometry x="-0.0628" y="1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-79" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-18" target="book-sapiens">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-79" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-18" target="GE_0eAFPz4kt7BSk_G4X-169">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1720" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-86" value="0.4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-79">
-          <mxGeometry x="-0.0579" y="3" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-80" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-14" target="book-sherlock">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-80" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-14" target="GE_0eAFPz4kt7BSk_G4X-137">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-84" value="0.3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-80">
-          <mxGeometry x="0.0035" y="4" relative="1" as="geometry">
-            <mxPoint y="-1" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-81" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-14" target="book-1984">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-81" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-14" target="GE_0eAFPz4kt7BSk_G4X-122">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-83" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-81">
@@ -299,13 +260,8 @@
             <mxPoint x="-1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-91" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-23" target="book-einstein">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-91" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-23" target="GE_0eAFPz4kt7BSk_G4X-147">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-92" value="0.1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-91">
-          <mxGeometry x="0.2646" y="-6" relative="1" as="geometry">
-            <mxPoint y="-1" as="offset" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-95" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="book-influence">
           <mxGeometry relative="1" as="geometry" />
@@ -315,13 +271,8 @@
             <mxPoint x="-1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-97" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="book-pride">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-97" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="GE_0eAFPz4kt7BSk_G4X-145">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-98" value="0.3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-97">
-          <mxGeometry x="0.0542" y="7" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-100" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="cat-biography" target="book-einstein">
           <mxGeometry relative="1" as="geometry" />
@@ -339,13 +290,183 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-104" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="cat-education" target="book-sapiens">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-104" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="cat-education" target="GE_0eAFPz4kt7BSk_G4X-169">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-105" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-104">
-          <mxGeometry x="0.1272" relative="1" as="geometry">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-106" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-22" target="book-harry">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-107" value="0.1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-106">
+          <mxGeometry x="0.2839" y="7" relative="1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-108" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-17" target="GE_0eAFPz4kt7BSk_G4X-122">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-109" value="0.1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-108">
+          <mxGeometry x="0.134" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-111" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-19" target="GE_0eAFPz4kt7BSk_G4X-59">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-230" y="-940" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-114" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="GE_0eAFPz4kt7BSk_G4X-59">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-665.3333875868057" y="-1080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-115" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="GE_0eAFPz4kt7BSk_G4X-59">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-123" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-122" target="book-1984">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-122" value="0.3" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontFamily=Lucida Console;fontSize=25;" vertex="1" parent="1">
+          <mxGeometry x="-868" y="210" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-124" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="book-harry">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-125" value="0.1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-124">
+          <mxGeometry x="0.4642" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-127" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-19" target="book-harry">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-128" value="0.1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-127">
+          <mxGeometry x="0.0605" y="4" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-129" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-13" target="book-thriller1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-130" value="0.1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-129">
+          <mxGeometry x="0.0158" y="-4" relative="1" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-131" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-18" target="GE_0eAFPz4kt7BSk_G4X-137">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-133" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="GE_0eAFPz4kt7BSk_G4X-137">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-134" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-23" target="GE_0eAFPz4kt7BSk_G4X-137">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-144" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-137" target="book-sherlock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-137" value="0.8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=25;fontFamily=Lucida Console;" vertex="1" parent="1">
+          <mxGeometry x="-150" y="200" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-140" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-139" target="book-sherlock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-143" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-140">
+          <mxGeometry x="0.3044" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-141" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-romance" target="book-sherlock">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-206.800048828125" y="-1080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-142" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-141">
+          <mxGeometry x="0.0863" y="-2" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-146" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-145" target="book-pride">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-145" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=25;fontFamily=Lucida Console;" vertex="1" parent="1">
+          <mxGeometry x="210.79999999999995" y="280" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-148" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-147" target="book-einstein">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-147" value="0.4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=25;fontFamily=Lucida Console;" vertex="1" parent="1">
+          <mxGeometry x="570" y="180" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-149" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="GE_0eAFPz4kt7BSk_G4X-147">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-150" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-18" target="GE_0eAFPz4kt7BSk_G4X-147">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1180" y="-1662.285679408482" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-151" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-13" target="GE_0eAFPz4kt7BSk_G4X-71">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-155" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-162" target="book-influence">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-156" value="0.1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-155">
+          <mxGeometry x="0.4204" y="-10" relative="1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-161" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-23" target="GE_0eAFPz4kt7BSk_G4X-162">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1840" y="-1040" as="targetPoint" />
+            <mxPoint x="1960" y="-675" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-163" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-13" target="GE_0eAFPz4kt7BSk_G4X-162">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="750" y="-1025" as="targetPoint" />
+            <mxPoint x="-474" y="-680" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-164" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-17" target="GE_0eAFPz4kt7BSk_G4X-162">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1490" y="-1005" as="targetPoint" />
+            <mxPoint x="756" y="-680" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-166" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-162" target="book-influence">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-165" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="GE_0eAFPz4kt7BSk_G4X-162">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2674" y="-1000" as="targetPoint" />
+            <mxPoint x="3028" y="-675" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-152" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-education" target="book-influence">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="960" y="-990" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-154" value="0.1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-152">
+          <mxGeometry x="0.6926" relative="1" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-167" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-education" target="GE_0eAFPz4kt7BSk_G4X-162">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-645" y="-285" as="sourcePoint" />
+            <mxPoint x="1290" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-162" value="0.6" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=25;fontFamily=Lucida Console;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="260" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-171" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-169" target="book-sapiens">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-169" value="0.9" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=25;fontFamily=Lucida Console;" vertex="1" parent="1">
+          <mxGeometry x="1614" y="110" width="80" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
