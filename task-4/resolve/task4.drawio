@@ -1,19 +1,19 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
   <diagram name="Страница — 1" id="uCsr0VBgmde8ibieJ8oe">
-    <mxGraphModel dx="3957" dy="2450" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="3657" dy="2300" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="book-lotr" value="&lt;font&gt;&lt;b&gt;Властелин колец (0.3)&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#FFFFFF;strokeColor=#2D7600;labelBackgroundColor=none;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
+        <mxCell id="book-lotr" value="&lt;font&gt;&lt;b&gt;Властелин колец&amp;nbsp;&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#FFFFFF;strokeColor=#2D7600;labelBackgroundColor=none;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
           <mxGeometry x="-1662.2" y="414.3" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="book-1984" value="&lt;font&gt;&lt;b&gt;1984&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
           <mxGeometry x="-962.2" y="414.3" width="344" height="297" as="geometry" />
         </mxCell>
-        <mxCell id="book-thriller1" value="&lt;font&gt;&lt;b&gt;Триллер №1 (0.4)&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
+        <mxCell id="book-thriller1" value="&lt;font&gt;&lt;b&gt;Триллер №1&amp;nbsp;&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
           <mxGeometry x="-618.2" y="414.29999999999995" width="344" height="297" as="geometry" />
         </mxCell>
-        <mxCell id="book-sherlock" value="&lt;font&gt;&lt;b&gt;Шерлок Холмс (0.6)&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
+        <mxCell id="book-sherlock" value="&lt;font&gt;&lt;b&gt;Шерлок Холмс&amp;nbsp;&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
           <mxGeometry x="-274.2" y="414.3" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="book-pride" value="&lt;font&gt;&lt;b&gt;Гордость и предубеждение&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
@@ -31,8 +31,8 @@
         <mxCell id="book-sapiens" value="&lt;font&gt;&lt;b&gt;Sapiens&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
           <mxGeometry x="1453.8" y="414.3" width="344" height="297" as="geometry" />
         </mxCell>
-        <mxCell id="book-harry" value="&lt;font&gt;&lt;b&gt;Гарри Поттер&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font&gt;&lt;b&gt;(0.7)&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-          <mxGeometry x="-1312.2" y="414.3" width="344" height="297" as="geometry" />
+        <mxCell id="book-harry" value="&lt;font&gt;&lt;b&gt;Гарри Поттер&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
+          <mxGeometry x="-1318.2" y="414.3" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="j8eD9IXPpESuBY232fKf-15" value="&lt;font style=&quot;font-size: 50px;&quot;&gt;Выбор книги&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;" parent="1" vertex="1">
           <mxGeometry x="-220" y="-970" width="570" height="230" as="geometry" />
@@ -126,7 +126,7 @@
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-36" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-15" target="book-pride">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-37" value="0.3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-36">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-37" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-36">
           <mxGeometry x="0.1794" relative="1" as="geometry">
             <mxPoint x="-1" as="offset" />
           </mxGeometry>
@@ -156,8 +156,8 @@
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-46" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-thriller" target="book-thriller1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-47" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-46">
-          <mxGeometry x="0.1195" y="2" relative="1" as="geometry">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-99" value="0.6" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-46">
+          <mxGeometry x="0.1247" y="2" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
@@ -172,7 +172,7 @@
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-50" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="cat-romance" target="book-pride">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-51" value="0.9" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-50">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-51" value="0.5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-50">
           <mxGeometry x="-0.0366" y="-1" relative="1" as="geometry">
             <mxPoint x="1" as="offset" />
           </mxGeometry>
@@ -236,7 +236,7 @@
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-74" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="cat-selfhelp" target="book-influence">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-76" value="0.9" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-74">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-76" value="0.8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-74">
           <mxGeometry x="-0.2048" y="-3" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -318,8 +318,32 @@
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-97" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="book-pride">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-98" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-97">
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-98" value="0.3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-97">
           <mxGeometry x="0.0542" y="7" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-100" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="cat-biography" target="book-einstein">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-101" value="0.3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-100">
+          <mxGeometry x="0.0352" y="-4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-102" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="cat-education" target="book-einstein">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-103" value="0.3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-102">
+          <mxGeometry x="-0.0911" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-104" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="cat-education" target="book-sapiens">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE_0eAFPz4kt7BSk_G4X-105" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-104">
+          <mxGeometry x="0.1272" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
