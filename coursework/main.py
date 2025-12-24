@@ -109,7 +109,46 @@ def run_cli():
     preferences['художественные_средства'] = [tool_map[c.strip()] for c in choices if c.strip() in tool_map]
     print()
     
+    # Показываем путь принятия решения
+    print("=" * 60)
+    print("🛤️  ПУТЬ ПРИНЯТИЯ РЕШЕНИЯ")
+    print("=" * 60)
+    
+    path_items = []
+    
+    if preferences.get('объём'):
+        vol_map = {'короткое': '⚡ Короткое', 'среднее': '📚 Среднее', 'длинное': '📖 Длинное'}
+        path_items.append(vol_map.get(preferences['объём'], preferences['объём']))
+    
+    if preferences.get('сложность'):
+        comp_map = {'низкая': '😌 Лёгкое', 'средняя': '🤔 Среднее', 'высокая': '🎓 Сложное'}
+        path_items.append(comp_map.get(preferences['сложность'], preferences['сложность']))
+    
+    if preferences.get('настроение'):
+        path_items.append(f"🎭 {preferences['настроение'].capitalize()}")
+    
+    if preferences.get('тип_героя'):
+        hero_map = {
+            'идеалист': '😇 Идеалист', 'бунтарь': '✊ Бунтарь',
+            'лишний_человек': '😔 Лишний человек', 'обыватель': '👤 Обыватель',
+            'искатель': '🔍 Искатель', 'антигерой': '🖤 Антигерой'
+        }
+        path_items.append(hero_map.get(preferences['тип_героя'], preferences['тип_героя']))
+    
+    # Отображаем путь
+    print("\n   " + " → ".join(path_items))
+    
+    # Детали
+    print("\n📋 Детали выбора:")
+    if preferences.get('темы'):
+        print(f"   📌 Темы: {', '.join(preferences['темы'])}")
+    if preferences.get('тип_конфликта'):
+        print(f"   ⚔️  Конфликт: {preferences['тип_конфликта'].replace('_', ' ')}")
+    if preferences.get('художественные_средства'):
+        print(f"   🎨 Приёмы: {', '.join(preferences['художественные_средства'])}")
+    
     # Получаем рекомендации
+    print()
     print("=" * 60)
     print("🎯 РЕКОМЕНДАЦИИ")
     print("=" * 60)
