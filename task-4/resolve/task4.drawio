@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
   <diagram name="Страница — 1" id="uCsr0VBgmde8ibieJ8oe">
-    <mxGraphModel dx="7130" dy="4330" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="4897" dy="2989" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -20,7 +20,7 @@
           <mxGeometry x="78.79999999999995" y="420" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="book-einstein" value="&lt;font&gt;&lt;b&gt;Альберт Эйнштейн Биография&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-          <mxGeometry x="426" y="410" width="344" height="297" as="geometry" />
+          <mxGeometry x="440" y="420" width="344" height="297" as="geometry" />
         </mxCell>
         <mxCell id="book-russia" value="&lt;font&gt;&lt;b&gt;История России&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#13A963;fontColor=#ffffff;strokeColor=#2D7600;fontSize=35;fontFamily=Comic Sans MS;" parent="1" vertex="1">
           <mxGeometry x="774" y="420" width="344" height="297" as="geometry" />
@@ -206,7 +206,7 @@
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-153" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=25;fontFamily=Lucida Console;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-70">
           <mxGeometry x="0.5124" y="1" relative="1" as="geometry">
-            <mxPoint as="offset" />
+            <mxPoint x="14" y="10" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-68" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-19" target="GE_0eAFPz4kt7BSk_G4X-71">
@@ -262,14 +262,6 @@
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-91" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-23" target="GE_0eAFPz4kt7BSk_G4X-147">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-95" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="book-influence">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="GE_0eAFPz4kt7BSk_G4X-96" value="0.2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Lucida Console;fontSize=25;" vertex="1" connectable="0" parent="GE_0eAFPz4kt7BSk_G4X-95">
-          <mxGeometry x="-0.1394" y="2" relative="1" as="geometry">
-            <mxPoint x="-1" as="offset" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-97" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Lucida Console;fontSize=25;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="GE_0eAFPz4kt7BSk_G4X-145">
           <mxGeometry relative="1" as="geometry" />
@@ -395,7 +387,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-147" value="0.4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=25;fontFamily=Lucida Console;" vertex="1" parent="1">
-          <mxGeometry x="570" y="180" width="80" height="80" as="geometry" />
+          <mxGeometry x="584" y="190" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="GE_0eAFPz4kt7BSk_G4X-149" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=25;fontFamily=Lucida Console;" edge="1" parent="1" source="GE_0eAFPz4kt7BSk_G4X-28" target="GE_0eAFPz4kt7BSk_G4X-147">
           <mxGeometry relative="1" as="geometry" />
