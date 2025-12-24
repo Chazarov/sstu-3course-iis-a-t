@@ -1,3 +1,2 @@
-experta>=1.9.4
-frozendict>=2.3.8
+experta
 

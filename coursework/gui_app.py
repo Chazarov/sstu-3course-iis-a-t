@@ -9,11 +9,7 @@ from tkinter import ttk, messagebox, scrolledtext
 import json
 import os
 
-# Импорт экспертной системы
-try:
-    from expert_system import get_recommendations, BookExpertSystem
-except ImportError:
-    get_recommendations = None
+from expert_system import get_recommendations, BookExpertSystem
 
 
 class BookRecommenderApp:
@@ -605,73 +601,48 @@ class BookRecommenderApp:
         main_canvas.bind_all("<MouseWheel>", _on_mousewheel)
         
         # ==================== ПУТЬ ПРИНЯТИЯ РЕШЕНИЯ ====================
-        path_frame = tk.Frame(content_frame, bg=self.colors['card'], padx=15, pady=15)
+        path_frame = tk.Frame(content_frame, bg=self.colors['card'], padx=15, pady=10)
         path_frame.pack(fill='x', pady=(10, 15), padx=10)
         
-        path_title = tk.Label(path_frame,
-                             text="🛤️ Путь принятия решения",
-                             font=('Segoe UI', 14, 'bold'),
+        # Заголовок и кнопка копирования
+        header_frame = tk.Frame(path_frame, bg=self.colors['card'])
+        header_frame.pack(fill='x')
+        
+        path_title = tk.Label(header_frame,
+                             text="📋 Ваш выбор:",
+                             font=('Segoe UI', 11, 'bold'),
                              bg=self.colors['card'],
-                             fg=self.colors['success'])
-        path_title.pack(anchor='w', pady=(0, 10))
+                             fg=self.colors['fg'])
+        path_title.pack(side='left')
         
-        # Формируем путь
-        path_items = self._format_decision_path()
+        # Формируем текст для копирования
+        self.path_text = self._format_simple_path()
         
-        # Отображаем путь в виде цепочки
-        path_chain = tk.Frame(path_frame, bg=self.colors['card'])
-        path_chain.pack(fill='x')
+        copy_btn = tk.Button(header_frame,
+                            text="📋 Копировать",
+                            font=('Segoe UI', 9),
+                            bg=self.colors['button'],
+                            fg=self.colors['fg'],
+                            activebackground=self.colors['accent'],
+                            border=0,
+                            padx=10, pady=3,
+                            cursor='hand2',
+                            command=self._copy_path_to_clipboard)
+        copy_btn.pack(side='right')
         
-        for i, (icon, label, value) in enumerate(path_items):
-            item_frame = tk.Frame(path_chain, bg=self.colors['card'])
-            item_frame.pack(side='left', padx=5, pady=5)
-            
-            # Блок с выбором
-            block = tk.Frame(item_frame, bg=self.colors['button'], padx=10, pady=8)
-            block.pack()
-            
-            icon_label = tk.Label(block,
-                                 text=icon,
-                                 font=('Segoe UI', 12),
-                                 bg=self.colors['button'],
-                                 fg='white')
-            icon_label.pack()
-            
-            text_label = tk.Label(block,
-                                 text=value,
-                                 font=('Segoe UI', 9, 'bold'),
-                                 bg=self.colors['button'],
-                                 fg='white')
-            text_label.pack()
-            
-            # Стрелка между блоками (кроме последнего)
-            if i < len(path_items) - 1:
-                arrow = tk.Label(path_chain,
-                               text="→",
-                               font=('Segoe UI', 16, 'bold'),
-                               bg=self.colors['card'],
-                               fg=self.colors['accent'])
-                arrow.pack(side='left', padx=2)
-        
-        # Подробная таблица выборов
-        details_frame = tk.Frame(path_frame, bg=self.colors['card'])
-        details_frame.pack(fill='x', pady=(15, 5))
-        
-        details_title = tk.Label(details_frame,
-                                text="📋 Детали выбора:",
-                                font=('Segoe UI', 11, 'bold'),
-                                bg=self.colors['card'],
-                                fg=self.colors['fg'])
-        details_title.pack(anchor='w', pady=(0, 5))
-        
-        details_text = self._format_details_text()
-        details_label = tk.Label(details_frame,
-                                text=details_text,
-                                font=('Segoe UI', 10),
-                                bg=self.colors['card'],
-                                fg='#aaa',
-                                justify='left')
-        details_label.pack(anchor='w', padx=10)
+        # Текстовое поле с путём (можно выделять и копировать)
+        path_text_widget = tk.Text(path_frame,
+                                   height=6,
+                                   font=('Consolas', 10),
+                                   bg='#0d1117',
+                                   fg='#c9d1d9',
+                                   relief='flat',
+                                   padx=10, pady=10,
+                                   wrap='word',
+                                   cursor='arrow')
+        path_text_widget.pack(fill='x', pady=(10, 0))
+        path_text_widget.insert('1.0', self.path_text)
+        path_text_widget.config(state='disabled')  # Только чтение, но можно выделять
         
         # ==================== ЗАГОЛОВОК РЕКОМЕНДАЦИЙ ====================
         title = tk.Label(content_frame,
@@ -681,11 +652,7 @@ class BookRecommenderApp:
                         fg=self.colors['accent'])
         title.pack(pady=(20, 10))
         
-        # Получаем рекомендации
-        if get_recommendations:
-            results = get_recommendations(self.preferences)
-        else:
-            results = self._fallback_recommendations()
+        results = get_recommendations(self.preferences)
         
         if not results:
             no_results = tk.Label(content_frame,
@@ -707,60 +674,54 @@ class BookRecommenderApp:
         self.next_btn.config(text="🔄 Начать заново", command=self.reset)
         self.back_btn.config(state='normal')
     
-    def _format_decision_path(self):
-        """Форматирование пути принятия решения для визуализации"""
-        path = []
+    def _copy_path_to_clipboard(self):
+        """Копирование пути в буфер обмена"""
+        self.root.clipboard_clear()
+        self.root.clipboard_append(self.path_text)
+        # Показываем уведомление
+        messagebox.showinfo("Скопировано", "Путь принятия решения скопирован в буфер обмена!")
+    
+    def _format_simple_path(self):
+        """Форматирование простого текста пути"""
+        lines = []
         
         # Объём
         volume = self.preferences.get('объём', '')
         if volume:
-            volume_icons = {'короткое': '⚡', 'среднее': '📚', 'длинное': '📖'}
-            volume_labels = {'короткое': 'Короткое', 'среднее': 'Среднее', 'длинное': 'Длинное'}
-            path.append((volume_icons.get(volume, '📖'), 'Объём', volume_labels.get(volume, volume)))
+            vol_text = {'короткое': 'до 200 стр.', 'среднее': '200-500 стр.', 'длинное': 'более 500 стр.'}
+            lines.append(f"Объём: {volume} ({vol_text.get(volume, '')})")
         
         # Сложность
         complexity = self.preferences.get('сложность', '')
         if complexity:
-            comp_icons = {'низкая': '😌', 'средняя': '🤔', 'высокая': '🎓'}
-            comp_labels = {'низкая': 'Лёгкое', 'средняя': 'Среднее', 'высокая': 'Сложное'}
-            path.append((comp_icons.get(complexity, '📊'), 'Сложность', comp_labels.get(complexity, complexity)))
+            lines.append(f"Сложность: {complexity}")
         
         # Настроение
         mood = self.preferences.get('настроение', '')
         if mood:
-            mood_icons = {
-                'философское': '💭', 'драматическое': '😢', 'сатирическое': '😄',
-                'романтическое': '💕', 'трагическое': '💔', 'лирическое': '🌸'
-            }
-            path.append((mood_icons.get(mood, '🎭'), 'Настроение', mood.capitalize()))
+            lines.append(f"Настроение: {mood}")
+        
+        # Темы
+        themes = self.preferences.get('темы', [])
+        if themes:
+            lines.append(f"Темы: {', '.join(themes)}")
         
         # Тип героя
         hero = self.preferences.get('тип_героя', '')
         if hero:
-            hero_icons = {
-                'идеалист': '😇', 'бунтарь': '✊', 'лишний_человек': '😔',
-                'обыватель': '👤', 'искатель': '🔍', 'жертва': '😢', 'антигерой': '🖤'
-            }
-            hero_labels = {
-                'идеалист': 'Идеалист', 'бунтарь': 'Бунтарь', 'лишний_человек': 'Лишний чел.',
-                'обыватель': 'Обыватель', 'искатель': 'Искатель', 'жертва': 'Жертва', 'антигерой': 'Антигерой'
-            }
-            path.append((hero_icons.get(hero, '👤'), 'Герой', hero_labels.get(hero, hero)))
+            lines.append(f"Тип героя: {hero.replace('_', ' ')}")
         
-        # Конфликт
+        # Тип конфликта
         conflict = self.preferences.get('тип_конфликта', '')
         if conflict:
-            conflict_labels = {
-                'личность_vs_общество': 'vs Общество',
-                'добро_vs_зло': 'Добро vs Зло',
-                'долг_vs_чувство': 'Долг vs Чувство',
-                'идеал_vs_реальность': 'Идеал vs Реальность',
-                'старое_vs_новое': 'Старое vs Новое',
-                'свобода_vs_система': 'Свобода vs Система'
-            }
-            path.append(('⚡', 'Конфликт', conflict_labels.get(conflict, conflict)))
+            lines.append(f"Конфликт: {conflict.replace('_', ' ')}")
         
-        return path
+        # Художественные средства
+        tools = self.preferences.get('художественные_средства', [])
+        if tools:
+            lines.append(f"Приёмы: {', '.join(tools)}")
+        
+        return '\n'.join(lines)
     
     def _format_details_text(self):
         """Форматирование детального текста выбора"""
@@ -876,45 +837,6 @@ class BookRecommenderApp:
         """Показать название книги"""
         btn.config(text=f"📚 {name}", fg=self.colors['accent'])
     
-    def _fallback_recommendations(self):
-        """Запасные рекомендации, если experta не работает"""
-        # Простая логика на основе выбора
-        results = []
-        
-        volume = self.preferences.get('объём')
-        complexity = self.preferences.get('сложность')
-        mood = self.preferences.get('настроение')
-        
-        if volume == 'короткое' and complexity == 'низкая':
-            results.append({
-                'название': 'Собачье сердце',
-                'объяснение': 'Короткое и лёгкое сатирическое произведение',
-                'данные': {'автор': 'Булгаков', 'жанр': 'повесть', 'страницы': 100, 'год': 1925}
-            })
-        
-        if mood == 'философское':
-            results.append({
-                'название': 'Братья Карамазовы',
-                'объяснение': 'Глубокий философский роман о вере и смысле жизни',
-                'данные': {'автор': 'Достоевский', 'жанр': 'роман', 'страницы': 800, 'год': 1880}
-            })
-        
-        if mood == 'романтическое':
-            results.append({
-                'название': 'Евгений Онегин',
-                'объяснение': 'Романтическая история в стихах',
-                'данные': {'автор': 'Пушкин', 'жанр': 'роман в стихах', 'страницы': 415, 'год': 1831}
-            })
-        
-        if not results:
-            results.append({
-                'название': 'Мастер и Маргарита',
-                'объяснение': 'Универсальный выбор — роман для всех',
-                'данные': {'автор': 'Булгаков', 'жанр': 'роман', 'страницы': 480, 'год': 1967}
-            })
-        
-        return results
-
 
 def main():
     """Точка входа"""
