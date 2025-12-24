@@ -4,3 +4,5 @@ remarks/
 *.bmp
 
 .~lock*
+
+__pycache__/
