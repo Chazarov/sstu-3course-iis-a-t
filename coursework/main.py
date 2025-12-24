@@ -1,28 +1,42 @@
-# -*- coding: utf-8 -*-
-"""
-Экспертная система подбора классической литературы
-Использует scikit-learn для классификации и рекомендаций
 
-Курсовая работа по ИИСиТ
-"""
+
+from __future__ import annotations
 
 import json
 import os
-import numpy as np
-from typing import Dict, List, Tuple, Optional, Any
-from dataclasses import dataclass, field
+import re
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
 
-# Scikit-learn импорты
-from sklearn.preprocessing import LabelEncoder, MultiLabelBinarizer
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.neighbors import NearestNeighbors
+import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import MultiLabelBinarizer, OneHotEncoder
+
+import tkinter as tk
+from tkinter import messagebox
+from PIL import Image, ImageTk
 
 
-@dataclass
+# ---------------------------
+# ТЁМНАЯ ТЕМА (палитра)
+# ---------------------------
+COL_PRIMARY = "#FC703C"
+COL_DARK = "#5D0703"
+COL_LIGHT = "#F4F3E6"
+COL_ACCENT = "#FFA175"
+
+COL_BG = COL_DARK
+COL_SURFACE = COL_DARK
+COL_TEXT = COL_LIGHT
+COL_MUTED = COL_ACCENT
+
+
+# ---------------------------
+# МОДЕЛЬ ДАННЫХ
+# ---------------------------
+@dataclass(frozen=True)
 class Book:
-    """Класс для представления книги"""
     name: str
     author: str
     genre: str
@@ -31,790 +45,1181 @@ class Book:
     complexity: str
     volume: str
     mood: str
-    themes: List[str]
+    themes: Tuple[str, ...]
     conflict_type: str
     hero_type: str
-    artistic_means: List[str]
+    artistic_means: Tuple[str, ...]
     pages: int
     year: int
-    author_position: str = ""
-    audience: str = ""
-    attention_points: str = ""
-    weaknesses: str = ""
-    interpretations: str = ""
-    
-    def __str__(self):
-        return f"{self.name} ({self.author}, {self.year})"
+    author_position: str  # (14)
+    audience: str  # (15)
+    attention_points: str  # (16)
+    weaknesses: str  # (17)
+    interpretations: str  # (18)
+    image_file: str  # имя файла изображения обложки
 
 
 @dataclass
-class UserPreferences:
-    """Класс для хранения предпочтений пользователя"""
+class Preferences:
     volume: Optional[str] = None
     complexity: Optional[str] = None
     mood: Optional[str] = None
-    themes: List[str] = field(default_factory=list)
+    themes: List[str] = None
     hero_type: Optional[str] = None
     conflict_type: Optional[str] = None
-    artistic_means: List[str] = field(default_factory=list)
+    artistic_means: List[str] = None
     era: Optional[str] = None
     genre_group: Optional[List[str]] = None
 
+    # 14/15/17/18 — текстовые предпочтения
+    liked_author_position: List[str] = None  # 14
+    liked_audience: List[str] = None  # 15
+    disliked_weaknesses: List[str] = None  # 17 (негатив)
+    liked_interpretations: List[str] = None  # 18
 
-class DataLoader:
-    """Загрузчик данных из JSON файлов"""
-    
-    def __init__(self, base_path: str):
-        self.base_path = Path(base_path)
-        
-    def load_json(self, filepath: str) -> Dict:
-        """Загрузка JSON файла"""
-        full_path = self.base_path / filepath
-        with open(full_path, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    
-    def load_catalog(self) -> Dict:
-        """Загрузка каталога произведений"""
-        return self.load_json("data/каталог.json")
-    
-    def load_questions(self) -> Dict:
-        """Загрузка вопросов"""
-        return self.load_json("data/вопросы.json")
-    
-    def load_rules(self) -> Dict:
-        """Загрузка продукционных правил"""
-        return self.load_json("rules/правила.json")
-    
-    def load_config(self) -> Dict:
-        """Загрузка конфигурации"""
-        return self.load_json("config.json")
-    
-    def load_frames(self) -> Dict:
-        """Загрузка фреймов"""
-        return {
-            "authors": self.load_json("frames/авторы.json"),
-            "genres": self.load_json("frames/жанры.json"),
-            "directions": self.load_json("frames/направления.json")
-        }
-    
-    def load_all_books(self, catalog: Dict) -> List[Book]:
-        """Загрузка всех книг из каталога"""
-        books = []
-        for book_id, book_info in catalog["произведения"].items():
-            try:
-                book_data = self.load_json(f"parametrs/{book_info['файл']}")
-                book = Book(
-                    name=book_info["название"],
-                    author=book_data.get("автор", book_info["автор"]),
-                    genre=book_data.get("жанр", ""),
-                    era=book_data.get("эпоха", ""),
-                    direction=book_data.get("направление", ""),
-                    complexity=book_data.get("сложность", ""),
-                    volume=book_data.get("объём", ""),
-                    mood=book_data.get("настроение", ""),
-                    themes=book_data.get("темы", []),
-                    conflict_type=book_data.get("тип_конфликта", ""),
-                    hero_type=book_data.get("тип_героя", ""),
-                    artistic_means=book_data.get("художественные_средства", []),
-                    pages=book_data.get("страницы", 0),
-                    year=book_data.get("год", book_info["год"]),
-                    author_position=book_data.get("авторская_позиция", ""),
-                    audience=book_data.get("аудитория", ""),
-                    attention_points=book_data.get("точки_внимания", ""),
-                    weaknesses=book_data.get("слабые_стороны", ""),
-                    interpretations=book_data.get("интерпретации", "")
-                )
-                books.append(book)
-            except Exception as e:
-                print(f"Ошибка загрузки книги {book_info['название']}: {e}")
-        return books
+    def __post_init__(self) -> None:
+        self.themes = self.themes or []
+        self.artistic_means = self.artistic_means or []
+        self.liked_author_position = self.liked_author_position or []
+        self.liked_audience = self.liked_audience or []
+        self.disliked_weaknesses = self.disliked_weaknesses or []
+        self.liked_interpretations = self.liked_interpretations or []
 
 
-class FeatureVectorizer:
-    """Векторизатор признаков для машинного обучения"""
-    
-    def __init__(self):
-        # Энкодеры для категориальных признаков
-        self.volume_encoder = LabelEncoder()
-        self.complexity_encoder = LabelEncoder()
-        self.mood_encoder = LabelEncoder()
-        self.conflict_encoder = LabelEncoder()
-        self.hero_encoder = LabelEncoder()
-        self.era_encoder = LabelEncoder()
-        self.genre_encoder = LabelEncoder()
-        self.direction_encoder = LabelEncoder()
-        
-        # Бинаризаторы для множественных меток
-        self.themes_binarizer = MultiLabelBinarizer()
-        self.means_binarizer = MultiLabelBinarizer()
-        
-        self.is_fitted = False
-        
-    def fit(self, books: List[Book]):
-        """Обучение энкодеров на данных книг"""
-        # Собираем все уникальные значения
-        volumes = [b.volume for b in books if b.volume]
-        complexities = [b.complexity for b in books if b.complexity]
-        moods = [b.mood for b in books if b.mood]
-        conflicts = [b.conflict_type for b in books if b.conflict_type]
-        heroes = [b.hero_type for b in books if b.hero_type]
-        eras = [b.era for b in books if b.era]
-        genres = [b.genre for b in books if b.genre]
-        directions = [b.direction for b in books if b.direction]
-        
-        # Обучаем энкодеры
-        self.volume_encoder.fit(volumes)
-        self.complexity_encoder.fit(complexities)
-        self.mood_encoder.fit(moods)
-        self.conflict_encoder.fit(conflicts)
-        self.hero_encoder.fit(heroes)
-        self.era_encoder.fit(eras)
-        self.genre_encoder.fit(genres)
-        self.direction_encoder.fit(directions)
-        
-        # Обучаем бинаризаторы
-        all_themes = [b.themes for b in books]
-        all_means = [b.artistic_means for b in books]
-        self.themes_binarizer.fit(all_themes)
-        self.means_binarizer.fit(all_means)
-        
-        self.is_fitted = True
-        
-    def transform_book(self, book: Book) -> np.ndarray:
-        """Преобразование книги в вектор признаков"""
-        if not self.is_fitted:
-            raise ValueError("Vectorizer not fitted. Call fit() first.")
-        
-        features = []
-        
-        # Категориальные признаки (one-hot encoding через порядковый номер)
-        features.append(self._safe_encode(self.volume_encoder, book.volume))
-        features.append(self._safe_encode(self.complexity_encoder, book.complexity))
-        features.append(self._safe_encode(self.mood_encoder, book.mood))
-        features.append(self._safe_encode(self.conflict_encoder, book.conflict_type))
-        features.append(self._safe_encode(self.hero_encoder, book.hero_type))
-        features.append(self._safe_encode(self.era_encoder, book.era))
-        features.append(self._safe_encode(self.genre_encoder, book.genre))
-        features.append(self._safe_encode(self.direction_encoder, book.direction))
-        
-        # Множественные метки (бинарные векторы)
-        themes_vec = self.themes_binarizer.transform([book.themes])[0]
-        means_vec = self.means_binarizer.transform([book.artistic_means])[0]
-        
-        # Объединяем все признаки
-        categorical = np.array(features)
-        return np.concatenate([categorical, themes_vec, means_vec])
-    
-    def transform_preferences(self, prefs: UserPreferences) -> np.ndarray:
-        """Преобразование предпочтений пользователя в вектор"""
-        if not self.is_fitted:
-            raise ValueError("Vectorizer not fitted. Call fit() first.")
-        
-        features = []
-        
-        # Категориальные признаки
-        features.append(self._safe_encode(self.volume_encoder, prefs.volume) if prefs.volume else -1)
-        features.append(self._safe_encode(self.complexity_encoder, prefs.complexity) if prefs.complexity else -1)
-        features.append(self._safe_encode(self.mood_encoder, prefs.mood) if prefs.mood else -1)
-        features.append(self._safe_encode(self.conflict_encoder, prefs.conflict_type) if prefs.conflict_type else -1)
-        features.append(self._safe_encode(self.hero_encoder, prefs.hero_type) if prefs.hero_type else -1)
-        features.append(self._safe_encode(self.era_encoder, prefs.era) if prefs.era else -1)
-        features.append(-1)  # genre - пропускаем
-        features.append(-1)  # direction - пропускаем
-        
-        # Множественные метки
-        themes_vec = self.themes_binarizer.transform([prefs.themes])[0] if prefs.themes else np.zeros(len(self.themes_binarizer.classes_))
-        means_vec = self.means_binarizer.transform([prefs.artistic_means])[0] if prefs.artistic_means else np.zeros(len(self.means_binarizer.classes_))
-        
-        categorical = np.array(features)
-        return np.concatenate([categorical, themes_vec, means_vec])
-    
-    def _safe_encode(self, encoder: LabelEncoder, value: str) -> int:
-        """Безопасное кодирование значения"""
+# ---------------------------
+# ЗАГРУЗКА ДАННЫХ
+# ---------------------------
+def _read_json(p: Path) -> Dict[str, Any]:
+    with p.open("r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def load_data(data_dir: Path) -> Tuple[List[Book], Dict[str, Any], Dict[str, Any], Dict[str, Any]]:
+    config = _read_json(data_dir / "config.json")
+    questions = _read_json(data_dir / "data" / "вопросы.json")
+    rules = _read_json(data_dir / "rules" / "правила.json").get("правила", {})
+    catalog = _read_json(data_dir / "data" / "каталог.json").get("произведения", {})
+
+    books: List[Book] = []
+    for _, info in catalog.items():
+        fp = data_dir / "parametrs" / info["файл"]
         try:
-            if value and value in encoder.classes_:
-                return encoder.transform([value])[0]
-            return -1
-        except:
-            return -1
-    
-    def transform_all_books(self, books: List[Book]) -> np.ndarray:
-        """Преобразование всех книг в матрицу признаков"""
-        return np.array([self.transform_book(b) for b in books])
+            d = _read_json(fp)
+        except Exception:
+            continue
+
+        books.append(
+            Book(
+                name=str(info.get("название", "")).strip(),
+                author=str(d.get("автор", info.get("автор", "")) or "").strip(),
+                genre=str(d.get("жанр", "") or "").strip(),
+                era=str(d.get("эпоха", "") or "").strip(),
+                direction=str(d.get("направление", "") or "").strip(),
+                complexity=str(d.get("сложность", "") or "").strip(),
+                volume=str(d.get("объём", "") or "").strip(),
+                mood=str(d.get("настроение", "") or "").strip(),
+                themes=tuple(d.get("темы", []) or []),
+                conflict_type=str(d.get("тип_конфликта", "") or "").strip(),
+                hero_type=str(d.get("тип_героя", "") or "").strip(),
+                artistic_means=tuple(d.get("художественные_средства", []) or []),
+                pages=int(d.get("страницы", 0) or 0),
+                year=int(d.get("год", info.get("год", 0)) or 0),
+                author_position=str(d.get("авторская_позиция", "") or "").strip(),
+                audience=str(d.get("аудитория", "") or "").strip(),
+                attention_points=str(d.get("точки_внимания", "") or "").strip(),
+                weaknesses=str(d.get("слабые_стороны", "") or "").strip(),
+                interpretations=str(d.get("интерпретации", "") or "").strip(),
+                image_file=str(d.get("изображение", "") or "").strip(),
+            )
+        )
+
+    return books, config, questions, rules
 
 
-class RuleEngine:
-    """Движок продукционных правил"""
-    
-    def __init__(self, rules: Dict):
-        self.rules = rules.get("правила", {})
-        
-    def evaluate_rule(self, rule: Dict, prefs: UserPreferences, books: List[Book]) -> Tuple[bool, List[str]]:
-        """Проверка применимости правила к предпочтениям"""
-        conditions = rule.get("если", {})
-        matches = True
-        
-        for param, value in conditions.items():
-            if param == "объём" and prefs.volume:
-                if prefs.volume != value:
-                    matches = False
-                    break
-            elif param == "сложность" and prefs.complexity:
-                if isinstance(value, list):
-                    if prefs.complexity not in value:
-                        matches = False
-                        break
-                elif prefs.complexity != value:
-                    matches = False
-                    break
-            elif param == "настроение" and prefs.mood:
-                if isinstance(value, list):
-                    if prefs.mood not in value:
-                        matches = False
-                        break
-                elif prefs.mood != value:
-                    matches = False
-                    break
-            elif param == "темы" and prefs.themes:
-                required_themes = value if isinstance(value, list) else [value]
-                if not any(t in prefs.themes for t in required_themes):
-                    matches = False
-                    break
-            elif param == "тип_конфликта" and prefs.conflict_type:
-                if prefs.conflict_type != value:
-                    matches = False
-                    break
-            elif param == "тип_героя" and prefs.hero_type:
-                if prefs.hero_type != value:
-                    matches = False
-                    break
-            elif param == "художественные_средства" and prefs.artistic_means:
-                required_means = value if isinstance(value, list) else [value]
-                if not any(m in prefs.artistic_means for m in required_means):
-                    matches = False
-                    break
-            elif param == "эпоха" and prefs.era:
-                if prefs.era != value:
-                    matches = False
-                    break
-            elif param == "жанр" and prefs.genre_group:
-                required_genres = value if isinstance(value, list) else [value]
-                if not any(g in prefs.genre_group for g in required_genres):
-                    matches = False
-                    break
-        
-        if matches:
-            return True, rule.get("то", [])
-        return False, []
-    
-    def get_recommendations(self, prefs: UserPreferences, books: List[Book]) -> List[Tuple[str, str, str]]:
-        """Получение рекомендаций на основе правил"""
-        recommendations = []
-        
-        for rule_id, rule in self.rules.items():
-            matched, book_names = self.evaluate_rule(rule, prefs, books)
-            if matched:
-                for book_name in book_names:
-                    recommendations.append((
-                        book_name,
-                        rule.get("название", ""),
-                        rule.get("объяснение", "")
-                    ))
-        
-        return recommendations
+# ---------------------------
+# ПРАВИЛА (минимально)
+# ---------------------------
+def _as_list(x: Any) -> List[Any]:
+    if x is None:
+        return []
+    return x if isinstance(x, list) else [x]
 
 
-class MLRecommender:
-    """Рекомендательная система на основе машинного обучения"""
-    
-    def __init__(self, vectorizer: FeatureVectorizer):
-        self.vectorizer = vectorizer
-        self.knn = NearestNeighbors(n_neighbors=5, metric='cosine')
-        self.decision_tree = DecisionTreeClassifier(max_depth=10, random_state=42)
-        self.books: List[Book] = []
-        self.book_vectors: np.ndarray = None
-        
-    def fit(self, books: List[Book]):
-        """Обучение моделей"""
+def rule_matches(rule_if: Dict[str, Any], prefs: Preferences) -> bool:
+    for key, wanted in rule_if.items():
+        if key == "объём" and prefs.volume is not None and prefs.volume != wanted:
+            return False
+        if key == "сложность" and prefs.complexity is not None:
+            if isinstance(wanted, list) and prefs.complexity not in wanted:
+                return False
+            if not isinstance(wanted, list) and prefs.complexity != wanted:
+                return False
+        if key == "настроение" and prefs.mood is not None:
+            if isinstance(wanted, list) and prefs.mood not in wanted:
+                return False
+            if not isinstance(wanted, list) and prefs.mood != wanted:
+                return False
+        if key == "темы" and prefs.themes:
+            need = set(_as_list(wanted))
+            if not (need & set(prefs.themes)):
+                return False
+        if key == "тип_героя" and prefs.hero_type is not None and prefs.hero_type != wanted:
+            return False
+        if key == "тип_конфликта" and prefs.conflict_type is not None and prefs.conflict_type != wanted:
+            return False
+        if key == "художественные_средства" and prefs.artistic_means:
+            need = set(_as_list(wanted))
+            if not (need & set(prefs.artistic_means)):
+                return False
+        if key == "эпоха" and prefs.era is not None and prefs.era != wanted:
+            return False
+        if key == "жанр" and prefs.genre_group:
+            need = set(_as_list(wanted))
+            if not (need & set(prefs.genre_group)):
+                return False
+    return True
+
+
+def rules_by_book(rules: Dict[str, Any], prefs: Preferences) -> Dict[str, int]:
+    out: Dict[str, int] = {}
+    for _, rule in rules.items():
+        if not rule_matches(rule.get("если", {}), prefs):
+            continue
+        for book_name in _as_list(rule.get("то", [])):
+            if isinstance(book_name, str) and book_name.strip():
+                out[book_name.strip()] = out.get(book_name.strip(), 0) + 1
+    return out
+
+
+# ---------------------------
+# ML + текстовые предпочтения
+# ---------------------------
+def _contains_any(text: str, phrases: List[str]) -> int:
+    if not text or not phrases:
+        return 0
+    t = text.lower()
+    c = 0
+    for p in phrases:
+        ps = (p or "").strip().lower()
+        if ps and ps in t:
+            c += 1
+    return c
+
+
+class Recommender:
+    def __init__(self, books: List[Book], rules: Dict[str, Any]):
         self.books = books
-        self.vectorizer.fit(books)
-        self.book_vectors = self.vectorizer.transform_all_books(books)
-        
-        # Обучаем KNN для поиска похожих книг
-        self.knn.fit(self.book_vectors)
-        
-        # Обучаем дерево решений для классификации по сложности
-        y_complexity = [b.complexity for b in books]
-        if len(set(y_complexity)) > 1:
-            complexity_encoder = LabelEncoder()
-            y_encoded = complexity_encoder.fit_transform(y_complexity)
-            self.decision_tree.fit(self.book_vectors, y_encoded)
-            self.complexity_encoder = complexity_encoder
-    
-    def find_similar_books(self, prefs: UserPreferences, n_recommendations: int = 5) -> List[Tuple[Book, float]]:
-        """Поиск похожих книг по предпочтениям пользователя"""
-        pref_vector = self.vectorizer.transform_preferences(prefs)
-        
-        # Находим ближайших соседей
-        distances, indices = self.knn.kneighbors([pref_vector], n_neighbors=min(n_recommendations, len(self.books)))
-        
-        results = []
-        for idx, dist in zip(indices[0], distances[0]):
-            similarity = 1 - dist  # Конвертируем расстояние в подобие
-            results.append((self.books[idx], similarity))
-        
-        return results
-    
-    def calculate_match_score(self, book: Book, prefs: UserPreferences) -> float:
-        """Вычисление оценки соответствия книги предпочтениям"""
-        score = 0.0
-        max_score = 0.0
-        
-        # Проверяем объём (вес 20)
-        if prefs.volume:
-            max_score += 20
-            if book.volume == prefs.volume:
-                score += 20
-        
-        # Проверяем сложность (вес 20)
-        if prefs.complexity:
-            max_score += 20
-            if book.complexity == prefs.complexity:
-                score += 20
-        
-        # Проверяем настроение (вес 15)
-        if prefs.mood:
-            max_score += 15
-            if book.mood == prefs.mood:
-                score += 15
-        
-        # Проверяем темы (вес 20)
-        if prefs.themes:
-            max_score += 20
-            common_themes = set(book.themes) & set(prefs.themes)
-            if prefs.themes:
-                score += 20 * (len(common_themes) / len(prefs.themes))
-        
-        # Проверяем тип конфликта (вес 10)
-        if prefs.conflict_type:
-            max_score += 10
-            if book.conflict_type == prefs.conflict_type:
-                score += 10
-        
-        # Проверяем тип героя (вес 10)
-        if prefs.hero_type:
-            max_score += 10
-            if book.hero_type == prefs.hero_type:
-                score += 10
-        
-        # Проверяем художественные средства (вес 10)
-        if prefs.artistic_means:
-            max_score += 10
-            common_means = set(book.artistic_means) & set(prefs.artistic_means)
-            if prefs.artistic_means:
-                score += 10 * (len(common_means) / len(prefs.artistic_means))
-        
-        # Проверяем эпоху (вес 5)
-        if prefs.era:
-            max_score += 5
-            if book.era == prefs.era:
-                score += 5
-        
-        # Проверяем жанр (вес 5)
-        if prefs.genre_group:
-            max_score += 5
-            if book.genre in prefs.genre_group:
-                score += 5
-        
-        if max_score > 0:
-            return (score / max_score) * 100
-        return 0.0
+        self.rules = rules
+
+        self.ohe = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
+        cats = [[b.volume, b.complexity, b.mood, b.conflict_type, b.hero_type, b.era, b.genre, b.direction] for b in books]
+        self.cat_matrix = self.ohe.fit_transform(cats) if books else np.zeros((0, 0))
+
+        self.mlb_themes = MultiLabelBinarizer()
+        self.mlb_means = MultiLabelBinarizer()
+        themes = [list(b.themes) for b in books]
+        means = [list(b.artistic_means) for b in books]
+        self.themes_matrix = self.mlb_themes.fit_transform(themes) if books else np.zeros((0, 0))
+        self.means_matrix = self.mlb_means.fit_transform(means) if books else np.zeros((0, 0))
+
+        self.book_matrix = np.hstack([self.cat_matrix, self.themes_matrix, self.means_matrix]) if books else np.zeros((0, 0))
+
+    def _prefs_vec(self, p: Preferences) -> np.ndarray:
+        cat = [[p.volume, p.complexity, p.mood, p.conflict_type, p.hero_type, p.era, None, None]]
+        cat_vec = self.ohe.transform(cat)
+        themes_vec = self.mlb_themes.transform([p.themes]) if p.themes else np.zeros((1, len(self.mlb_themes.classes_)))
+        means_vec = self.mlb_means.transform([p.artistic_means]) if p.artistic_means else np.zeros((1, len(self.mlb_means.classes_)))
+        return np.hstack([cat_vec, themes_vec, means_vec]).astype(float)
+
+    def rank(self, prefs: Preferences, top_k: int = 10) -> List[Dict[str, Any]]:
+        if not self.books:
+            return []
+
+        allowed_genres = set(prefs.genre_group or [])
+        v = self._prefs_vec(prefs)
+        sims = cosine_similarity(v, self.book_matrix)[0]
+
+        rb = rules_by_book(self.rules, prefs)
+
+        items: List[Dict[str, Any]] = []
+        for i, b in enumerate(self.books):
+            if allowed_genres and b.genre not in allowed_genres:
+                continue
+
+            score = float(sims[i])
+
+            # Бонус от правил
+            score += 0.10 * float(rb.get(b.name, 0))
+
+            # Текстовые предпочтения (14/15/17/18)
+            score += 0.06 * _contains_any(b.author_position, prefs.liked_author_position)
+            score += 0.06 * _contains_any(b.audience, prefs.liked_audience)
+            score += 0.08 * _contains_any(b.interpretations, prefs.liked_interpretations)
+            score -= 0.10 * _contains_any(b.weaknesses, prefs.disliked_weaknesses)
+
+            items.append(
+                {
+                    "book": b,
+                    "score": score,
+                    "similarity": float(sims[i]),
+                    "rules_count": int(rb.get(b.name, 0)),
+                }
+            )
+
+        items.sort(key=lambda x: x["score"], reverse=True)
+        return items[: max(1, top_k)]
 
 
-class BookExpertSystem:
-    """Главный класс экспертной системы подбора книг"""
-    
-    def __init__(self, base_path: str = "sourses"):
-        self.base_path = base_path
-        self.data_loader = DataLoader(base_path)
-        self.vectorizer = FeatureVectorizer()
-        self.rule_engine: Optional[RuleEngine] = None
-        self.ml_recommender: Optional[MLRecommender] = None
-        self.books: List[Book] = []
-        self.questions: Dict = {}
-        self.config: Dict = {}
-        self.frames: Dict = {}
-        
-    def initialize(self):
-        """Инициализация системы"""
-        print("=" * 60)
-        print("ИНИЦИАЛИЗАЦИЯ ЭКСПЕРТНОЙ СИСТЕМЫ")
-        print("=" * 60)
-        
-        # Загружаем конфигурацию
-        print("\n📚 Загрузка конфигурации...")
-        self.config = self.data_loader.load_config()
-        
-        # Загружаем каталог и книги
-        print("📖 Загрузка каталога книг...")
-        catalog = self.data_loader.load_catalog()
-        self.books = self.data_loader.load_all_books(catalog)
-        print(f"   Загружено {len(self.books)} произведений")
-        
-        # Загружаем вопросы
-        print("❓ Загрузка вопросов...")
-        self.questions = self.data_loader.load_questions()
-        
-        # Загружаем правила
-        print("📋 Загрузка продукционных правил...")
-        rules = self.data_loader.load_rules()
-        self.rule_engine = RuleEngine(rules)
-        print(f"   Загружено {len(rules.get('правила', {}))} правил")
-        
-        # Загружаем фреймы
-        print("🏗️ Загрузка фреймов...")
-        self.frames = self.data_loader.load_frames()
-        
-        # Инициализируем ML-рекомендатор
-        print("🤖 Обучение ML-моделей (scikit-learn)...")
-        self.ml_recommender = MLRecommender(self.vectorizer)
-        self.ml_recommender.fit(self.books)
-        print("   ✓ KNN-модель обучена")
-        print("   ✓ Дерево решений обучено")
-        
-        print("\n✅ Система готова к работе!")
-        print("=" * 60)
-    
-    def ask_question(self, question_id: str) -> Any:
-        """Задать вопрос пользователю"""
-        question = self.questions["вопросы"].get(question_id)
-        if not question:
-            return None
-        
-        print(f"\n📌 {question['текст']}")
-        print("-" * 50)
-        
-        variants = question["варианты"]
-        multiple = question.get("множественный_выбор", False)
-        
-        for i, variant in enumerate(variants, 1):
-            print(f"  {i}. {variant['текст']}")
-        
-        if multiple:
-            print(f"\n💡 Можно выбрать несколько вариантов (через запятую, например: 1,3,5)")
-            print("   Или нажмите Enter для пропуска")
+# ---------------------------
+# ДИНАМИЧЕСКИЕ ОПЦИИ (14/15/17/18)
+# ---------------------------
+def _normalize_phrase(s: str) -> str:
+    s = re.sub(r"\s+", " ", (s or "").strip())
+    return s.strip(" -–—•\t")
+
+
+def extract_phrases(text: str, max_len: int = 120) -> List[str]:
+    """
+    Делает варианты из длинного текста: режем по . ; \\n и частично по запятым,
+    чистим, убираем слишком короткие, ограничиваем длину.
+    """
+    t = (text or "").replace("\r", "\n")
+    t = re.sub(r"[•*]+", " ", t)
+    chunks = re.split(r"[.;\n]+", t)
+    out: List[str] = []
+    for c in chunks:
+        c = _normalize_phrase(c)
+        if not c:
+            continue
+        # дополнительно режем слишком длинные куски по запятым
+        if len(c) > max_len:
+            for part in c.split(","):
+                part = _normalize_phrase(part)
+                if 6 <= len(part) <= max_len:
+                    out.append(part)
         else:
-            print(f"\n💡 Введите номер варианта (или Enter для пропуска)")
-        
-        while True:
-            try:
-                user_input = input("\n➤ Ваш выбор: ").strip()
-                
-                if not user_input:
-                    return None
-                
-                if multiple:
-                    indices = [int(x.strip()) - 1 for x in user_input.split(",")]
-                    values = []
-                    for idx in indices:
-                        if 0 <= idx < len(variants):
-                            val = variants[idx]["значение"]
-                            if val is not None:
-                                if isinstance(val, list):
-                                    values.extend(val)
-                                else:
-                                    values.append(val)
-                    return values if values else None
-                else:
-                    idx = int(user_input) - 1
-                    if 0 <= idx < len(variants):
-                        return variants[idx]["значение"]
-                    else:
-                        print("❌ Неверный номер варианта. Попробуйте снова.")
-            except ValueError:
-                print("❌ Введите корректное число.")
-    
-    def conduct_interview(self) -> UserPreferences:
-        """Проведение интервью с пользователем"""
-        prefs = UserPreferences()
-        
-        print("\n" + "=" * 60)
-        print("ОПРОС ДЛЯ ПОДБОРА КНИГИ")
-        print("=" * 60)
-        print("\n📝 Ответьте на несколько вопросов, чтобы получить рекомендации.")
-        print("   Вы можете пропустить любой вопрос, нажав Enter.\n")
-        
-        # Порядок вопросов из конфигурации
-        question_order = self.questions.get("сценарий_диалога", {}).get("порядок", 
-                                            ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9"])
-        
-        for q_id in question_order:
-            answer = self.ask_question(q_id)
-            
-            # Сохраняем ответы в предпочтения
-            if q_id == "Q1":
-                prefs.volume = answer
-            elif q_id == "Q2":
-                prefs.complexity = answer
-            elif q_id == "Q3":
-                prefs.mood = answer
-            elif q_id == "Q4":
-                prefs.themes = answer if answer else []
-            elif q_id == "Q5":
-                prefs.hero_type = answer
-            elif q_id == "Q6":
-                prefs.conflict_type = answer
-            elif q_id == "Q7":
-                prefs.artistic_means = answer if answer else []
-            elif q_id == "Q8":
-                prefs.era = answer
-            elif q_id == "Q9":
-                prefs.genre_group = answer if answer else None
-        
-        return prefs
-    
-    def get_recommendations(self, prefs: UserPreferences, max_recommendations: int = 5) -> List[Dict]:
-        """Получение рекомендаций на основе предпочтений"""
-        recommendations = {}
-        
-        # 1. Получаем рекомендации от правил
-        rule_recommendations = self.rule_engine.get_recommendations(prefs, self.books)
-        for book_name, rule_name, explanation in rule_recommendations:
-            if book_name not in recommendations:
-                recommendations[book_name] = {
-                    "book": None,
-                    "rules": [],
-                    "ml_score": 0,
-                    "match_score": 0
-                }
-            recommendations[book_name]["rules"].append({
-                "name": rule_name,
-                "explanation": explanation
-            })
-        
-        # 2. Получаем рекомендации от ML-модели
-        ml_results = self.ml_recommender.find_similar_books(prefs, n_recommendations=10)
-        for book, similarity in ml_results:
-            if book.name not in recommendations:
-                recommendations[book.name] = {
-                    "book": book,
-                    "rules": [],
-                    "ml_score": similarity,
-                    "match_score": 0
-                }
-            else:
-                recommendations[book.name]["ml_score"] = similarity
-            recommendations[book.name]["book"] = book
-        
-        # 3. Вычисляем итоговую оценку для каждой книги
-        for book_name, rec_data in recommendations.items():
-            if rec_data["book"] is None:
-                # Находим книгу по имени
-                for b in self.books:
-                    if b.name == book_name:
-                        rec_data["book"] = b
-                        break
-            
-            if rec_data["book"]:
-                rec_data["match_score"] = self.ml_recommender.calculate_match_score(
-                    rec_data["book"], prefs
-                )
-        
-        # 4. Сортируем по комбинированной оценке
-        final_recommendations = []
-        for book_name, rec_data in recommendations.items():
-            if rec_data["book"]:
-                # Комбинированная оценка: вес правил + ML-оценка + оценка соответствия
-                rule_bonus = len(rec_data["rules"]) * 15
-                combined_score = rec_data["match_score"] + rule_bonus + rec_data["ml_score"] * 50
-                
-                final_recommendations.append({
-                    "book": rec_data["book"],
-                    "score": combined_score,
-                    "match_percent": rec_data["match_score"],
-                    "rules": rec_data["rules"],
-                    "ml_similarity": rec_data["ml_score"]
-                })
-        
-        # Сортируем по убыванию оценки
-        final_recommendations.sort(key=lambda x: x["score"], reverse=True)
-        
-        return final_recommendations[:max_recommendations]
-    
-    def display_recommendations(self, recommendations: List[Dict], prefs: UserPreferences):
-        """Отображение рекомендаций"""
-        print("\n" + "=" * 60)
-        print("📚 РЕКОМЕНДОВАННЫЕ КНИГИ")
-        print("=" * 60)
-        
-        if not recommendations:
-            print("\n😔 К сожалению, не удалось найти подходящие книги.")
-            print("   Попробуйте изменить критерии поиска.")
+            if len(c) >= 6:
+                out.append(c)
+    # уникализация с сохранением порядка
+    seen = set()
+    uniq: List[str] = []
+    for x in out:
+        k = x.lower()
+        if k in seen:
+            continue
+        seen.add(k)
+        uniq.append(x)
+    return uniq
+
+
+def dynamic_options_from_candidates(items: List[Dict[str, Any]], field: str, limit: int = 10) -> List[str]:
+    """
+    field: author_position | audience | weaknesses | interpretations
+    """
+    phrases: List[str] = []
+    for it in items:
+        b: Book = it["book"]
+        txt = getattr(b, field, "") or ""
+        phrases.extend(extract_phrases(txt))
+    # лёгкая сортировка: сначала более частотные
+    freq: Dict[str, int] = {}
+    for p in phrases:
+        freq[p.lower()] = freq.get(p.lower(), 0) + 1
+    phrases_sorted = sorted({p for p in phrases}, key=lambda p: (-freq.get(p.lower(), 0), len(p)))
+    return phrases_sorted[:limit]
+
+
+# ---------------------------
+# GUI-ВИДЖЕТЫ
+# ---------------------------
+class ScrollFrame(tk.Frame):
+    def __init__(self, master: tk.Widget):
+        super().__init__(master, bg=COL_SURFACE)
+        self.canvas = tk.Canvas(self, bg=COL_SURFACE, highlightthickness=0)
+        self.vsb = tk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
+        self.canvas.configure(yscrollcommand=self.vsb.set)
+        self.inner = tk.Frame(self.canvas, bg=COL_SURFACE)
+        self.win_id = self.canvas.create_window((0, 0), window=self.inner, anchor="nw")
+
+        self.canvas.pack(side="left", fill="both", expand=True)
+        self.vsb.pack(side="right", fill="y")
+
+        self.inner.bind("<Configure>", self._on_cfg)
+        self.canvas.bind("<Configure>", self._on_canvas_cfg)
+        self.canvas.bind("<MouseWheel>", self._on_wheel)
+
+    def _on_cfg(self, _e: tk.Event) -> None:
+        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+
+    def _on_canvas_cfg(self, e: tk.Event) -> None:
+        self.canvas.itemconfigure(self.win_id, width=e.width)
+
+    def _on_wheel(self, e: tk.Event) -> None:
+        self.canvas.yview_scroll(int(-1 * (e.delta / 120)), "units")
+
+
+@dataclass(frozen=True)
+class Option:
+    label: str
+    value: Any
+
+
+@dataclass(frozen=True)
+class Step:
+    id: str
+    title: str
+    kind: str  # "single" | "multi" | "result"
+    optional: bool
+    # source: "json" для Q*, "dynamic" для 14/15/17/18
+    source: str
+    qid: Optional[str] = None
+    dynamic_field: Optional[str] = None
+
+
+class WizardApp(tk.Tk):
+    def __init__(self) -> None:
+        super().__init__()
+        self.title("Экспертная система подбора книг")
+        self.geometry("1100x720")
+        self.minsize(980, 640)
+        self.configure(bg=COL_BG)
+
+        self.data_dir = Path(os.path.dirname(os.path.abspath(__file__))) / "sourses"
+        if not self.data_dir.exists():
+            messagebox.showerror("Ошибка", f"Папка с данными не найдена:\n{self.data_dir}")
+            self.destroy()
             return
+
+        try:
+            self.books, self.config, self.questions, self.rules = load_data(self.data_dir)
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Не удалось загрузить данные:\n{e}")
+            self.destroy()
+            return
+
+        if not self.books:
+            messagebox.showerror("Ошибка", "Книги не загружены. Проверьте папку `sourses/parametrs`.")
+            self.destroy()
+            return
+
+        self.recommender = Recommender(self.books, self.rules)
+        self.prefs = Preferences()
+
+        # ДИНАМИЧНЫЙ ОПРОС: вопросы выбираются для уточнения итогового произведения
+        self.max_dynamic_questions = 8
+        self.finished_flow = False
+
+        # Банк доступных уточняющих вопросов (без P16/RESULT)
+        self.step_bank: List[Step] = [
+            Step(id="Q1", title="Объём", kind="single", optional=False, source="json", qid="Q1"),
+            Step(id="Q2", title="Сложность", kind="single", optional=False, source="json", qid="Q2"),
+            Step(id="Q3", title="Настроение", kind="single", optional=False, source="json", qid="Q3"),
+            Step(id="Q9", title="Жанровая группа", kind="single", optional=True, source="json", qid="Q9"),
+            Step(id="Q5", title="Тип героя", kind="single", optional=True, source="json", qid="Q5"),
+            Step(id="Q6", title="Тип конфликта", kind="single", optional=True, source="json", qid="Q6"),
+            Step(id="Q8", title="Эпоха", kind="single", optional=True, source="json", qid="Q8"),
+            Step(id="THEME", title="Тема (уточнение)", kind="single", optional=True, source="dynamic", dynamic_field="themes"),
+            Step(id="MEANS", title="Приём (уточнение)", kind="single", optional=True, source="dynamic", dynamic_field="artistic_means"),
+            Step(id="P15", title="Аудитория (15)", kind="single", optional=True, source="dynamic", dynamic_field="audience"),
+            Step(id="P14", title="Авторская позиция (14)", kind="single", optional=True, source="dynamic", dynamic_field="author_position"),
+            Step(id="P17", title="Слабые стороны (17) — НЕ хочу", kind="single", optional=True, source="dynamic", dynamic_field="weaknesses"),
+            Step(id="P18", title="Интерпретации (18)", kind="single", optional=True, source="dynamic", dynamic_field="interpretations"),
+        ]
+
+        # Финальные шаги (всегда в конце)
+        self.step_final_pick = Step(id="P16", title="Финальный выбор (16): точки внимания", kind="single", optional=False, source="dynamic", dynamic_field="attention_points")
+        self.step_result = Step(id="RESULT", title="Итог", kind="result", optional=False, source="dynamic")
+
+        # Поток шагов (формируется динамически)
+        self.steps: List[Step] = []
+        first = self._choose_next_step()
+        self.steps.append(first if first is not None else self.step_bank[0])
+        self.step_index = 0
+
+        # ответы: step_id -> {"value": ..., "labels": [...]}
+        self.answers: Dict[str, Dict[str, Any]] = {}
+        self.final_choice: Optional[Book] = None
+
+        self._build_ui()
+        self._render_step()
+
+    # ---------------- UI ----------------
+    def _build_ui(self) -> None:
+        # Header
+        header = tk.Frame(self, bg=COL_BG)
+        header.pack(fill="x", padx=16, pady=(14, 10))
+        tk.Label(
+            header,
+            text="Подбор книги — пошаговый опрос",
+            bg=COL_BG,
+            fg=COL_TEXT,
+            font=("Segoe UI", 18, "bold"),
+        ).pack(anchor="w")
+
+        # progress bar line
+        self.progress = tk.Canvas(self, height=10, bg=COL_BG, highlightthickness=0)
+        self.progress.pack(fill="x", padx=16, pady=(0, 12))
+
+        # body split
+        body = tk.Frame(self, bg=COL_BG)
+        body.pack(fill="both", expand=True, padx=16, pady=(0, 16))
+
+        self.left = tk.Frame(body, bg=COL_BG)
+        self.right = tk.Frame(body, bg=COL_BG, width=320)
+        self.right.pack_propagate(False)
+        self.left.pack(side="left", fill="both", expand=True, padx=(0, 10))
+        self.right.pack(side="right", fill="y", padx=(10, 0))
+
+        # Question card
+        self.card = tk.Frame(self.left, bg=COL_SURFACE, highlightthickness=2, highlightbackground=COL_PRIMARY)
+        self.card.pack(fill="both", expand=True)
+
+        self.lbl_step = tk.Label(self.card, text="", bg=COL_SURFACE, fg=COL_MUTED, font=("Segoe UI", 10, "bold"))
+        self.lbl_step.pack(anchor="w", padx=14, pady=(12, 0))
+
+        self.lbl_question = tk.Label(
+            self.card,
+            text="",
+            bg=COL_SURFACE,
+            fg=COL_TEXT,
+            font=("Segoe UI", 14, "bold"),
+            wraplength=520,
+            justify="left",
+        )
+        self.lbl_question.pack(anchor="w", padx=14, pady=(6, 6))
+
+        self.lbl_hint = tk.Label(self.card, text="", bg=COL_SURFACE, fg=COL_MUTED, font=("Segoe UI", 9))
+        self.lbl_hint.pack(anchor="w", padx=14, pady=(0, 10))
+
+        self.options_scroll = ScrollFrame(self.card)
+        self.options_scroll.pack(fill="both", expand=True, padx=10, pady=(0, 10))
+
+        # Buttons
+        btns = tk.Frame(self.card, bg=COL_SURFACE)
+        btns.pack(fill="x", padx=12, pady=(0, 12))
+
+        self.btn_back = tk.Button(
+            btns,
+            text="Назад",
+            command=self.on_back,
+            bg=COL_SURFACE,
+            fg=COL_TEXT,
+            activebackground=COL_ACCENT,
+            activeforeground=COL_DARK,
+            relief="flat",
+            padx=14,
+            pady=8,
+            highlightthickness=1,
+            highlightbackground=COL_ACCENT,
+            font=("Segoe UI", 10, "bold"),
+        )
+        self.btn_back.pack(side="left")
+
+        self.btn_skip = tk.Button(
+            btns,
+            text="Пропустить",
+            command=self.on_skip,
+            bg=COL_SURFACE,
+            fg=COL_MUTED,
+            activebackground=COL_SURFACE,
+            activeforeground=COL_TEXT,
+            relief="flat",
+            padx=14,
+            pady=8,
+            highlightthickness=1,
+            highlightbackground=COL_ACCENT,
+            font=("Segoe UI", 10, "bold"),
+        )
+        self.btn_skip.pack(side="left", padx=10)
+
+        self.btn_next = tk.Button(
+            btns,
+            text="Далее",
+            command=self.on_next,
+            bg=COL_PRIMARY,
+            fg=COL_DARK,
+            activebackground=COL_ACCENT,
+            activeforeground=COL_DARK,
+            relief="flat",
+            padx=16,
+            pady=8,
+            font=("Segoe UI", 10, "bold"),
+        )
+        self.btn_next.pack(side="right")
+
+        # Right: путь ответов (кандидаты во время опроса НЕ показываем)
+        path_title = tk.Label(self.right, text="Путь ответов", bg=COL_BG, fg=COL_TEXT, font=("Segoe UI", 14, "bold"))
+        path_title.pack(anchor="w")
         
-        for i, rec in enumerate(recommendations, 1):
-            book = rec["book"]
-            print(f"\n{'─' * 60}")
-            print(f"📖 #{i}: {book.name}")
-            print(f"{'─' * 60}")
-            print(f"   ✍️  Автор: {book.author}")
-            print(f"   📅 Год: {book.year}")
-            print(f"   📚 Жанр: {book.genre}")
-            print(f"   📏 Объём: {book.volume} ({book.pages} стр.)")
-            print(f"   📊 Сложность: {book.complexity}")
-            print(f"   🎭 Настроение: {book.mood}")
-            print(f"   🏷️  Темы: {', '.join(book.themes)}")
-            
-            print(f"\n   📈 ОЦЕНКА СООТВЕТСТВИЯ: {rec['match_percent']:.1f}%")
-            
-            if rec["rules"]:
-                print(f"\n   🔍 Подходит по правилам:")
-                for rule in rec["rules"][:3]:  # Показываем максимум 3 правила
-                    print(f"      • {rule['name']}: {rule['explanation']}")
-            
-            if book.attention_points:
-                print(f"\n   💡 На что обратить внимание: {book.attention_points}")
-            
-            if book.audience:
-                print(f"   👤 Аудитория: {book.audience}")
-    
-    def display_book_details(self, book: Book):
-        """Показать детальную информацию о книге"""
-        print(f"\n{'═' * 60}")
-        print(f"📖 {book.name}")
-        print(f"{'═' * 60}")
-        print(f"\n✍️  Автор: {book.author}")
-        print(f"📅 Год издания: {book.year}")
-        print(f"📚 Жанр: {book.genre}")
-        print(f"🎨 Направление: {book.direction}")
-        print(f"📅 Эпоха: {book.era}")
-        print(f"📏 Объём: {book.volume} ({book.pages} страниц)")
-        print(f"📊 Сложность: {book.complexity}")
-        print(f"🎭 Настроение: {book.mood}")
-        print(f"⚔️  Тип конфликта: {book.conflict_type}")
-        print(f"🦸 Тип героя: {book.hero_type}")
-        print(f"\n🏷️  Темы: {', '.join(book.themes)}")
-        print(f"🎨 Художественные средства: {', '.join(book.artistic_means)}")
-        
-        if book.author_position:
-            print(f"\n📝 Авторская позиция: {book.author_position}")
-        if book.audience:
-            print(f"👤 Для кого: {book.audience}")
-        if book.attention_points:
-            print(f"💡 Точки внимания: {book.attention_points}")
-        if book.weaknesses:
-            print(f"⚠️  Возможные сложности: {book.weaknesses}")
-        if book.interpretations:
-            print(f"🔮 Интерпретации: {book.interpretations}")
-    
-    def list_all_books(self):
-        """Показать список всех книг"""
-        print("\n" + "=" * 60)
-        print("📚 КАТАЛОГ ПРОИЗВЕДЕНИЙ")
-        print("=" * 60)
-        
-        # Группируем по авторам
-        by_author = {}
-        for book in self.books:
-            if book.author not in by_author:
-                by_author[book.author] = []
-            by_author[book.author].append(book)
-        
-        for author in sorted(by_author.keys()):
-            print(f"\n✍️  {author}:")
-            for book in sorted(by_author[author], key=lambda x: x.year):
-                print(f"   • {book.name} ({book.year}) - {book.genre}, {book.complexity} сложность")
-    
-    def run(self):
-        """Запуск экспертной системы"""
-        self.initialize()
-        
-        while True:
-            print("\n" + "=" * 60)
-            print("ГЛАВНОЕ МЕНЮ")
-            print("=" * 60)
-            print("\n1. 🔍 Подобрать книгу (интервью)")
-            print("2. 📚 Показать все книги")
-            print("3. 📖 Информация о конкретной книге")
-            print("4. ℹ️  О системе")
-            print("5. 🚪 Выход")
-            
-            choice = input("\n➤ Выберите действие (1-5): ").strip()
-            
-            if choice == "1":
-                prefs = self.conduct_interview()
-                max_recs = self.config.get("параметры_системы", {}).get("максимум_рекомендаций", 5)
-                recommendations = self.get_recommendations(prefs, max_recs)
-                self.display_recommendations(recommendations, prefs)
-                
-                # Предложить подробности о книге
-                if recommendations:
-                    print("\n💡 Хотите узнать подробнее о какой-либо книге?")
-                    detail_choice = input("   Введите номер книги или Enter для продолжения: ").strip()
-                    if detail_choice.isdigit():
-                        idx = int(detail_choice) - 1
-                        if 0 <= idx < len(recommendations):
-                            self.display_book_details(recommendations[idx]["book"])
-            
-            elif choice == "2":
-                self.list_all_books()
-            
-            elif choice == "3":
-                print("\n📚 Введите название книги (или часть названия):")
-                search = input("➤ ").strip().lower()
-                found = [b for b in self.books if search in b.name.lower()]
-                if found:
-                    if len(found) == 1:
-                        self.display_book_details(found[0])
-                    else:
-                        print("\nНайдено несколько книг:")
-                        for i, b in enumerate(found, 1):
-                            print(f"  {i}. {b.name}")
-                        idx = input("Выберите номер: ").strip()
-                        if idx.isdigit() and 0 < int(idx) <= len(found):
-                            self.display_book_details(found[int(idx) - 1])
-                else:
-                    print("❌ Книга не найдена")
-            
-            elif choice == "4":
-                system_info = self.config.get("система", {})
-                print(f"\n{'=' * 60}")
-                print(f"ℹ️  {system_info.get('название', 'Экспертная система')}")
-                print(f"{'=' * 60}")
-                print(f"Версия: {system_info.get('версия', '1.0')}")
-                print(f"Автор: {system_info.get('автор', 'Неизвестен')}")
-                print(f"Описание: {system_info.get('описание', '')}")
-                print(f"\n📊 Статистика:")
-                print(f"   • Произведений в базе: {len(self.books)}")
-                print(f"   • Продукционных правил: {len(self.rule_engine.rules)}")
-                print(f"\n🤖 Используемые ML-модели (scikit-learn):")
-                print(f"   • KNN (K-Nearest Neighbors) для поиска похожих книг")
-                print(f"   • Decision Tree для классификации")
-                print(f"   • Косинусное сходство для оценки соответствия")
-            
-            elif choice == "5":
-                print("\n👋 До свидания! Приятного чтения!")
-                break
-            
+
+        self.path_text = tk.Text(
+            self.right,
+            bg=COL_SURFACE,
+            fg=COL_TEXT,
+            insertbackground=COL_TEXT,
+            highlightthickness=2,
+            highlightbackground=COL_ACCENT,
+            relief="flat",
+            font=("Segoe UI", 10),
+            wrap="word",
+        )
+        self.path_text.pack(fill="both", expand=True)
+        self.path_text.configure(state="disabled")
+
+        self.btn_copy = tk.Button(
+            self.right,
+            text="Скопировать путь",
+            command=self.on_copy_path,
+            bg=COL_ACCENT,
+            fg=COL_DARK,
+            activebackground=COL_PRIMARY,
+            activeforeground=COL_DARK,
+            relief="flat",
+            padx=14,
+            pady=8,
+            font=("Segoe UI", 10, "bold"),
+        )
+        self.btn_copy.pack(anchor="e", pady=(10, 0))
+        self.btn_copy.configure(state="disabled")
+
+    # ------------- steps/options -------------
+    def _update_progress(self) -> None:
+        self.progress.delete("all")
+        w = self.progress.winfo_width() or 900
+        h = 10
+        # Длина опроса динамическая, поэтому прогресс оцениваем относительно лимита
+        total = max(1, self.max_dynamic_questions + 2)  # + P16 + RESULT
+        done = min(total, self.step_index)
+        frac = done / total
+        self.progress.create_rectangle(0, 0, w, h, fill=COL_SURFACE, outline=COL_SURFACE)
+        self.progress.create_rectangle(0, 0, int(w * frac), h, fill=COL_PRIMARY, outline=COL_PRIMARY)
+
+    def _get_json_question(self, qid: str) -> Dict[str, Any]:
+        return (self.questions.get("вопросы", {}) or {}).get(qid, {})
+
+    @staticmethod
+    def _entropy(probs: np.ndarray) -> float:
+        p = probs[probs > 0]
+        if p.size == 0:
+            return 0.0
+        return float(-(p * np.log2(p)).sum())
+
+    @staticmethod
+    def _softmax(x: np.ndarray) -> np.ndarray:
+        if x.size == 0:
+            return x
+        z = x - np.max(x)
+        e = np.exp(z)
+        s = e.sum()
+        return e / s if s > 0 else np.ones_like(x) / len(x)
+
+    def _rank_all(self) -> Tuple[List[Dict[str, Any]], np.ndarray]:
+        # 23 книги — можно ранжировать все, это быстро
+        ranked = self.recommender.rank(self.prefs, top_k=len(self.books))
+        scores = np.array([float(it.get("score", 0.0)) for it in ranked], dtype=float)
+        probs = self._softmax(scores)
+        return ranked, probs
+
+    def _asked_dynamic_count(self) -> int:
+        # считаем только “уточняющие” вопросы (без P16/RESULT)
+        cnt = 0
+        for s in self.steps:
+            if s.id in ("P16", "RESULT"):
+                continue
+            cnt += 1
+        return cnt
+
+    def _should_finish_questions(self) -> bool:
+        ranked, probs = self._rank_all()
+        if len(ranked) <= 1:
+            return True
+        top_prob = float(probs[0])
+        ent = self._entropy(probs)
+        asked = self._asked_dynamic_count()
+        if asked >= self.max_dynamic_questions:
+            return True
+        # если уже достаточно уверенно — переходим к финальному выбору (16)
+        if asked >= 2 and top_prob >= 0.58:
+            return True
+        if ent <= 1.2:
+            return True
+        return False
+
+    def _match_for_step(self, step: Step, book: Book, option_value: Any) -> bool:
+        if option_value is None:
+            return False
+
+        # JSON-вопросы
+        if step.source == "json":
+            if step.id == "Q1":
+                return book.volume == option_value
+            if step.id == "Q2":
+                return book.complexity == option_value
+            if step.id == "Q3":
+                return book.mood == option_value
+            if step.id == "Q5":
+                return book.hero_type == option_value
+            if step.id == "Q6":
+                return book.conflict_type == option_value
+            if step.id == "Q8":
+                return book.era == option_value
+            if step.id == "Q9":
+                return isinstance(option_value, list) and book.genre in option_value
+
+        # Динамические
+        if step.id == "THEME":
+            return isinstance(option_value, str) and option_value in set(book.themes)
+        if step.id == "MEANS":
+            return isinstance(option_value, str) and option_value in set(book.artistic_means)
+
+        if step.id in ("P14", "P15", "P18", "P17"):
+            if not isinstance(option_value, str) or not option_value.strip():
+                return False
+            needle = option_value.strip().lower()
+            if step.id == "P14":
+                hay = (book.author_position or "").lower()
+                return needle in hay
+            if step.id == "P15":
+                hay = (book.audience or "").lower()
+                return needle in hay
+            if step.id == "P18":
+                hay = (book.interpretations or "").lower()
+                return needle in hay
+            if step.id == "P17":
+                # “НЕ хочу” → оставляем книги, где этого нет
+                hay = (book.weaknesses or "").lower()
+                return needle not in hay
+
+        return False
+
+    def _expected_entropy(self, step: Step, ranked: List[Dict[str, Any]], probs: np.ndarray) -> float:
+        opts = self._options_for_step(step)
+        if len(opts) < 2:
+            return 1e9
+
+        masses = 0
+        exp_ent = 0.0
+        for opt in opts:
+            subset_idx: List[int] = []
+            for i, it in enumerate(ranked):
+                b: Book = it["book"]
+                if self._match_for_step(step, b, opt.value):
+                    subset_idx.append(i)
+            if not subset_idx:
+                continue
+
+            mass = float(probs[subset_idx].sum())
+            if mass < 0.05:
+                continue
+            masses += 1
+            sub = probs[subset_idx] / mass
+            exp_ent += mass * self._entropy(sub)
+
+        # если почти все варианты пустые — вопрос неинформативен
+        if masses < 2:
+            return 1e9
+        return exp_ent
+
+    def _choose_next_step(self) -> Optional[Step]:
+        # если уже решили закончить — следующий шаг не нужен
+        if self.finished_flow:
+            return None
+        if self._should_finish_questions():
+            return None
+
+        ranked, probs = self._rank_all()
+        asked_ids = {s.id for s in self.steps}
+
+        best: Optional[Step] = None
+        best_score = 1e18
+
+        for s in self.step_bank:
+            if s.id in asked_ids:
+                continue
+            e = self._expected_entropy(s, ranked, probs)
+            if e < best_score:
+                best_score = e
+                best = s
+
+        return best
+
+    def _options_for_step(self, step: Step) -> List[Option]:
+        if step.source == "json" and step.qid:
+            q = self._get_json_question(step.qid)
+            opts: List[Option] = []
+            for v in q.get("варианты", []):
+                label = str(v.get("текст", "")).strip()
+                value = v.get("значение", None)
+                opts.append(Option(label=label, value=value))
+            return opts
+
+        if step.source == "dynamic" and step.dynamic_field:
+            if step.id == "P16":
+                items = self.recommender.rank(self.prefs, top_k=8)
+                if not items:
+                    return [Option(label="(Не удалось сформировать варианты — вернитесь и выберите больше критериев)", value=None)]
+                opts: List[Option] = []
+                for it in items:
+                    b: Book = it["book"]
+                    fit = int(round(float(it["similarity"]) * 100))
+                    ap = (b.attention_points or "(нет точек внимания)").strip()
+                    ap = re.sub(r"\s+", " ", ap)
+                    if len(ap) > 160:
+                        ap = ap[:160].rstrip() + "…"
+                    # value — индекс книги в self.books (не светим название)
+                    try:
+                        idx = self.books.index(b)
+                    except ValueError:
+                        continue
+                    opts.append(Option(label=f"{fit}% — {ap}", value=idx))
+                return opts or [Option(label="(Нет вариантов — попробуйте изменить ответы)", value=None)]
+
+            if step.id == "THEME":
+                items = self.recommender.rank(self.prefs, top_k=10)
+                freq: Dict[str, int] = {}
+                for it in items:
+                    b: Book = it["book"]
+                    for t in b.themes:
+                        freq[t] = freq.get(t, 0) + 1
+                themes = sorted(freq.keys(), key=lambda k: (-freq[k], k))[:8]
+                return [Option(label=t, value=t) for t in themes] or [Option(label="(Нет тем для уточнения — пропустите)", value=None)]
+
+            if step.id == "MEANS":
+                items = self.recommender.rank(self.prefs, top_k=10)
+                freq2: Dict[str, int] = {}
+                for it in items:
+                    b: Book = it["book"]
+                    for m in b.artistic_means:
+                        freq2[m] = freq2.get(m, 0) + 1
+                means = sorted(freq2.keys(), key=lambda k: (-freq2[k], k))[:8]
+                return [Option(label=m, value=m) for m in means] or [Option(label="(Нет приёмов для уточнения — пропустите)", value=None)]
+
+            # 14/15/17/18: варианты из текущих топ-кандидатов
+            items = self.recommender.rank(self.prefs, top_k=10)
+            phrases = dynamic_options_from_candidates(items, step.dynamic_field, limit=10)
+            return [Option(label=p, value=p) for p in phrases] or [Option(label="(Пока нет явных вариантов — пропустите этот шаг)", value=None)]
+
+        return []
+
+    def _apply_answer_to_prefs(self, step_id: str, value: Any) -> None:
+        def to_list(v: Any) -> List[str]:
+            if v is None:
+                return []
+            if isinstance(v, list):
+                return [x for x in v if isinstance(x, str) and x.strip()]
+            if isinstance(v, str) and v.strip():
+                return [v.strip()]
+            return []
+
+        # Переназначаем prefs на основе step_id; value уже "чистое" значение.
+        if step_id == "Q1":
+            self.prefs.volume = value
+        elif step_id == "Q2":
+            self.prefs.complexity = value
+        elif step_id == "Q3":
+            self.prefs.mood = value
+        elif step_id == "Q5":
+            self.prefs.hero_type = value
+        elif step_id == "Q6":
+            self.prefs.conflict_type = value
+        elif step_id == "Q8":
+            self.prefs.era = value
+        elif step_id == "Q9":
+            self.prefs.genre_group = value if isinstance(value, list) else None
+
+        # 14/15/17/18
+        elif step_id == "THEME":
+            self.prefs.themes = list({*self.prefs.themes, *to_list(value)})
+        elif step_id == "MEANS":
+            self.prefs.artistic_means = list({*self.prefs.artistic_means, *to_list(value)})
+        elif step_id == "P14":
+            self.prefs.liked_author_position = to_list(value)
+        elif step_id == "P15":
+            self.prefs.liked_audience = to_list(value)
+        elif step_id == "P17":
+            self.prefs.disliked_weaknesses = to_list(value)
+        elif step_id == "P18":
+            self.prefs.liked_interpretations = to_list(value)
+        elif step_id == "P16":
+            self.final_choice = None
+            if isinstance(value, int) and 0 <= value < len(self.books):
+                self.final_choice = self.books[value]
+
+    def _render_step(self) -> None:
+        step = self.steps[self.step_index]
+        self._update_progress()
+
+        # Buttons state
+        self.btn_back.configure(state=("disabled" if self.step_index == 0 else "normal"))
+        self.btn_skip.configure(state=("normal" if step.optional else "disabled"))
+        if step.kind == "result":
+            self.btn_next.configure(text="Готово", state="disabled")
+            self.btn_skip.configure(state="disabled")
+        else:
+            self.btn_next.configure(state="normal")
+            self.btn_next.configure(text=("Показать итог" if step.id == "P16" else "Далее"))
+
+        # Titles (кол-во вопросов динамическое)
+        self.lbl_step.configure(text=f"Шаг {self.step_index + 1}  •  {step.title}")
+
+        # Итоговый экран
+        if step.kind == "result":
+            self._render_result_screen()
+            return
+
+        if step.source == "json" and step.qid:
+            q = self._get_json_question(step.qid)
+            self.lbl_question.configure(text=str(q.get("текст", "")).strip())
+            multi = bool(q.get("множественный_выбор", False))
+            self.lbl_hint.configure(text=("Можно выбрать несколько вариантов" if multi else "Выберите один вариант"))
+        else:
+            # динамические вопросы по 14/15/17/18
+            if step.id == "P17":
+                self.lbl_question.configure(text="Какие слабые стороны (по мнению критиков) вы бы НЕ хотели видеть в книге?")
+                self.lbl_hint.configure(text="Выберите всё, что вам точно не подходит (это понизит рейтинг книг с такими особенностями).")
+            elif step.id == "P18":
+                self.lbl_question.configure(text="Какая интерпретация/ракурс вам интереснее?")
+                self.lbl_hint.configure(text="Выбор увеличит вероятность книг, где встречается такой ракурс.")
+            elif step.id == "P16":
+                self.lbl_question.configure(text="Финальный вопрос: какие темы вам подходят больше всего?")
+                self.lbl_hint.configure(text="Выберите один вариант. Процент — насколько подходит по вашим ответам.")
+            elif step.id == "THEME":
+                self.lbl_question.configure(text="Какая тема вам ближе?")
+                self.lbl_hint.configure(text="Этот вопрос подбирается динамически по текущим кандидатам.")
+            elif step.id == "MEANS":
+                self.lbl_question.configure(text="Какой художественный приём вам интереснее?")
+                self.lbl_hint.configure(text="Этот вопрос подбирается динамически по текущим кандидатам.")
+            elif step.id == "P15":
+                self.lbl_question.configure(text="Для какой аудитории должна быть книга?")
+                self.lbl_hint.configure(text="Подберу ближе по формулировкам из описаний книг.")
+            elif step.id == "P14":
+                self.lbl_question.configure(text="Какая авторская позиция вам ближе?")
+                self.lbl_hint.configure(text="Подберу ближе по формулировкам из описаний книг.")
             else:
-                print("❌ Неверный выбор. Попробуйте снова.")
+                self.lbl_question.configure(text=step.title)
+                self.lbl_hint.configure(text="")
+
+        # render options
+        for w in self.options_scroll.inner.winfo_children():
+            w.destroy()
+
+        opts = self._options_for_step(step)
+        saved = (self.answers.get(step.id, {}) or {}).get("value", None)
+
+        if step.kind == "single":
+            sv = tk.StringVar(value=self._encode_value(saved))
+            self._current_var = ("single", sv)
+            for opt in opts:
+                tk.Radiobutton(
+                    self.options_scroll.inner,
+                    text=opt.label,
+                    variable=sv,
+                    value=self._encode_value(opt.value),
+                    bg=COL_SURFACE,
+                    fg=COL_TEXT,
+                    activebackground=COL_SURFACE,
+                    activeforeground=COL_TEXT,
+                    selectcolor=COL_SURFACE,
+                    wraplength=450,
+                    justify="left",
+                    font=("Segoe UI", 10),
+                    anchor="w",
+                ).pack(anchor="w", padx=12, pady=6, fill="x")
+        else:
+            # multi
+            items: List[Tuple[tk.BooleanVar, Any]] = []
+            saved_set = set(self._safe_list(saved))
+            for opt in opts:
+                bv = tk.BooleanVar(value=(opt.value in saved_set))
+                items.append((bv, opt.value))
+                tk.Checkbutton(
+                    self.options_scroll.inner,
+                    text=opt.label,
+                    variable=bv,
+                    bg=COL_SURFACE,
+                    fg=COL_TEXT,
+                    activebackground=COL_SURFACE,
+                    activeforeground=COL_TEXT,
+                    selectcolor=COL_SURFACE,
+                    wraplength=450,
+                    justify="left",
+                    font=("Segoe UI", 10),
+                    anchor="w",
+                ).pack(anchor="w", padx=12, pady=6, fill="x")
+            self._current_var = ("multi", items)
+
+        # обновляем путь ответов, но не показываем кандидатов
+        self._render_path()
+        self.btn_copy.configure(state="disabled")
+
+    # кандидаты во время опроса не показываем — вместо этого ведём “путь ответов”
+    def _render_path(self) -> None:
+        text = self._build_path_text()
+        self.path_text.configure(state="normal")
+        self.path_text.delete("1.0", "end")
+        self.path_text.insert("1.0", text)
+        self.path_text.configure(state="disabled")
+
+    # ---------------- actions ----------------
+    def on_back(self) -> None:
+        if self.step_index <= 0:
+            return
+        self.step_index -= 1
+        self._rebuild_prefs_from_answers()
+        self._render_step()
+
+    def on_skip(self) -> None:
+        step = self.steps[self.step_index]
+        if not step.optional:
+            return
+        # если пропускаем вопрос в середине — отбрасываем будущие шаги и пересчитаем дальше
+        self._truncate_future()
+        self.answers.pop(step.id, None)
+        self._rebuild_prefs_from_answers()
+        self._advance()
+
+    def on_next(self) -> None:
+        step = self.steps[self.step_index]
+        if step.kind == "result":
+            return
+
+        # если пользователь вернулся назад и отвечает заново — удаляем будущую ветку
+        self._truncate_future()
+
+        opts = self._options_for_step(step)
+        value = self._read_current_selection(step.kind)
+        labels = self._labels_for_value(opts, value)
+
+        # обязательные шаги не пропускаем
+        if (not step.optional) and (value is None or (isinstance(value, list) and len(value) == 0)):
+            messagebox.showwarning("Нужно выбрать", "Пожалуйста, выберите вариант, чтобы продолжить.")
+            return
+
+        self.answers[step.id] = {"value": value, "labels": labels}
+        self._apply_answer_to_prefs(step.id, value)
+        self._advance()
+
+    def _truncate_future(self) -> None:
+        """Если ответ меняют не на последнем шаге — удаляем все будущие шаги и ответы, чтобы опрос пересчитался."""
+        if self.step_index >= len(self.steps) - 1:
+            return
+        keep = [s.id for s in self.steps[: self.step_index + 1]]
+        self.steps = self.steps[: self.step_index + 1]
+        for k in list(self.answers.keys()):
+            if k not in keep:
+                self.answers.pop(k, None)
+        self.final_choice = None
+        self.finished_flow = False
+
+    def _advance(self) -> None:
+        current = self.steps[self.step_index]
+
+        # если мы в конце текущего потока — добавляем следующий шаг динамически
+        if self.step_index == len(self.steps) - 1 and current.id != "RESULT":
+            if current.id == "P16":
+                # после финального выбора идём в RESULT
+                if not any(s.id == "RESULT" for s in self.steps):
+                    self.steps.append(self.step_result)
+                self.finished_flow = True
+            else:
+                # решаем: задаём ещё уточняющий вопрос или переходим к P16
+                nxt = self._choose_next_step()
+                if nxt is None:
+                    if not any(s.id == "P16" for s in self.steps):
+                        self.steps.append(self.step_final_pick)
+                    self.finished_flow = True
+                else:
+                    self.steps.append(nxt)
+
+        # двигаемся вперёд
+        if self.step_index < len(self.steps) - 1:
+            self.step_index += 1
+        self._render_step()
+
+    def _labels_for_value(self, opts: List[Option], value: Any) -> List[str]:
+        if value is None:
+            return []
+        if isinstance(value, list):
+            out: List[str] = []
+            for v in value:
+                out.extend(self._labels_for_value(opts, v))
+            return [x for x in out if x]
+        for o in opts:
+            if o.value == value:
+                return [o.label]
+        return [str(value)]
+
+    def _build_path_text(self) -> str:
+        lines: List[str] = []
+        for step in self.steps:
+            if step.kind == "result":
+                continue
+            if step.id not in self.answers:
+                continue
+            labels = (self.answers.get(step.id, {}) or {}).get("labels", []) or []
+            if not labels:
+                continue
+
+            lines.append(step.title)
+            if len(labels) > 1:
+                for lab in labels:
+                    lines.append(f"  - {lab}")
+            else:
+                lines.append(f"  Ответ: {labels[0]}")
+            lines.append("")
+        return "\n".join(lines).strip() or "Пока нет ответов."
+
+    def on_copy_path(self) -> None:
+        text = self._build_path_text()
+        try:
+            self.clipboard_clear()
+            self.clipboard_append(text)
+            self.update()
+        except Exception:
+            messagebox.showerror("Ошибка", "Не удалось скопировать путь в буфер обмена.")
+
+    # ------------- helpers -------------
+    def _rebuild_prefs_from_answers(self) -> None:
+        self.prefs = Preferences()
+        for step in self.steps:
+            if step.id in self.answers:
+                self._apply_answer_to_prefs(step.id, (self.answers[step.id] or {}).get("value"))
+
+    def _render_result_screen(self) -> None:
+        # чистим область опций
+        for w in self.options_scroll.inner.winfo_children():
+            w.destroy()
+
+        self.lbl_question.configure(text="Итоговая книга выбрана")
+        if not self.final_choice:
+            tk.Label(
+                self.options_scroll.inner,
+                text="Финальный вариант не выбран. Нажмите \"Назад\" и выберите пункт на шаге параметра 16.",
+                bg=COL_SURFACE,
+                fg=COL_TEXT,
+                font=("Segoe UI", 11),
+                wraplength=520,
+                justify="left",
+            ).pack(anchor="w", padx=12, pady=12)
+            self.btn_copy.configure(state="disabled")
+            self._render_path()
+            return
+
+        # Название книги
+        tk.Label(
+            self.options_scroll.inner,
+            text=f"📖 {self.final_choice.name}",
+            bg=COL_SURFACE,
+            fg=COL_PRIMARY,
+            font=("Segoe UI", 16, "bold"),
+            wraplength=520,
+            justify="left",
+        ).pack(anchor="w", padx=12, pady=(12, 4))
+
+        tk.Label(
+            self.options_scroll.inner,
+            text=f"Автор: {self.final_choice.author} ({self.final_choice.year})",
+            bg=COL_SURFACE,
+            fg=COL_TEXT,
+            font=("Segoe UI", 11),
+            wraplength=520,
+            justify="left",
+        ).pack(anchor="w", padx=12, pady=(0, 12))
+
+        # Обложка книги (если есть)
+        if self.final_choice.image_file:
+            img_path = self.data_dir / "images" / self.final_choice.image_file
+            if img_path.exists():
+                try:
+                    pil_img = Image.open(img_path)
+                    # Масштабируем до разумного размера (макс 400px по ширине)
+                    w, h = pil_img.size
+                    if w > 400:
+                        ratio = 400 / w
+                        pil_img = pil_img.resize((400, int(h * ratio)), Image.Resampling.LANCZOS)
+                    photo = ImageTk.PhotoImage(pil_img)
+                    lbl_img = tk.Label(self.options_scroll.inner, image=photo, bg=COL_SURFACE)
+                    lbl_img.image = photo  # сохраняем ссылку, чтобы не удалилась
+                    lbl_img.pack(anchor="w", padx=12, pady=(0, 12))
+                except Exception:
+                    pass  # если не удалось загрузить — просто пропускаем
+
+        # Точки внимания (16)
+        ap = (self.final_choice.attention_points or "(нет точек внимания)").strip()
+        tk.Label(
+            self.options_scroll.inner,
+            text=f"💡 На эти темы Эксперты ставят акцент в этом произведении:\n{ap}",
+            bg=COL_SURFACE,
+            fg=COL_TEXT,
+            font=("Segoe UI", 11),
+            wraplength=480,
+            justify="left",
+            anchor="w",
+        ).pack(anchor="w", padx=12, pady=(0, 12), fill="x")
+
+        # Процент — берём из сохранённого ответа P16 (он уже отображался пользователю)
+        p16_labels = (self.answers.get("P16", {}) or {}).get("labels", []) or []
+        if p16_labels:
+            tk.Label(
+                self.options_scroll.inner,
+                text=f"Вы выбрали: {p16_labels[0]}",
+                bg=COL_SURFACE,
+                fg=COL_MUTED,
+                font=("Segoe UI", 10, "bold"),
+                wraplength=520,
+                justify="left",
+            ).pack(anchor="w", padx=12, pady=(0, 12))
+
+        # Показ "пути" справа + включаем копирование
+        self._render_path()
+        self.btn_copy.configure(state="normal")
+
+    @staticmethod
+    def _safe_list(x: Any) -> List[Any]:
+        if x is None:
+            return []
+        return x if isinstance(x, list) else [x]
+
+    @staticmethod
+    def _encode_value(v: Any) -> str:
+        # Нужен стабильный перенос в строку для tkinter variables
+        if v is None:
+            return ""
+        return json.dumps(v, ensure_ascii=False)
+
+    def _read_current_selection(self, kind: str) -> Any:
+        if kind == "single":
+            _, sv = self._current_var
+            raw = sv.get().strip()
+            if not raw:
+                return None
+            try:
+                return json.loads(raw)
+            except Exception:
+                return None
+
+        # multi
+        _, items = self._current_var
+        out: List[Any] = []
+        for bv, value in items:
+            if not bv.get():
+                continue
+            if value is None:
+                continue
+            if isinstance(value, list):
+                out.extend(value)
+            else:
+                out.append(value)
+        return out
 
 
-def main():
-    """Точка входа"""
-    # Определяем путь к данным
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    data_path = os.path.join(script_dir, "sourses")
-    
-    if not os.path.exists(data_path):
-        print(f"❌ Папка с данными не найдена: {data_path}")
-        return
-    
-    # Создаём и запускаем экспертную систему
-    expert_system = BookExpertSystem(data_path)
-    expert_system.run()
+def main() -> None:
+    app = WizardApp()
+    if app.winfo_exists():
+        app.mainloop()
 
 
 if __name__ == "__main__":
     main()
+
 
