@@ -16,11 +16,6 @@ from sklearn.preprocessing import MultiLabelBinarizer, OneHotEncoder
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
-
-
-# ---------------------------
-# ТЁМНАЯ ТЕМА (палитра)
-# ---------------------------
 COL_PRIMARY = "#FC703C"
 COL_DARK = "#5D0703"
 COL_LIGHT = "#F4F3E6"
@@ -31,10 +26,6 @@ COL_SURFACE = COL_DARK
 COL_TEXT = COL_LIGHT
 COL_MUTED = COL_ACCENT
 
-
-# ---------------------------
-# МОДЕЛЬ ДАННЫХ
-# ---------------------------
 @dataclass(frozen=True)
 class Book:
     name: str
@@ -51,12 +42,12 @@ class Book:
     artistic_means: Tuple[str, ...]
     pages: int
     year: int
-    author_position: str  # (14)
-    audience: str  # (15)
-    attention_points: str  # (16)
-    weaknesses: str  # (17)
-    interpretations: str  # (18)
-    image_file: str  # имя файла изображения обложки
+    author_position: str
+    audience: str
+    attention_points: str
+    weaknesses: str
+    interpretations: str
+    image_file: str
 
 
 @dataclass
@@ -71,11 +62,10 @@ class Preferences:
     era: Optional[str] = None
     genre_group: Optional[List[str]] = None
 
-    # 14/15/17/18 — текстовые предпочтения
-    liked_author_position: List[str] = None  # 14
-    liked_audience: List[str] = None  # 15
-    disliked_weaknesses: List[str] = None  # 17 (негатив)
-    liked_interpretations: List[str] = None  # 18
+    liked_author_position: List[str] = None
+    liked_audience: List[str] = None
+    disliked_weaknesses: List[str] = None
+    liked_interpretations: List[str] = None
 
     def __post_init__(self) -> None:
         self.themes = self.themes or []
@@ -84,11 +74,6 @@ class Preferences:
         self.liked_audience = self.liked_audience or []
         self.disliked_weaknesses = self.disliked_weaknesses or []
         self.liked_interpretations = self.liked_interpretations or []
-
-
-# ---------------------------
-# ЗАГРУЗКА ДАННЫХ
-# ---------------------------
 def _read_json(p: Path) -> Dict[str, Any]:
     with p.open("r", encoding="utf-8") as f:
         return json.load(f)
@@ -136,9 +121,6 @@ def load_data(data_dir: Path) -> Tuple[List[Book], Dict[str, Any], Dict[str, Any
     return books, config, questions, rules
 
 
-# ---------------------------
-# ПРАВИЛА (минимально)
-# ---------------------------
 def _as_list(x: Any) -> List[Any]:
     if x is None:
         return []
@@ -191,9 +173,6 @@ def rules_by_book(rules: Dict[str, Any], prefs: Preferences) -> Dict[str, int]:
     return out
 
 
-# ---------------------------
-# ML + текстовые предпочтения
-# ---------------------------
 def _contains_any(text: str, phrases: List[str]) -> int:
     if not text or not phrases:
         return 0
@@ -247,11 +226,7 @@ class Recommender:
                 continue
 
             score = float(sims[i])
-
-            # Бонус от правил
             score += 0.10 * float(rb.get(b.name, 0))
-
-            # Текстовые предпочтения (14/15/17/18)
             score += 0.06 * _contains_any(b.author_position, prefs.liked_author_position)
             score += 0.06 * _contains_any(b.audience, prefs.liked_audience)
             score += 0.08 * _contains_any(b.interpretations, prefs.liked_interpretations)
@@ -270,9 +245,6 @@ class Recommender:
         return items[: max(1, top_k)]
 
 
-# ---------------------------
-# ДИНАМИЧЕСКИЕ ОПЦИИ (14/15/17/18)
-# ---------------------------
 def _normalize_phrase(s: str) -> str:
     s = re.sub(r"\s+", " ", (s or "").strip())
     return s.strip(" -–—•\t")
@@ -291,7 +263,6 @@ def extract_phrases(text: str, max_len: int = 120) -> List[str]:
         c = _normalize_phrase(c)
         if not c:
             continue
-        # дополнительно режем слишком длинные куски по запятым
         if len(c) > max_len:
             for part in c.split(","):
                 part = _normalize_phrase(part)
@@ -300,7 +271,6 @@ def extract_phrases(text: str, max_len: int = 120) -> List[str]:
         else:
             if len(c) >= 6:
                 out.append(c)
-    # уникализация с сохранением порядка
     seen = set()
     uniq: List[str] = []
     for x in out:
@@ -321,7 +291,6 @@ def dynamic_options_from_candidates(items: List[Dict[str, Any]], field: str, lim
         b: Book = it["book"]
         txt = getattr(b, field, "") or ""
         phrases.extend(extract_phrases(txt))
-    # лёгкая сортировка: сначала более частотные
     freq: Dict[str, int] = {}
     for p in phrases:
         freq[p.lower()] = freq.get(p.lower(), 0) + 1
@@ -329,9 +298,6 @@ def dynamic_options_from_candidates(items: List[Dict[str, Any]], field: str, lim
     return phrases_sorted[:limit]
 
 
-# ---------------------------
-# GUI-ВИДЖЕТЫ
-# ---------------------------
 class ScrollFrame(tk.Frame):
     def __init__(self, master: tk.Widget):
         super().__init__(master, bg=COL_SURFACE)
@@ -368,9 +334,8 @@ class Option:
 class Step:
     id: str
     title: str
-    kind: str  # "single" | "multi" | "result"
+    kind: str
     optional: bool
-    # source: "json" для Q*, "dynamic" для 14/15/17/18
     source: str
     qid: Optional[str] = None
     dynamic_field: Optional[str] = None
@@ -405,11 +370,9 @@ class WizardApp(tk.Tk):
         self.recommender = Recommender(self.books, self.rules)
         self.prefs = Preferences()
 
-        # ДИНАМИЧНЫЙ ОПРОС: вопросы выбираются для уточнения итогового произведения
         self.max_dynamic_questions = 8
         self.finished_flow = False
 
-        # Банк доступных уточняющих вопросов (без P16/RESULT)
         self.step_bank: List[Step] = [
             Step(id="Q1", title="Объём", kind="single", optional=False, source="json", qid="Q1"),
             Step(id="Q2", title="Сложность", kind="single", optional=False, source="json", qid="Q2"),
@@ -426,28 +389,43 @@ class WizardApp(tk.Tk):
             Step(id="P18", title="Интерпретации (18)", kind="single", optional=True, source="dynamic", dynamic_field="interpretations"),
         ]
 
-        # Финальные шаги (всегда в конце)
         self.step_final_pick = Step(id="P16", title="Финальный выбор (16): точки внимания", kind="single", optional=False, source="dynamic", dynamic_field="attention_points")
         self.step_result = Step(id="RESULT", title="Итог", kind="result", optional=False, source="dynamic")
 
-        # Поток шагов (формируется динамически)
         self.steps: List[Step] = []
         first = self._choose_next_step()
         self.steps.append(first if first is not None else self.step_bank[0])
         self.step_index = 0
 
-        # ответы: step_id -> {"value": ..., "labels": [...]}
         self.answers: Dict[str, Dict[str, Any]] = {}
         self.final_choice: Optional[Book] = None
+        self.graph_win: Optional[tk.Toplevel] = None
+        self.graph_canvas: Optional[tk.Canvas] = None
+        self.graph_tooltip: Optional[tk.Toplevel] = None
 
         self._build_ui()
         self._render_step()
 
-    # ---------------- UI ----------------
     def _build_ui(self) -> None:
-        # Header
         header = tk.Frame(self, bg=COL_BG)
         header.pack(fill="x", padx=16, pady=(14, 10))
+        self.btn_graph = tk.Button(
+            header,
+            text="Граф",
+            command=self.open_graph,
+            bg=COL_SURFACE,
+            fg=COL_TEXT,
+            activebackground=COL_ACCENT,
+            activeforeground=COL_DARK,
+            relief="flat",
+            padx=12,
+            pady=6,
+            highlightthickness=1,
+            highlightbackground=COL_ACCENT,
+            font=("Segoe UI", 10, "bold"),
+        )
+        self.btn_graph.pack(side="right")
+
         tk.Label(
             header,
             text="Подбор книги — пошаговый опрос",
@@ -456,11 +434,9 @@ class WizardApp(tk.Tk):
             font=("Segoe UI", 18, "bold"),
         ).pack(anchor="w")
 
-        # progress bar line
         self.progress = tk.Canvas(self, height=10, bg=COL_BG, highlightthickness=0)
         self.progress.pack(fill="x", padx=16, pady=(0, 12))
 
-        # body split
         body = tk.Frame(self, bg=COL_BG)
         body.pack(fill="both", expand=True, padx=16, pady=(0, 16))
 
@@ -470,7 +446,6 @@ class WizardApp(tk.Tk):
         self.left.pack(side="left", fill="both", expand=True, padx=(0, 10))
         self.right.pack(side="right", fill="y", padx=(10, 0))
 
-        # Question card
         self.card = tk.Frame(self.left, bg=COL_SURFACE, highlightthickness=2, highlightbackground=COL_PRIMARY)
         self.card.pack(fill="both", expand=True)
 
@@ -494,7 +469,6 @@ class WizardApp(tk.Tk):
         self.options_scroll = ScrollFrame(self.card)
         self.options_scroll.pack(fill="both", expand=True, padx=10, pady=(0, 10))
 
-        # Buttons
         btns = tk.Frame(self.card, bg=COL_SURFACE)
         btns.pack(fill="x", padx=12, pady=(0, 12))
 
@@ -547,7 +521,6 @@ class WizardApp(tk.Tk):
         )
         self.btn_next.pack(side="right")
 
-        # Right: путь ответов (кандидаты во время опроса НЕ показываем)
         path_title = tk.Label(self.right, text="Путь ответов", bg=COL_BG, fg=COL_TEXT, font=("Segoe UI", 14, "bold"))
         path_title.pack(anchor="w")
         
@@ -582,13 +555,177 @@ class WizardApp(tk.Tk):
         self.btn_copy.pack(anchor="e", pady=(10, 0))
         self.btn_copy.configure(state="disabled")
 
-    # ------------- steps/options -------------
+    def open_graph(self) -> None:
+        if self.graph_win is not None and self.graph_win.winfo_exists():
+            self.graph_win.lift()
+            self._redraw_graph()
+            return
+
+        win = tk.Toplevel(self)
+        win.title("Граф экспертной системы")
+        win.configure(bg=COL_BG)
+        win.geometry("900x650")
+        self.graph_win = win
+
+        c = tk.Canvas(win, bg=COL_BG, highlightthickness=0)
+        c.pack(fill="both", expand=True)
+        self.graph_canvas = c
+
+        def on_close() -> None:
+            if self.graph_tooltip is not None and self.graph_tooltip.winfo_exists():
+                self.graph_tooltip.destroy()
+            self.graph_tooltip = None
+            self.graph_win = None
+            self.graph_canvas = None
+            win.destroy()
+
+        win.protocol("WM_DELETE_WINDOW", on_close)
+        c.bind("<Configure>", lambda _e: self._redraw_graph())
+        self._redraw_graph()
+
+    def _tooltip_show(self, title: str, e: tk.Event) -> None:
+        if self.graph_win is None or self.graph_canvas is None:
+            return
+        if self.graph_tooltip is not None and self.graph_tooltip.winfo_exists():
+            self.graph_tooltip.destroy()
+        tw = tk.Toplevel(self.graph_win)
+        tw.overrideredirect(True)
+        tw.configure(bg=COL_ACCENT)
+        lbl = tk.Label(
+            tw,
+            text=title,
+            bg=COL_ACCENT,
+            fg=COL_DARK,
+            font=("Segoe UI", 12, "bold"),
+            wraplength=720,
+            justify="left",
+        )
+        lbl.pack(padx=14, pady=12)
+        x = self.graph_win.winfo_rootx() + int(getattr(e, "x", 0)) + 18
+        y = self.graph_win.winfo_rooty() + int(getattr(e, "y", 0)) + 18
+        tw.geometry(f"+{x}+{y}")
+        self.graph_tooltip = tw
+
+    def _tooltip_move(self, e: tk.Event) -> None:
+        if self.graph_tooltip is None or not self.graph_tooltip.winfo_exists() or self.graph_win is None:
+            return
+        x = self.graph_win.winfo_rootx() + int(getattr(e, "x", 0)) + 18
+        y = self.graph_win.winfo_rooty() + int(getattr(e, "y", 0)) + 18
+        self.graph_tooltip.geometry(f"+{x}+{y}")
+
+    def _tooltip_hide(self, _e: tk.Event) -> None:
+        if self.graph_tooltip is not None and self.graph_tooltip.winfo_exists():
+            self.graph_tooltip.destroy()
+        self.graph_tooltip = None
+
+    def _graph_nodes(self) -> List[Tuple[str, str]]:
+        nodes: List[Tuple[str, str]] = []
+        for s in self.step_bank:
+            nodes.append((s.id, s.title))
+        nodes.append(("P16", self.step_final_pick.title))
+        nodes.append(("RESULT", self.step_result.title))
+
+        seen = set()
+        out: List[Tuple[str, str]] = []
+        for nid, title in nodes:
+            if nid in seen:
+                continue
+            seen.add(nid)
+            out.append((nid, title))
+        return out
+
+    def _redraw_graph(self) -> None:
+        if self.graph_canvas is None or self.graph_win is None or not self.graph_win.winfo_exists():
+            return
+
+        c = self.graph_canvas
+        c.delete("all")
+
+        w = int(c.winfo_width() or 900)
+        h = int(c.winfo_height() or 650)
+        margin = 18
+        cols = 4
+
+        nodes = self._graph_nodes()
+        n = max(1, len(nodes))
+        rows = (n + cols - 1) // cols
+
+        cell_w = max(150, (w - 2 * margin) // cols)
+        cell_h = max(90, (h - 2 * margin) // max(1, rows))
+        r = 18
+
+        pos: Dict[str, Tuple[int, int]] = {}
+        num: Dict[str, int] = {}
+        title_map: Dict[str, str] = {}
+        for i, (nid, title) in enumerate(nodes, 1):
+            rr = (i - 1) // cols
+            cc = (i - 1) % cols
+            cx = margin + cc * cell_w + cell_w // 2
+            cy = margin + rr * cell_h + cell_h // 2
+            pos[nid] = (int(cx), int(cy))
+            num[nid] = i
+            title_map[nid] = title
+
+        path_ids = [s.id for s in self.steps]
+        cur_id = self.steps[self.step_index].id if self.steps else ""
+        prev_id = self.steps[self.step_index - 1].id if self.step_index > 0 else ""
+
+        edges: List[Tuple[str, str, str]] = []
+        for i in range(len(self.steps) - 1):
+            a = self.steps[i].id
+            b = self.steps[i + 1].id
+            labs = (self.answers.get(a, {}) or {}).get("labels", []) or []
+            lab = labs[0] if labs else ""
+            edges.append((a, b, lab))
+
+        for a, b, lab in edges:
+            if a not in pos or b not in pos:
+                continue
+            x1, y1 = pos[a]
+            x2, y2 = pos[b]
+            is_active = (a == prev_id and b == cur_id)
+            col = COL_PRIMARY if is_active else COL_ACCENT
+            tag = f"edge::{a}::{b}"
+            show = lab.strip() if isinstance(lab, str) else ""
+            if not show:
+                show = f"{a} → {b}"
+            c.create_line(
+                x1,
+                y1,
+                x2,
+                y2,
+                fill=col,
+                width=4,
+                arrow=tk.LAST,
+                arrowshape=(14, 18, 8),
+                tags=(tag,),
+            )
+            c.tag_bind(tag, "<Enter>", lambda e, t=show: self._tooltip_show(t, e))
+            c.tag_bind(tag, "<Motion>", self._tooltip_move)
+            c.tag_bind(tag, "<Leave>", self._tooltip_hide)
+
+        for nid, title in nodes:
+            if nid not in pos:
+                continue
+            cx, cy = pos[nid]
+            is_cur = (nid == cur_id)
+            is_in_path = (nid in path_ids)
+            fill = COL_PRIMARY if is_cur else COL_SURFACE
+            outline = COL_PRIMARY if is_in_path else COL_ACCENT
+            width = 3 if is_cur else 2
+            tcol = COL_DARK if is_cur else COL_TEXT
+            tag = f"node::{nid}"
+            oval = c.create_oval(cx - r, cy - r, cx + r, cy + r, fill=fill, outline=outline, width=width, tags=(tag,))
+            c.create_text(cx, cy, text=str(num.get(nid, "")), fill=tcol, font=("Segoe UI", 11, "bold"), tags=(tag,))
+            c.tag_bind(tag, "<Enter>", lambda e, nid=nid: self._tooltip_show(title_map.get(nid, nid), e))
+            c.tag_bind(tag, "<Motion>", self._tooltip_move)
+            c.tag_bind(tag, "<Leave>", self._tooltip_hide)
+
     def _update_progress(self) -> None:
         self.progress.delete("all")
         w = self.progress.winfo_width() or 900
         h = 10
-        # Длина опроса динамическая, поэтому прогресс оцениваем относительно лимита
-        total = max(1, self.max_dynamic_questions + 2)  # + P16 + RESULT
+        total = max(1, self.max_dynamic_questions + 2)
         done = min(total, self.step_index)
         frac = done / total
         self.progress.create_rectangle(0, 0, w, h, fill=COL_SURFACE, outline=COL_SURFACE)
@@ -614,14 +751,12 @@ class WizardApp(tk.Tk):
         return e / s if s > 0 else np.ones_like(x) / len(x)
 
     def _rank_all(self) -> Tuple[List[Dict[str, Any]], np.ndarray]:
-        # 23 книги — можно ранжировать все, это быстро
         ranked = self.recommender.rank(self.prefs, top_k=len(self.books))
         scores = np.array([float(it.get("score", 0.0)) for it in ranked], dtype=float)
         probs = self._softmax(scores)
         return ranked, probs
 
     def _asked_dynamic_count(self) -> int:
-        # считаем только “уточняющие” вопросы (без P16/RESULT)
         cnt = 0
         for s in self.steps:
             if s.id in ("P16", "RESULT"):
@@ -638,7 +773,6 @@ class WizardApp(tk.Tk):
         asked = self._asked_dynamic_count()
         if asked >= self.max_dynamic_questions:
             return True
-        # если уже достаточно уверенно — переходим к финальному выбору (16)
         if asked >= 2 and top_prob >= 0.58:
             return True
         if ent <= 1.2:
@@ -649,7 +783,6 @@ class WizardApp(tk.Tk):
         if option_value is None:
             return False
 
-        # JSON-вопросы
         if step.source == "json":
             if step.id == "Q1":
                 return book.volume == option_value
@@ -666,7 +799,6 @@ class WizardApp(tk.Tk):
             if step.id == "Q9":
                 return isinstance(option_value, list) and book.genre in option_value
 
-        # Динамические
         if step.id == "THEME":
             return isinstance(option_value, str) and option_value in set(book.themes)
         if step.id == "MEANS":
@@ -686,7 +818,6 @@ class WizardApp(tk.Tk):
                 hay = (book.interpretations or "").lower()
                 return needle in hay
             if step.id == "P17":
-                # “НЕ хочу” → оставляем книги, где этого нет
                 hay = (book.weaknesses or "").lower()
                 return needle not in hay
 
@@ -715,13 +846,11 @@ class WizardApp(tk.Tk):
             sub = probs[subset_idx] / mass
             exp_ent += mass * self._entropy(sub)
 
-        # если почти все варианты пустые — вопрос неинформативен
         if masses < 2:
             return 1e9
         return exp_ent
 
     def _choose_next_step(self) -> Optional[Step]:
-        # если уже решили закончить — следующий шаг не нужен
         if self.finished_flow:
             return None
         if self._should_finish_questions():
@@ -764,9 +893,6 @@ class WizardApp(tk.Tk):
                     fit = int(round(float(it["similarity"]) * 100))
                     ap = (b.attention_points or "(нет точек внимания)").strip()
                     ap = re.sub(r"\s+", " ", ap)
-                    if len(ap) > 160:
-                        ap = ap[:160].rstrip() + "…"
-                    # value — индекс книги в self.books (не светим название)
                     try:
                         idx = self.books.index(b)
                     except ValueError:
@@ -794,7 +920,6 @@ class WizardApp(tk.Tk):
                 means = sorted(freq2.keys(), key=lambda k: (-freq2[k], k))[:8]
                 return [Option(label=m, value=m) for m in means] or [Option(label="(Нет приёмов для уточнения — пропустите)", value=None)]
 
-            # 14/15/17/18: варианты из текущих топ-кандидатов
             items = self.recommender.rank(self.prefs, top_k=10)
             phrases = dynamic_options_from_candidates(items, step.dynamic_field, limit=10)
             return [Option(label=p, value=p) for p in phrases] or [Option(label="(Пока нет явных вариантов — пропустите этот шаг)", value=None)]
@@ -811,7 +936,6 @@ class WizardApp(tk.Tk):
                 return [v.strip()]
             return []
 
-        # Переназначаем prefs на основе step_id; value уже "чистое" значение.
         if step_id == "Q1":
             self.prefs.volume = value
         elif step_id == "Q2":
@@ -827,7 +951,6 @@ class WizardApp(tk.Tk):
         elif step_id == "Q9":
             self.prefs.genre_group = value if isinstance(value, list) else None
 
-        # 14/15/17/18
         elif step_id == "THEME":
             self.prefs.themes = list({*self.prefs.themes, *to_list(value)})
         elif step_id == "MEANS":
@@ -849,7 +972,6 @@ class WizardApp(tk.Tk):
         step = self.steps[self.step_index]
         self._update_progress()
 
-        # Buttons state
         self.btn_back.configure(state=("disabled" if self.step_index == 0 else "normal"))
         self.btn_skip.configure(state=("normal" if step.optional else "disabled"))
         if step.kind == "result":
@@ -859,12 +981,11 @@ class WizardApp(tk.Tk):
             self.btn_next.configure(state="normal")
             self.btn_next.configure(text=("Показать итог" if step.id == "P16" else "Далее"))
 
-        # Titles (кол-во вопросов динамическое)
         self.lbl_step.configure(text=f"Шаг {self.step_index + 1}  •  {step.title}")
 
-        # Итоговый экран
         if step.kind == "result":
             self._render_result_screen()
+            self._redraw_graph()
             return
 
         if step.source == "json" and step.qid:
@@ -873,7 +994,6 @@ class WizardApp(tk.Tk):
             multi = bool(q.get("множественный_выбор", False))
             self.lbl_hint.configure(text=("Можно выбрать несколько вариантов" if multi else "Выберите один вариант"))
         else:
-            # динамические вопросы по 14/15/17/18
             if step.id == "P17":
                 self.lbl_question.configure(text="Какие слабые стороны (по мнению критиков) вы бы НЕ хотели видеть в книге?")
                 self.lbl_hint.configure(text="Выберите всё, что вам точно не подходит (это понизит рейтинг книг с такими особенностями).")
@@ -899,7 +1019,6 @@ class WizardApp(tk.Tk):
                 self.lbl_question.configure(text=step.title)
                 self.lbl_hint.configure(text="")
 
-        # render options
         for w in self.options_scroll.inner.winfo_children():
             w.destroy()
 
@@ -926,7 +1045,6 @@ class WizardApp(tk.Tk):
                     anchor="w",
                 ).pack(anchor="w", padx=12, pady=6, fill="x")
         else:
-            # multi
             items: List[Tuple[tk.BooleanVar, Any]] = []
             saved_set = set(self._safe_list(saved))
             for opt in opts:
@@ -948,11 +1066,10 @@ class WizardApp(tk.Tk):
                 ).pack(anchor="w", padx=12, pady=6, fill="x")
             self._current_var = ("multi", items)
 
-        # обновляем путь ответов, но не показываем кандидатов
         self._render_path()
         self.btn_copy.configure(state="disabled")
+        self._redraw_graph()
 
-    # кандидаты во время опроса не показываем — вместо этого ведём “путь ответов”
     def _render_path(self) -> None:
         text = self._build_path_text()
         self.path_text.configure(state="normal")
@@ -960,7 +1077,6 @@ class WizardApp(tk.Tk):
         self.path_text.insert("1.0", text)
         self.path_text.configure(state="disabled")
 
-    # ---------------- actions ----------------
     def on_back(self) -> None:
         if self.step_index <= 0:
             return
@@ -972,7 +1088,6 @@ class WizardApp(tk.Tk):
         step = self.steps[self.step_index]
         if not step.optional:
             return
-        # если пропускаем вопрос в середине — отбрасываем будущие шаги и пересчитаем дальше
         self._truncate_future()
         self.answers.pop(step.id, None)
         self._rebuild_prefs_from_answers()
@@ -983,14 +1098,12 @@ class WizardApp(tk.Tk):
         if step.kind == "result":
             return
 
-        # если пользователь вернулся назад и отвечает заново — удаляем будущую ветку
         self._truncate_future()
 
         opts = self._options_for_step(step)
         value = self._read_current_selection(step.kind)
         labels = self._labels_for_value(opts, value)
 
-        # обязательные шаги не пропускаем
         if (not step.optional) and (value is None or (isinstance(value, list) and len(value) == 0)):
             messagebox.showwarning("Нужно выбрать", "Пожалуйста, выберите вариант, чтобы продолжить.")
             return
@@ -1014,15 +1127,12 @@ class WizardApp(tk.Tk):
     def _advance(self) -> None:
         current = self.steps[self.step_index]
 
-        # если мы в конце текущего потока — добавляем следующий шаг динамически
         if self.step_index == len(self.steps) - 1 and current.id != "RESULT":
             if current.id == "P16":
-                # после финального выбора идём в RESULT
                 if not any(s.id == "RESULT" for s in self.steps):
                     self.steps.append(self.step_result)
                 self.finished_flow = True
             else:
-                # решаем: задаём ещё уточняющий вопрос или переходим к P16
                 nxt = self._choose_next_step()
                 if nxt is None:
                     if not any(s.id == "P16" for s in self.steps):
@@ -1031,7 +1141,6 @@ class WizardApp(tk.Tk):
                 else:
                     self.steps.append(nxt)
 
-        # двигаемся вперёд
         if self.step_index < len(self.steps) - 1:
             self.step_index += 1
         self._render_step()
@@ -1078,7 +1187,6 @@ class WizardApp(tk.Tk):
         except Exception:
             messagebox.showerror("Ошибка", "Не удалось скопировать путь в буфер обмена.")
 
-    # ------------- helpers -------------
     def _rebuild_prefs_from_answers(self) -> None:
         self.prefs = Preferences()
         for step in self.steps:
@@ -1086,7 +1194,6 @@ class WizardApp(tk.Tk):
                 self._apply_answer_to_prefs(step.id, (self.answers[step.id] or {}).get("value"))
 
     def _render_result_screen(self) -> None:
-        # чистим область опций
         for w in self.options_scroll.inner.winfo_children():
             w.destroy()
 
@@ -1105,7 +1212,6 @@ class WizardApp(tk.Tk):
             self._render_path()
             return
 
-        # Название книги
         tk.Label(
             self.options_scroll.inner,
             text=f"📖 {self.final_choice.name}",
@@ -1126,25 +1232,22 @@ class WizardApp(tk.Tk):
             justify="left",
         ).pack(anchor="w", padx=12, pady=(0, 12))
 
-        # Обложка книги (если есть)
         if self.final_choice.image_file:
             img_path = self.data_dir / "images" / self.final_choice.image_file
             if img_path.exists():
                 try:
                     pil_img = Image.open(img_path)
-                    # Масштабируем до разумного размера (макс 400px по ширине)
                     w, h = pil_img.size
                     if w > 400:
                         ratio = 400 / w
                         pil_img = pil_img.resize((400, int(h * ratio)), Image.Resampling.LANCZOS)
                     photo = ImageTk.PhotoImage(pil_img)
                     lbl_img = tk.Label(self.options_scroll.inner, image=photo, bg=COL_SURFACE)
-                    lbl_img.image = photo  # сохраняем ссылку, чтобы не удалилась
+                    lbl_img.image = photo
                     lbl_img.pack(anchor="w", padx=12, pady=(0, 12))
                 except Exception:
-                    pass  # если не удалось загрузить — просто пропускаем
+                    pass
 
-        # Точки внимания (16)
         ap = (self.final_choice.attention_points or "(нет точек внимания)").strip()
         tk.Label(
             self.options_scroll.inner,
@@ -1157,7 +1260,6 @@ class WizardApp(tk.Tk):
             anchor="w",
         ).pack(anchor="w", padx=12, pady=(0, 12), fill="x")
 
-        # Процент — берём из сохранённого ответа P16 (он уже отображался пользователю)
         p16_labels = (self.answers.get("P16", {}) or {}).get("labels", []) or []
         if p16_labels:
             tk.Label(
@@ -1170,7 +1272,6 @@ class WizardApp(tk.Tk):
                 justify="left",
             ).pack(anchor="w", padx=12, pady=(0, 12))
 
-        # Показ "пути" справа + включаем копирование
         self._render_path()
         self.btn_copy.configure(state="normal")
 
@@ -1182,7 +1283,6 @@ class WizardApp(tk.Tk):
 
     @staticmethod
     def _encode_value(v: Any) -> str:
-        # Нужен стабильный перенос в строку для tkinter variables
         if v is None:
             return ""
         return json.dumps(v, ensure_ascii=False)
@@ -1198,7 +1298,6 @@ class WizardApp(tk.Tk):
             except Exception:
                 return None
 
-        # multi
         _, items = self._current_var
         out: List[Any] = []
         for bv, value in items:
