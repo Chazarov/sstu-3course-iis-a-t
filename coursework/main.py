@@ -402,6 +402,7 @@ class WizardApp(tk.Tk):
         self.graph_win: Optional[tk.Toplevel] = None
         self.graph_canvas: Optional[tk.Canvas] = None
         self.graph_tooltip: Optional[tk.Toplevel] = None
+        self.graph_candidates: Optional[tk.Text] = None
 
         self._build_ui()
         self._render_step()
@@ -567,9 +568,33 @@ class WizardApp(tk.Tk):
         win.geometry("900x650")
         self.graph_win = win
 
-        c = tk.Canvas(win, bg=COL_BG, highlightthickness=0)
-        c.pack(fill="both", expand=True)
+        root = tk.Frame(win, bg=COL_BG)
+        root.pack(fill="both", expand=True)
+
+        c = tk.Canvas(root, bg=COL_BG, highlightthickness=0)
+        c.pack(side="left", fill="both", expand=True)
         self.graph_canvas = c
+
+        panel = tk.Frame(root, bg=COL_BG, width=320)
+        panel.pack(side="right", fill="y")
+        panel.pack_propagate(False)
+
+        tk.Label(panel, text="Кандидаты", bg=COL_BG, fg=COL_TEXT, font=("Segoe UI", 12, "bold")).pack(anchor="w", padx=10, pady=(10, 6))
+
+        t = tk.Text(
+            panel,
+            bg=COL_SURFACE,
+            fg=COL_TEXT,
+            insertbackground=COL_TEXT,
+            relief="flat",
+            highlightthickness=2,
+            highlightbackground=COL_ACCENT,
+            font=("Segoe UI", 10),
+            wrap="word",
+        )
+        t.pack(fill="both", expand=True, padx=10, pady=(0, 10))
+        t.configure(state="disabled")
+        self.graph_candidates = t
 
         def on_close() -> None:
             if self.graph_tooltip is not None and self.graph_tooltip.winfo_exists():
@@ -577,6 +602,7 @@ class WizardApp(tk.Tk):
             self.graph_tooltip = None
             self.graph_win = None
             self.graph_canvas = None
+            self.graph_candidates = None
             win.destroy()
 
         win.protocol("WM_DELETE_WINDOW", on_close)
@@ -720,6 +746,34 @@ class WizardApp(tk.Tk):
             c.tag_bind(tag, "<Enter>", lambda e, nid=nid: self._tooltip_show(title_map.get(nid, nid), e))
             c.tag_bind(tag, "<Motion>", self._tooltip_move)
             c.tag_bind(tag, "<Leave>", self._tooltip_hide)
+
+        self._redraw_candidates()
+
+    def _redraw_candidates(self) -> None:
+        if self.graph_candidates is None or not self.graph_candidates.winfo_exists():
+            return
+        ranked, probs = self._rank_all()
+        lines: List[str] = []
+        idx = 1
+        for i, it in enumerate(ranked):
+            b: Book = it["book"]
+            p = int(round(float(probs[i]) * 100))
+            if p <= 0:
+                continue
+            lines.append(f"{idx}) {p}% — {b.name}")
+            if b.author:
+                lines.append(f"   {b.author}")
+            if b.attention_points:
+                lines.append(f"   {b.attention_points}")
+            lines.append("")
+            idx += 1
+            if idx > 7:
+                break
+        text = "\n".join(lines).strip() or "Нет кандидатов"
+        self.graph_candidates.configure(state="normal")
+        self.graph_candidates.delete("1.0", "end")
+        self.graph_candidates.insert("1.0", text)
+        self.graph_candidates.configure(state="disabled")
 
     def _update_progress(self) -> None:
         self.progress.delete("all")
@@ -884,13 +938,13 @@ class WizardApp(tk.Tk):
 
         if step.source == "dynamic" and step.dynamic_field:
             if step.id == "P16":
-                items = self.recommender.rank(self.prefs, top_k=8)
-                if not items:
+                ranked, probs = self._rank_all()
+                if not ranked:
                     return [Option(label="(Не удалось сформировать варианты — вернитесь и выберите больше критериев)", value=None)]
                 opts: List[Option] = []
-                for it in items:
+                for i, it in enumerate(ranked[:8]):
                     b: Book = it["book"]
-                    fit = int(round(float(it["similarity"]) * 100))
+                    fit = int(round(float(probs[i]) * 100))
                     ap = (b.attention_points or "(нет точек внимания)").strip()
                     ap = re.sub(r"\s+", " ", ap)
                     try:
