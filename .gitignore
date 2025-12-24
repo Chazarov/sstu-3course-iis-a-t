@@ -2,3 +2,5 @@ remarks/
 *.bkp
 *.dtmp
 *.bmp
+
+.~lock*
