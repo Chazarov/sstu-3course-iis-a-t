@@ -189,6 +189,9 @@ class Recommender:
     def __init__(self, books: List[Book], rules: Dict[str, Any]):
         self.books = books
         self.rules = rules
+        self.w_cat = 2.5
+        self.w_themes = 6.0
+        self.w_means = 4.0
 
         self.ohe = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
         cats = [[b.volume, b.complexity, b.mood, b.conflict_type, b.hero_type, b.era, b.genre, b.direction] for b in books]
@@ -201,14 +204,16 @@ class Recommender:
         self.themes_matrix = self.mlb_themes.fit_transform(themes) if books else np.zeros((0, 0))
         self.means_matrix = self.mlb_means.fit_transform(means) if books else np.zeros((0, 0))
 
-        self.book_matrix = np.hstack([self.cat_matrix, self.themes_matrix, self.means_matrix]) if books else np.zeros((0, 0))
+        self.book_matrix = np.hstack(
+            [self.cat_matrix * self.w_cat, self.themes_matrix * self.w_themes, self.means_matrix * self.w_means]
+        ) if books else np.zeros((0, 0))
 
     def _prefs_vec(self, p: Preferences) -> np.ndarray:
         cat = [[p.volume, p.complexity, p.mood, p.conflict_type, p.hero_type, p.era, None, None]]
         cat_vec = self.ohe.transform(cat)
         themes_vec = self.mlb_themes.transform([p.themes]) if p.themes else np.zeros((1, len(self.mlb_themes.classes_)))
         means_vec = self.mlb_means.transform([p.artistic_means]) if p.artistic_means else np.zeros((1, len(self.mlb_means.classes_)))
-        return np.hstack([cat_vec, themes_vec, means_vec]).astype(float)
+        return np.hstack([cat_vec * self.w_cat, themes_vec * self.w_themes, means_vec * self.w_means]).astype(float)
 
     def rank(self, prefs: Preferences, top_k: int = 10) -> List[Dict[str, Any]]:
         if not self.books:
@@ -372,6 +377,7 @@ class WizardApp(tk.Tk):
 
         self.max_dynamic_questions = 8
         self.finished_flow = False
+        self.prob_sharpness = 10.0
 
         self.step_bank: List[Step] = [
             Step(id="Q1", title="Объём", kind="single", optional=False, source="json", qid="Q1"),
@@ -646,19 +652,32 @@ class WizardApp(tk.Tk):
 
     def _graph_nodes(self) -> List[Tuple[str, str]]:
         nodes: List[Tuple[str, str]] = []
-        for s in self.step_bank:
-            nodes.append((s.id, s.title))
-        nodes.append(("P16", self.step_final_pick.title))
-        nodes.append(("RESULT", self.step_result.title))
-
-        seen = set()
-        out: List[Tuple[str, str]] = []
-        for nid, title in nodes:
-            if nid in seen:
-                continue
-            seen.add(nid)
-            out.append((nid, title))
-        return out
+        var_keys = set()
+        for _, rule in (self.rules or {}).items():
+            for k in (rule.get("если", {}) or {}).keys():
+                var_keys.add(str(k))
+        var_order = [
+            "объём",
+            "сложность",
+            "жанр",
+            "настроение",
+            "темы",
+            "тип_героя",
+            "тип_конфликта",
+            "художественные_средства",
+            "эпоха",
+            "автор",
+        ]
+        vars_sorted = [k for k in var_order if k in var_keys] + sorted([k for k in var_keys if k not in var_order])
+        for k in vars_sorted:
+            nodes.append((f"V::{k}", f"Переменная: {k}"))
+        for rid in sorted((self.rules or {}).keys()):
+            name = str((self.rules[rid] or {}).get("название", "")).strip()
+            title = f"Правило {rid}" + (f": {name}" if name else "")
+            nodes.append((f"R::{rid}", title))
+        for b in sorted([bk.name for bk in self.books]):
+            nodes.append((f"H::{b}", f"Гипотеза: {b}"))
+        return nodes
 
     def _redraw_graph(self) -> None:
         if self.graph_canvas is None or self.graph_win is None or not self.graph_win.winfo_exists():
@@ -669,81 +688,224 @@ class WizardApp(tk.Tk):
 
         w = int(c.winfo_width() or 900)
         h = int(c.winfo_height() or 650)
-        margin = 18
-        cols = 4
+        margin = 16
+        rx = 14
+        all_nodes = self._graph_nodes()
+        titles = {nid: title for nid, title in all_nodes}
 
-        nodes = self._graph_nodes()
-        n = max(1, len(nodes))
-        rows = (n + cols - 1) // cols
+        var_nodes = [nid for nid, _ in all_nodes if nid.startswith("V::")]
+        rule_nodes = [nid for nid, _ in all_nodes if nid.startswith("R::")]
+        hyp_nodes = [nid for nid, _ in all_nodes if nid.startswith("H::")]
 
-        cell_w = max(150, (w - 2 * margin) // cols)
-        cell_h = max(90, (h - 2 * margin) // max(1, rows))
-        r = 18
+        x_fact = margin + 60
+        x_var = margin + 170
+        x_rule = int(w * 0.50)
+        x_hyp = w - margin - 70
+
+        def layout(ids: List[str], x: int, cols: int) -> Dict[str, Tuple[int, int]]:
+            out: Dict[str, Tuple[int, int]] = {}
+            if not ids:
+                return out
+            spacing_y = 34
+            spacing_x = 90
+            per_col = max(1, int((h - 2 * margin) // spacing_y))
+            cols_eff = max(1, min(cols, (len(ids) + per_col - 1) // per_col + 1))
+            for i, nid in enumerate(ids):
+                col = i // per_col
+                row = i % per_col
+                cx = x + (col - (cols_eff - 1) / 2) * spacing_x
+                cy = margin + 30 + row * spacing_y
+                out[nid] = (int(cx), int(cy))
+            return out
+
+        def clamp(v: int, lo: int, hi: int) -> int:
+            return max(lo, min(hi, v))
 
         pos: Dict[str, Tuple[int, int]] = {}
-        num: Dict[str, int] = {}
-        title_map: Dict[str, str] = {}
-        for i, (nid, title) in enumerate(nodes, 1):
-            rr = (i - 1) // cols
-            cc = (i - 1) % cols
-            cx = margin + cc * cell_w + cell_w // 2
-            cy = margin + rr * cell_h + cell_h // 2
-            pos[nid] = (int(cx), int(cy))
-            num[nid] = i
-            title_map[nid] = title
+        pos.update(layout(var_nodes, x_var, 1))
+        pos.update(layout(rule_nodes, x_rule, 3))
+        pos.update(layout(hyp_nodes, x_hyp, 2))
 
-        path_ids = [s.id for s in self.steps]
-        cur_id = self.steps[self.step_index].id if self.steps else ""
-        prev_id = self.steps[self.step_index - 1].id if self.step_index > 0 else ""
+        var_idx = {nid: i for i, nid in enumerate(var_nodes, 1)}
+        rule_idx = {nid: i for i, nid in enumerate(rule_nodes, 1)}
+        hyp_idx = {nid: i for i, nid in enumerate(hyp_nodes, 1)}
+        fact_idx: Dict[str, int] = {}
 
-        edges: List[Tuple[str, str, str]] = []
-        for i in range(len(self.steps) - 1):
-            a = self.steps[i].id
-            b = self.steps[i + 1].id
-            labs = (self.answers.get(a, {}) or {}).get("labels", []) or []
-            lab = labs[0] if labs else ""
-            edges.append((a, b, lab))
+        def prefs_fact(var_key: str) -> Any:
+            if var_key == "объём":
+                return self.prefs.volume
+            if var_key == "сложность":
+                return self.prefs.complexity
+            if var_key == "настроение":
+                return self.prefs.mood
+            if var_key == "тип_героя":
+                return self.prefs.hero_type
+            if var_key == "тип_конфликта":
+                return self.prefs.conflict_type
+            if var_key == "эпоха":
+                return self.prefs.era
+            if var_key == "жанр":
+                return self.prefs.genre_group
+            if var_key == "темы":
+                return self.prefs.themes
+            if var_key == "художественные_средства":
+                return self.prefs.artistic_means
+            return None
 
-        for a, b, lab in edges:
-            if a not in pos or b not in pos:
+        fact_nodes: List[Tuple[str, str, str]] = []
+        for vn in var_nodes:
+            k = vn.split("V::", 1)[1]
+            v = prefs_fact(k)
+            if v is None:
                 continue
-            x1, y1 = pos[a]
-            x2, y2 = pos[b]
-            is_active = (a == prev_id and b == cur_id)
-            col = COL_PRIMARY if is_active else COL_ACCENT
-            tag = f"edge::{a}::{b}"
-            show = lab.strip() if isinstance(lab, str) else ""
-            if not show:
-                show = f"{a} → {b}"
+            if isinstance(v, list) and len(v) == 0:
+                continue
+            if isinstance(v, list):
+                txt = ", ".join([str(x) for x in v])
+            else:
+                txt = str(v)
+            fid = f"F::{k}={txt}"
+            fact_nodes.append((fid, f"Факт: {k} = {txt}", vn))
+
+        for i, (fid, ftitle, vn) in enumerate(fact_nodes, 1):
+            if vn in pos:
+                _, cy = pos[vn]
+                pos[fid] = (x_fact, cy)
+                titles[fid] = ftitle
+                fact_idx[fid] = i
+
+        matched_rules: set[str] = set()
+        for rid, rule in (self.rules or {}).items():
+            if rule_matches((rule or {}).get("если", {}) or {}, self.prefs):
+                matched_rules.add(f"R::{rid}")
+
+        ranked, probs = self._rank_all()
+        hyp_active: set[str] = set()
+        for i, it in enumerate(ranked):
+            p = int(round(float(probs[i]) * 100))
+            if p > 0:
+                hyp_active.add(f"H::{it['book'].name}")
+
+        var_active: set[str] = set()
+        for vn in var_nodes:
+            k = vn.split("V::", 1)[1]
+            v = prefs_fact(k)
+            if v is None:
+                continue
+            if isinstance(v, list) and len(v) == 0:
+                continue
+            var_active.add(vn)
+
+        cond_edges: List[Tuple[str, str, str]] = []
+        infer_edges: List[Tuple[str, str, str]] = []
+
+        def cond_label(k: str, wanted: Any) -> str:
+            if isinstance(wanted, list):
+                return f"{k} ∈ {wanted}"
+            return f"{k} = {wanted}"
+
+        for rid, rule in (self.rules or {}).items():
+            rnode = f"R::{rid}"
+            conds = (rule or {}).get("если", {}) or {}
+            for k, wanted in conds.items():
+                vnode = f"V::{k}"
+                if vnode in pos:
+                    cond_edges.append((vnode, rnode, cond_label(str(k), wanted)))
+            for b in _as_list((rule or {}).get("то", [])):
+                if isinstance(b, str) and b.strip():
+                    hnode = f"H::{b.strip()}"
+                    infer_edges.append((rnode, hnode, "вывод"))
+
+        for src, dst, lab in cond_edges + infer_edges:
+            if src not in pos or dst not in pos:
+                continue
+            x1, y1 = pos[src]
+            x2, y2 = pos[dst]
+            active = False
+            if src.startswith("V::") and dst.startswith("R::") and dst in matched_rules and src in var_active:
+                active = True
+            if src.startswith("R::") and dst.startswith("H::") and src in matched_rules and dst in hyp_active:
+                active = True
+            if src.startswith("F::") and dst.startswith("V::"):
+                active = True
+            col = "#FFFFFF" if active else COL_ACCENT
+            tag = f"edge::{src}::{dst}"
             c.create_line(
                 x1,
                 y1,
                 x2,
                 y2,
                 fill=col,
-                width=4,
+                width=5 if active else 3,
                 arrow=tk.LAST,
                 arrowshape=(14, 18, 8),
                 tags=(tag,),
             )
-            c.tag_bind(tag, "<Enter>", lambda e, t=show: self._tooltip_show(t, e))
+            c.tag_bind(tag, "<Enter>", lambda e, t=lab: self._tooltip_show(str(t), e))
             c.tag_bind(tag, "<Motion>", self._tooltip_move)
             c.tag_bind(tag, "<Leave>", self._tooltip_hide)
 
-        for nid, title in nodes:
-            if nid not in pos:
+        for fid, _, vn in fact_nodes:
+            if fid not in pos or vn not in pos:
                 continue
-            cx, cy = pos[nid]
-            is_cur = (nid == cur_id)
-            is_in_path = (nid in path_ids)
-            fill = COL_PRIMARY if is_cur else COL_SURFACE
-            outline = COL_PRIMARY if is_in_path else COL_ACCENT
-            width = 3 if is_cur else 2
-            tcol = COL_DARK if is_cur else COL_TEXT
+            x1, y1 = pos[fid]
+            x2, y2 = pos[vn]
+            tag = f"edge::{fid}::{vn}"
+            c.create_line(
+                x1,
+                y1,
+                x2,
+                y2,
+                fill="#FFFFFF",
+                width=3,
+                arrow=tk.LAST,
+                arrowshape=(12, 14, 6),
+                tags=(tag,),
+            )
+            c.tag_bind(tag, "<Enter>", lambda e, t=titles.get(fid, ""): self._tooltip_show(str(t), e))
+            c.tag_bind(tag, "<Motion>", self._tooltip_move)
+            c.tag_bind(tag, "<Leave>", self._tooltip_hide)
+
+        def node_style(nid: str) -> Tuple[str, str, int]:
+            if nid.startswith("V::"):
+                base = "#FFFFFF" if nid in var_active else COL_SURFACE
+                outline = "#FFFFFF" if nid in var_active else COL_ACCENT
+                wv = 3 if nid in var_active else 2
+                return base, outline, wv
+            if nid.startswith("F::"):
+                return "#FFFFFF", "#FFFFFF", 3
+            if nid.startswith("R::"):
+                base = "#FFFFFF" if nid in matched_rules else COL_SURFACE
+                outline = "#FFFFFF" if nid in matched_rules else COL_ACCENT
+                wv = 3 if nid in matched_rules else 2
+                return base, outline, wv
+            if nid.startswith("H::"):
+                base = "#FFFFFF" if nid in hyp_active else COL_SURFACE
+                outline = "#FFFFFF" if nid in hyp_active else COL_ACCENT
+                wv = 3 if nid in hyp_active else 2
+                return base, outline, wv
+            return COL_SURFACE, COL_ACCENT, 2
+
+        def node_label(nid: str) -> str:
+            if nid.startswith("V::"):
+                return f"В{var_idx.get(nid, 0)}"
+            if nid.startswith("R::"):
+                return f"П{rule_idx.get(nid, 0)}"
+            if nid.startswith("H::"):
+                return f"Г{hyp_idx.get(nid, 0)}"
+            if nid.startswith("F::"):
+                return f"Ф{fact_idx.get(nid, 0)}"
+            return ""
+
+        for nid, (cx, cy) in pos.items():
+            cx = clamp(cx, margin + rx, w - margin - rx)
+            cy = clamp(cy, margin + rx, h - margin - rx)
+            fill, outline, lw = node_style(nid)
+            tcol = COL_DARK if fill == "#FFFFFF" else COL_TEXT
             tag = f"node::{nid}"
-            oval = c.create_oval(cx - r, cy - r, cx + r, cy + r, fill=fill, outline=outline, width=width, tags=(tag,))
-            c.create_text(cx, cy, text=str(num.get(nid, "")), fill=tcol, font=("Segoe UI", 11, "bold"), tags=(tag,))
-            c.tag_bind(tag, "<Enter>", lambda e, nid=nid: self._tooltip_show(title_map.get(nid, nid), e))
+            c.create_oval(cx - rx, cy - rx, cx + rx, cy + rx, fill=fill, outline=outline, width=lw, tags=(tag,))
+            c.create_text(cx, cy, text=node_label(nid), fill=tcol, font=("Segoe UI", 10, "bold"), tags=(tag,))
+            c.tag_bind(tag, "<Enter>", lambda e, nid=nid: self._tooltip_show(titles.get(nid, nid), e))
             c.tag_bind(tag, "<Motion>", self._tooltip_move)
             c.tag_bind(tag, "<Leave>", self._tooltip_hide)
 
@@ -807,7 +969,7 @@ class WizardApp(tk.Tk):
     def _rank_all(self) -> Tuple[List[Dict[str, Any]], np.ndarray]:
         ranked = self.recommender.rank(self.prefs, top_k=len(self.books))
         scores = np.array([float(it.get("score", 0.0)) for it in ranked], dtype=float)
-        probs = self._softmax(scores)
+        probs = self._softmax(scores * self.prob_sharpness)
         return ranked, probs
 
     def _asked_dynamic_count(self) -> int:
@@ -1326,8 +1488,34 @@ class WizardApp(tk.Tk):
                 justify="left",
             ).pack(anchor="w", padx=12, pady=(0, 12))
 
+        tk.Button(
+            self.options_scroll.inner,
+            text="Пройти заново",
+            command=self.restart_survey,
+            bg=COL_PRIMARY,
+            fg=COL_DARK,
+            activebackground=COL_ACCENT,
+            activeforeground=COL_DARK,
+            relief="flat",
+            padx=16,
+            pady=10,
+            font=("Segoe UI", 11, "bold"),
+        ).pack(anchor="w", padx=12, pady=(4, 12))
+
         self._render_path()
         self.btn_copy.configure(state="normal")
+
+    def restart_survey(self) -> None:
+        self.prefs = Preferences()
+        self.answers = {}
+        self.final_choice = None
+        self.finished_flow = False
+        self.steps = []
+        first = self._choose_next_step()
+        self.steps.append(first if first is not None else self.step_bank[0])
+        self.step_index = 0
+        self.btn_copy.configure(state="disabled")
+        self._render_step()
 
     @staticmethod
     def _safe_list(x: Any) -> List[Any]:
