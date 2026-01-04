@@ -1,0 +1,12 @@
+services:
+  experta-app:
+    build: .
+    container_name: python-expert
+    volumes:
+      - .:/app
+    command: python main.py
+    working_dir: /app
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "8000:8000"
