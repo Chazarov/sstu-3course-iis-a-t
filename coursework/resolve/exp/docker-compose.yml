@@ -1,10 +1,10 @@
 services:
-  experta-app:
+  python-expert:
     build: .
     container_name: python-expert
     volumes:
       - .:/app
-    command: python main.py
+    command: sh -c "cd src && python main.py"
     working_dir: /app
     environment:
       - PYTHONUNBUFFERED=1
