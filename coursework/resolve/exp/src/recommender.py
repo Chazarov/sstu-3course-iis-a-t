@@ -7,6 +7,7 @@ from typing import Any, Callable, DefaultDict, Dict, Iterable, List, Mapping, Se
 from experta import Fact, KnowledgeEngine, Rule
 
 from frames_repo import BookFrame
+from models import Recommendation
 
 
 class Pref(Fact):
@@ -14,12 +15,6 @@ class Pref(Fact):
     value: Any
 
 
-@dataclass
-class Recommendation:
-    title: str
-    score: int
-    matched: List[str]
-    info: Mapping[str, Any]
 
 
 def _human_match(field: str, value: str, label_map: Mapping[str, Mapping[str, str]]) -> str:
@@ -70,7 +65,7 @@ def build_engine_class(
     return RecommenderEngine
 
 
-def recommend(
+def get_recomendations(
     engine_cls: type,
     frames: Sequence[BookFrame],
     prefs: Iterable[Tuple[str, str]],

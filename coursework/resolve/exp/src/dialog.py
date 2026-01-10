@@ -1,29 +1,22 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
+from typing import Any, Iterable, List, Mapping, Optional, Tuple
 
-from frames_repo import LIST_FIELDS, MATCH_FIELDS, string_normalize
-
+from frames_repo import string_normalize
 
 
-
-@dataclass
-class Question:
-    field: str
-    prompt: str
-    multi: bool = False
+from models import *
 
 
 def default_questions() -> List[Question]:
     # Минимальный, но полезный набор признаков (можно расширять позже без переделки архитектуры)
     return [
-        Question("жанр", "Выберите жанр (пример: роман, эпопея, повесть) или напишите skip"),
-        Question("эпоха", "Выберите эпоху (пример: начало_XIX, середина_XIX) или skip"),
-        Question("настроение", "Выберите настроение (пример: философское, лирическое, сатирическое) или skip"),
-        Question("сложность", "Выберите сложность (низкая/средняя/высокая) или skip"),
-        Question("объём", "Выберите объём (короткое/среднее/длинное) или skip"),
-        Question("темы", "Темы: можно 1 или несколько через запятую (пример: любовь, война) или skip", multi=True),
+        Question(field="жанр", prompt="Выберите жанр (пример: роман, эпопея, повесть) или напишите skip"),
+        Question(field="эпоха", prompt="Выберите эпоху (пример: начало_XIX, середина_XIX) или skip"),
+        Question(field="настроение", prompt="Выберите настроение (пример: философское, лирическое, сатирическое) или skip"),
+        Question(field="сложность", prompt="Выберите сложность (низкая/средняя/высокая) или skip"),
+        Question(field="объём", prompt="Выберите объём (короткое/среднее/длинное) или skip"),
+        Question(field="темы", prompt="Темы: можно 1 или несколько через запятую (пример: любовь, война) или skip", multi=True),
     ]
 
 
@@ -47,14 +40,19 @@ class DialogSession:
 
 
 
-    def add_answer(self, answer: List[str]) -> Tuple[bool, str]:
+    def add_answer(self, answer: ClientAnswer) -> None:
+        """
+        Добавляет ответ пользователя в сессию.
+        
+        Raises:
+            DialogError: если ответ невалиден.
+        """
         q = self.current()
         if not q:
-            return False, "Диалог уже завершён."
+            raise DialogError("Диалог уже завершён.")
 
         if not answer:
-            return False, "Пустой ответ. Необходимо значение."
-
+            raise DialogError("Пустой ответ. Необходимо значение.")
 
         field = q.field
         options_map = self.option_map.get(field, {})
@@ -62,29 +60,59 @@ class DialogSession:
         if q.multi:
             accepted = 0
             unknown: List[str] = []
-            for it in answer:
+            for it in answer.items_answer:
                 n = string_normalize(it)
                 if n not in options_map:
                     unknown.append(it)
                     continue
-                self.prefs.append((field, answer))
+                self.prefs.append((field, it))
                 accepted += 1
             if accepted == 0:
-                return False, f"Неизвестные значения: {', '.join(unknown)}"
+                raise DialogError(f"Неизвестные значения: {', '.join(unknown)}")
             self.advance()
-            return True, "ok"
+            return
 
+        if answer.text_answer not in options_map:
+            raise DialogError(f"Неизвестное значение. Ваш ответ: {answer.text_answer} Используйте вариант из {options_map} ваших фреймов или skip.")
 
-        if answer not in options_map:
-            return False, f"Неизвестное значение. Ваш ответ: {answer} Используйте вариант из {options_map} ваших фреймов или skip."
-
-        self.prefs.append((field, answer))
+        self.prefs.append((field, answer.text_answer))
         self.advance()
-        return True, "ok"
 
     def hints_for(self, field: str, limit: int = 16) -> List[str]:
         vals = list(self.option_map.get(field, {}).values())
         vals.sort()
         return vals[: max(1, limit)]
+    
+    def get_question_message(self):
+        q = self.current()
+        hints = self.hints_for(q.field, limit=12)
+        return QuestionMessage(
+                field=q.field,
+                text=q.prompt,
+                examples=hints,
+            )
+
+
+
+def format_recommendations(recommendations: Iterable[Any]) -> List[RecommendationItem]:
+    """Форматирует список рекомендаций в структуру для отправки клиенту."""
+    items: List[RecommendationItem] = []
+    for rec in recommendations:
+        info = rec.info
+        items.append(
+            RecommendationItem(
+                title=rec.title,
+                score=rec.score,
+                matched=rec.matched,
+                author=info.get("автор"),
+                genre=info.get("жанр"),
+                epoch=info.get("эпоха"),
+                mood=info.get("настроение"),
+                difficulty=info.get("сложность"),
+                volume=info.get("объём"),
+                image=info.get("изображение"),
+            )
+        )
+    return items
 
 
