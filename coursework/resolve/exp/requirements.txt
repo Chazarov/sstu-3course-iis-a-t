@@ -1,3 +1,4 @@
 experta==1.9.4
+loguru
 fastapi
 uvicorn[standard]

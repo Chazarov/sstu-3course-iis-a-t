@@ -1,16 +1,21 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Union
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from loguru import logger
 
 from dialog import DialogSession, default_questions, format_recommendations
-from frames_repo import build_options, frames_dir_from_repo_root, load_frames, option_map, repo_root_from_src_file
+from frames_repo import build_options, load_frames, option_map, load_frames, option_map
 from recommender import build_engine_class, get_recomendations
 from models import *
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 # ============ Pydantic модели для WebSocket сообщений ============
 
@@ -21,8 +26,18 @@ WSMessage = Union[QuestionMessage, RecomendationsMessage, ErrorMessage, InfoMess
 
 
 # ============ Инициализация ============
-repo_root = repo_root_from_src_file(Path(__file__))
-frames_dir = frames_dir_from_repo_root(repo_root)
+
+# Вычисляем путь к фреймам относительно main.py
+# main.py: resolve/exp/src/main.py
+# Фреймы: resolve/sourses/frames/
+current_file = Path(__file__).resolve()
+repo_root = current_file.parents[2]  # resolve/
+frames_dir = repo_root / "sourses" / "frames"
+
+
+logger.info(f"Frames directory: {frames_dir}")
+logger.info(f"Directory exists: {frames_dir.exists()}")
+
 frames = load_frames(frames_dir)
 options = build_options(frames)
 labels = option_map(options)
@@ -152,7 +167,9 @@ async def ws_endpoint(ws: WebSocket) -> None:
     try:
         while True:
             if session.is_done():
+                logger.info(" сессия закончена")
                 recs = get_recomendations(EngineCls, frames, session.prefs, top_k=5)
+                logger.info(" рекомендации получены")
                 if not recs:
                     await _send(ws, RecomendationsMessage(
                             text="Не нашёл совпадений по выбранным критериям. Напишите restart чтобы начать заново.",

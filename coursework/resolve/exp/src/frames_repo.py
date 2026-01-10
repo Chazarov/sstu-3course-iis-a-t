@@ -4,7 +4,7 @@ import json
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Mapping, Optional, Set, Tuple
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Set, Tuple, Union
 
 from models import BookFrame
 
@@ -31,22 +31,16 @@ LIST_FIELDS: Set[str] = {"темы", "художественные_средст�
 
 
 
-
-def frames_dir_from_repo_root(repo_root: Path) -> Path:
-    return repo_root / "sourses" / "frames"
-
-
-def repo_root_from_src_file(src_file: Path) -> Path:
-    # exp/src/<this_file>.py -> exp -> <repo_root>
-    return src_file.resolve().parents[2]
-
-
-def load_frames(frames_dir: Path, id_counter:int) -> Tuple[BookFrame, ...]:
+def load_frames(frames_dir: Union[str, Path]) -> Tuple[BookFrame, ...]:
     """
     Кэшированная версия загрузки фреймов.
     Использует строку вместо Path для хэширования.
     Возвращает tuple вместо list для хэширования.
     """
+    # Конвертируем в Path, если передана строка
+    if isinstance(frames_dir, str):
+        frames_dir = Path(frames_dir)
+    
     id_counter = 0
     frames: List[BookFrame] = []
     for p in sorted(frames_dir.glob("*.json")):
@@ -67,7 +61,7 @@ def load_frames(frames_dir: Path, id_counter:int) -> Tuple[BookFrame, ...]:
                 # числовые поля пока не используем для матчей
                 match[k] = v
 
-        frames.append(BookFrame(title=title, raw=raw, match=match, id="frame-" + id_counter))
+        frames.append(BookFrame(title=title, raw=raw, match=match, id=f"frame-{id_counter}"))
         id_counter += 1
 
     return tuple(frames)
@@ -134,7 +128,6 @@ def clear_frames_cache() -> None:
     """
     global _build_options_cache
     _build_options_cache = None
-    load_frames.cache_clear()
     _option_map_cached.cache_clear()
 
 
