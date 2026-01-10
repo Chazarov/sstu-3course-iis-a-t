@@ -1,4 +1,5 @@
 
+from dataclasses import dataclass
 from typing import Any, List, Literal, Mapping, Optional
 
 from pydantic import BaseModel, Field
@@ -19,16 +20,27 @@ class ClientAnswer(BaseModel):
 class QuestionMessage(BaseModel):
     """Сообщение с вопросом пользователю."""
     type: Literal["question"] = "question"
+    is_multiple_response_options: bool = Field(..., description="Можно выбрать несколько")
     field: str = Field(..., description="Поле для фильтрации")
     text: str = Field(..., description="Текст вопроса")
-    examples: List[str] = Field(..., description="Примеры значений")
+    avaliable_answers: List[str] = Field(..., description="Примеры значений")
 
 
 class Recommendation(BaseModel):
+    id: str
     title: str
     score: int
     matched: List[str]
     info: Mapping[str, Any]
+
+
+@dataclass(frozen=True)
+class BookFrame:
+    id: str
+    title: str
+    raw: Mapping[str, Any]
+    match: Mapping[str, Any]
+
 
 
 
@@ -69,4 +81,4 @@ class Question(BaseModel):
     """Модель вопроса в диалоге."""
     field: str = Field(..., description="Поле для фильтрации (жанр, эпоха и т.д.)")
     prompt: str = Field(..., description="Текст вопроса пользователю")
-    multi: bool = Field(default=False, description="Разрешены ли множественные значения")
+    is_multi: bool = Field(default=False, description="Разрешены ли множественные значения")

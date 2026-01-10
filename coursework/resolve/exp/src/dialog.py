@@ -16,7 +16,7 @@ def default_questions() -> List[Question]:
         Question(field="настроение", prompt="Выберите настроение (пример: философское, лирическое, сатирическое) или skip"),
         Question(field="сложность", prompt="Выберите сложность (низкая/средняя/высокая) или skip"),
         Question(field="объём", prompt="Выберите объём (короткое/среднее/длинное) или skip"),
-        Question(field="темы", prompt="Темы: можно 1 или несколько через запятую (пример: любовь, война) или skip", multi=True),
+        Question(field="темы", prompt="Темы: можно 1 или несколько через запятую (пример: любовь, война) или skip", is_multi=True),
     ]
 
 
@@ -26,6 +26,8 @@ class DialogSession:
         self.questions = default_questions()
         self.idx = 0
         self.prefs: List[Tuple[str, str]] = []
+        # Отслеживаем количество ответов для каждого вопроса (для отката)
+        self.answer_counts: List[int] = []
 
     def is_done(self) -> bool:
         return self.idx >= len(self.questions)
@@ -37,6 +39,30 @@ class DialogSession:
 
     def advance(self) -> None:
         self.idx += 1
+    
+    def can_go_back(self) -> bool:
+        """Проверяет, можно ли вернуться к предыдущему вопросу."""
+        return self.idx > 0
+    
+    def go_back(self) -> None:
+        """
+        Возвращается к предыдущему вопросу, удаляя последние ответы.
+        
+        Raises:
+            DialogError: если откат невозможен.
+        """
+        if not self.can_go_back():
+            raise DialogError("Невозможно вернуться назад. Вы на первом вопросе.")
+        
+        # Откатываем индекс вопроса
+        self.idx -= 1
+        
+        # Удаляем ответы предыдущего вопроса
+        if self.answer_counts:
+            count_to_remove = self.answer_counts.pop()
+            for _ in range(count_to_remove):
+                if self.prefs:
+                    self.prefs.pop()
 
 
 
@@ -57,7 +83,7 @@ class DialogSession:
         field = q.field
         options_map = self.option_map.get(field, {})
 
-        if q.multi:
+        if q.is_multi:
             accepted = 0
             unknown: List[str] = []
             for it in answer.items_answer:
@@ -69,6 +95,8 @@ class DialogSession:
                 accepted += 1
             if accepted == 0:
                 raise DialogError(f"Неизвестные значения: {', '.join(unknown)}")
+            # Сохраняем количество добавленных ответов для возможности отката
+            self.answer_counts.append(accepted)
             self.advance()
             return
 
@@ -76,6 +104,8 @@ class DialogSession:
             raise DialogError(f"Неизвестное значение. Ваш ответ: {answer.text_answer} Используйте вариант из {options_map} ваших фреймов или skip.")
 
         self.prefs.append((field, answer.text_answer))
+        # Сохраняем количество добавленных ответов (для single - всегда 1)
+        self.answer_counts.append(1)
         self.advance()
 
     def hints_for(self, field: str, limit: int = 16) -> List[str]:
@@ -83,13 +113,14 @@ class DialogSession:
         vals.sort()
         return vals[: max(1, limit)]
     
-    def get_question_message(self):
+    def get_question_message(self) -> QuestionMessage:
         q = self.current()
-        hints = self.hints_for(q.field, limit=12)
+        hints = self.hints_for(q.field)
         return QuestionMessage(
                 field=q.field,
                 text=q.prompt,
-                examples=hints,
+                avaliable_answers=hints,
+                is_multiple_response_options=q.is_multi
             )
 
 

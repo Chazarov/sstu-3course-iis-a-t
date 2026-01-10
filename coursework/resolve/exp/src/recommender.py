@@ -82,11 +82,12 @@ def get_recomendations(
     scored.sort(key=lambda x: x[1], reverse=True)
 
     out: List[Recommendation] = []
-    for title, score in scored[: max(top_k, 1)]:
+    for title, score, _id in scored[: max(top_k, 1)]:
         if score <= 0:
             continue
         out.append(
             Recommendation(
+                id = _id,
                 title=title,
                 score=score,
                 matched=sorted(engine.matched.get(title, set())),
