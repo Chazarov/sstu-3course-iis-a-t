@@ -23,6 +23,13 @@ class BookCandidate(Fact):
     matched: Set[str]
 
 
+class MatchProcessed(Fact):
+    """Факт о том, что матчинг для книги и предпочтения уже обработан."""
+    book_id: str
+    field: str
+    value: str
+
+
 def _human_match(field: str, value: str, label_map: Mapping[str, Mapping[str, str]]) -> str:
     """Форматирует совпадение для отображения."""
     m = label_map.get(field, {})
@@ -71,6 +78,7 @@ def build_engine_class(
                     @Rule(
                         Pref(field=f, value=val),
                         AS.candidate << BookCandidate(book_id=b.id, title=b.title),
+                        ~MatchProcessed(book_id=b.id, field=f, value=val),  # Ещё НЕ обработано
                         salience=50
                     )
                     def _match(self: KnowledgeEngine, candidate: Fact) -> None:
@@ -79,26 +87,15 @@ def build_engine_class(
                             score=candidate['score'] + 1,
                             matched=candidate['matched'] | {_human_match(f, val, label_map)}
                         )
+                        # Отмечаем как обработанное
+                        self.declare(MatchProcessed(book_id=b.id, field=f, value=val))
                     return _match
                 
                 attrs[f"match__{book.title}__{field}__{value_str}"] = _make_match_rule(book, field, value_str)
-    
-    # Правило для сбора результатов (низкий приоритет - выполняется последним)
-    @Rule(
-        AS.candidate << BookCandidate(score=lambda s: s > 0),
-        salience=10
-    )
-    def _collect_result(self: KnowledgeEngine, candidate: Fact) -> None:
-        """Собирает кандидатов с ненулевым score в результаты."""
-        self.results.append(candidate)
-    
-    attrs['_collect_result'] = _collect_result
 
     class RecommenderEngine(KnowledgeEngine):
         """Движок рекомендаций на основе experta."""
-        def __init__(self) -> None:
-            super().__init__()
-            self.results: List[Fact] = []  # Движок сам собирает результаты
+        pass
 
     for k, v in attrs.items():
         setattr(RecommenderEngine, k, v)
@@ -114,31 +111,35 @@ def get_recomendations(
 ) -> List[Recommendation]:
     """
     Получает рекомендации используя экспертную систему.
-    Движок сам собирает результаты через правила.
+    Собирает результаты из фактов после выполнения правил.
     """
     engine: KnowledgeEngine = engine_cls()
     engine.reset()
-
     logger.info(" движок перезапущен")
     
     # Декларируем предпочтения
     for field, value in prefs:
         engine.declare(Pref(field=field, value=value))
-
     logger.info(" предпочтения загружены")
     
-    # Движок сам выводит все через forward chaining
-    # Результаты автоматически собираются в engine.results
+    # Движок выполняет правила через forward chaining
     engine.run()
     logger.info(" движок отработал")
     
-    # Результаты УЖЕ в engine.results! Просто сортируем и форматируем
-    by_title: Dict[str, BookFrame] = {b.title: b for b in frames}
+    # Собираем результаты вручную из фактов
+    candidates: List[Fact] = []
+    for fact in engine.facts.values():
+        if isinstance(fact, BookCandidate) and fact['score'] > 0:
+            candidates.append(fact)
+    
+    logger.info(f" найдено {len(candidates)} кандидатов")
     
     # Сортируем по score
-    sorted_results = sorted(engine.results, key=lambda c: c['score'], reverse=True)
+    sorted_results = sorted(candidates, key=lambda c: c['score'], reverse=True)
     
     # Формируем финальный список рекомендаций
+    by_title: Dict[str, BookFrame] = {b.title: b for b in frames}
+    
     return [
         Recommendation(
             id=by_title[candidate['title']].id,
