@@ -14,8 +14,8 @@ class DialogError(Exception):
 
 class ClientAnswer(BaseModel):
     type: Literal["client-answer"] = "answer"
-    text_answer: Optional[str] = Field(..., description="ответ")
-    items_answer: Optional[List[str]] = Field(..., description="ответ в виде списка значений")
+    text_answer: Optional[str] = Field(None, description="ответ")
+    items_answer: Optional[List[str]] = Field(None, description="ответ в виде списка значений")
 
 class QuestionMessage(BaseModel):
     """Сообщение с вопросом пользователю."""

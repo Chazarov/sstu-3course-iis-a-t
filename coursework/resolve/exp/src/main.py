@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Tuple, Union
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from loguru import logger
@@ -82,30 +82,50 @@ def dialog_graph() -> Dict[str, Any]:
             result.append(subset)
         return result
     
-    def make_recursion(session:DialogSession, graph_obj_id_counter:int, adj_map: Dict[str, Any]):
-
-
+    def make_recursion(session:DialogSession, graph_obj_id_counter:int, depth:int, adj_map: Dict[str, Any]) -> Tuple[str, int]:
+        if session.is_done():
+            recs = get_recomendations(EngineCls, frames, session.prefs, top_k=1)
+            return recs[0].id, graph_obj_id_counter
+        
         question = session.get_question_message()
-        graph_obj_id_counter +=1 
-        graph_id = "qu-" + graph_obj_id_counter
+        graph_obj_id_counter += 1 
+        depth += 1
+        graph_id = "qu-" + str(graph_obj_id_counter)
         adj_map[graph_id] = {
             "graph_id": graph_id,
             "text": question.text,
+            "depth": depth,
             "edges": list()
         }
+        
         if question.is_multiple_response_options:
             powerset = make_powerset(question.avaliable_answers) 
-            for ans in powerset:
-                session.add_answer(ClientAnswer(text_answer=ans))
+            for multi_ans in powerset:
+
+                multi_ans = list(map(lambda x: x.lower(), multi_ans))
+                
+                session.add_answer(ClientAnswer(items_answer=multi_ans))
+                to_id, graph_obj_id_counter = make_recursion(session, graph_obj_id_counter, depth, adj_map)
+                adj_map[graph_id]["edges"].append({
+                    "to": to_id,
+                    "value": multi_ans
+                })
+                
+                session.go_back()
+
         else:
             for ans in question.avaliable_answers:
-                make_recursion(session, graph_obj_id_counter, adj_map)
-                session.add_answer(ClientAnswer(text_answer=ans))
+                
+                session.add_answer(ClientAnswer(text_answer=ans.lower()))
+                to_id, graph_obj_id_counter = make_recursion(session, graph_obj_id_counter, depth, adj_map)
+                adj_map[graph_id]["edges"].append({
+                    "to": to_id,
+                    "value": ans
+                })
+                
+                session.go_back()
 
-        if session.is_done():
-            recs = get_recomendations(EngineCls, frames, session.prefs, top_k=1)
-        
-        return graph_obj_id_counter, False
+        return graph_id, graph_obj_id_counter
 
 
 
@@ -114,9 +134,8 @@ def dialog_graph() -> Dict[str, Any]:
     edjes_count = 0
     questions = default_questions()
     adj_map: Dict[str, Dict[str, Any]] = {}
+    session = DialogSession(labels)
 
-    
-    
     # Создаем начальный узел
     start_node_id = "start"
     adj_map[start_node_id] = {
@@ -125,17 +144,11 @@ def dialog_graph() -> Dict[str, Any]:
         "depth": 0
     }
 
-    session = DialogSession(labels)
-    
-   
+
+    make_recursion(session, graph_obj_id_counter, depth=0, adj_map=adj_map)
 
     
-    
-    
     return {
-        "total_nodes": nodes_count,
-        "total_edges": edjes_count,
-        "questions_count": len(questions),
         "adj_map": adj_map
     }
 
@@ -181,7 +194,7 @@ async def ws_endpoint(ws: WebSocket) -> None:
                             items=items))
 
                 answer:ClientAnswer = await _recv_answer(ws)
-                if answer.lower() == "restart":
+                if answer.text_answer and answer.text_answer.lower() == "restart":
                     session = DialogSession(labels)
                     await _send(ws, InfoMessage(text="Ок, начнём заново."))
                     continue

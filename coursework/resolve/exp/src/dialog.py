@@ -91,7 +91,7 @@ class DialogSession:
                 if n not in options_map:
                     unknown.append(it)
                     continue
-                self.prefs.append((field, it))
+                self.prefs.append((field, n))
                 accepted += 1
             if accepted == 0:
                 raise DialogError(f"Неизвестные значения: {', '.join(unknown)}")
