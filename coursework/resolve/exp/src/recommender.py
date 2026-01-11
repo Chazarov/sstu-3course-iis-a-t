@@ -148,4 +148,21 @@ def get_recomendations(
     ]
 
 
+def get_all_recomendations(frames: Sequence[BookFrame]) -> List[Recommendation]:
+    """
+    Возвращает все возможные рекомендации (все книги из базы).
+    Книги возвращаются без оценки (score=0) и совпадений.
+    """
+    return [
+        Recommendation(
+            id=frame.id,
+            title=frame.title,
+            score=0,
+            matched=[],
+            info=frame.raw,
+        )
+        for frame in frames
+    ]
+
+
  

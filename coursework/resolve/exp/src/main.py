@@ -11,7 +11,7 @@ from loguru import logger
 
 from dialog import DialogSession, default_questions, format_recommendations
 from frames_repo import build_options, load_frames, option_map, load_frames, option_map
-from recommender import build_engine_class, get_recomendations
+from recommender import build_engine_class, get_all_recomendations, get_recomendations
 from models import *
 from dotenv import load_dotenv
 import os
@@ -102,15 +102,21 @@ def dialog_graph(max_paths: int = Query(default=1000, description="Максим�
         return result
     
     def make_recursion(session:DialogSession, graph_obj_id_counter:int, depth:int, adj_map: Dict[str, Any]) -> Tuple[str, int]:
+
+        depth += 1
+
+
         if session.is_done():
             recs = get_recomendations(EngineCls, frames, session.prefs, top_k=1)
             max_path_limit[0] -= 1
+
+            adj_map[recs[0].id]["depth"] = depth
+
             logger.info(f" Осталось {max_path_limit[0]} из {max_paths} путей")
             return recs[0].id, graph_obj_id_counter
         
         question = session.get_question_message()
         graph_obj_id_counter += 1 
-        depth += 1
         graph_id = "qu-" + str(graph_obj_id_counter)
         adj_map[graph_id] = {
             "graph_id": graph_id,
@@ -160,14 +166,16 @@ def dialog_graph(max_paths: int = Query(default=1000, description="Максим�
 
 
     graph_obj_id_counter:int = 0
-    # Создаем начальный узел
-    start_node_id = "start"
-    adj_map[start_node_id] = {
-        "id": start_node_id,
-        "type": "start",
-        "depth": 0
-    }
+    
+    recomendations = get_all_recomendations(frames=frames)
 
+    for rec in recomendations:
+        adj_map[rec.id] = {
+            "graph_id": rec.id,
+            "text": rec.title,
+            "depth": 0,
+            "edges": list()
+        }
 
     make_recursion(session, graph_obj_id_counter, depth=0, adj_map=adj_map)
 
