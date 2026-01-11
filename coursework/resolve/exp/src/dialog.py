@@ -11,12 +11,12 @@ from models import *
 def default_questions() -> List[Question]:
     # Минимальный, но полезный набор признаков (можно расширять позже без переделки архитектуры)
     return [
-        Question(field="жанр", prompt="Выберите жанр (пример: роман, эпопея, повесть) или напишите skip"),
-        Question(field="эпоха", prompt="Выберите эпоху (пример: начало_XIX, середина_XIX) или skip"),
-        Question(field="настроение", prompt="Выберите настроение (пример: философское, лирическое, сатирическое) или skip"),
-        Question(field="сложность", prompt="Выберите сложность (низкая/средняя/высокая) или skip"),
-        Question(field="объём", prompt="Выберите объём (короткое/среднее/длинное) или skip"),
-        Question(field="темы", prompt="Темы: можно 1 или несколько через запятую (пример: любовь, война) или skip", is_multi=True),
+        Question(id="gq-1", field="жанр", prompt="Выберите жанр "),
+        Question(id="gq-2",field="эпоха", prompt="Выберите эпоху"),
+        Question(id="gq-3",field="настроение", prompt="Выберите настроение"),
+        Question(id="gq-4",field="сложность", prompt="Выберите сложность"),
+        Question(id="gq-5",field="объём", prompt="Выберите объём"),
+        Question(id="gq-6",field="темы", prompt="Выберите одну или несколько тем", is_multi=True),
     ]
 
 
@@ -117,6 +117,7 @@ class DialogSession:
         q = self.current()
         hints = self.hints_for(q.field)
         return QuestionMessage(
+                question_id=q.id,
                 field=q.field,
                 text=q.prompt,
                 avaliable_answers=hints,

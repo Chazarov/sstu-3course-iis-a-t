@@ -20,6 +20,7 @@ class ClientAnswer(BaseModel):
 class QuestionMessage(BaseModel):
     """Сообщение с вопросом пользователю."""
     type: Literal["question"] = "question"
+    question_id: str = Field(..., description="id вопроса к которому относится")
     is_multiple_response_options: bool = Field(..., description="Можно выбрать несколько")
     field: str = Field(..., description="Поле для фильтрации")
     text: str = Field(..., description="Текст вопроса")
@@ -79,6 +80,7 @@ class InfoMessage(BaseModel):
 
 class Question(BaseModel):
     """Модель вопроса в диалоге."""
+    id: str = Field(..., description="id вопроса обеспечивающее его уникальность среди других вопросов")
     field: str = Field(..., description="Поле для фильтрации (жанр, эпоха и т.д.)")
     prompt: str = Field(..., description="Текст вопроса пользователю")
     is_multi: bool = Field(default=False, description="Разрешены ли множественные значения")

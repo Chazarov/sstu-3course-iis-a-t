@@ -3,9 +3,10 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
+import random
 from typing import Any, Dict, List, Tuple, Union
 
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, Query, WebSocket, WebSocketDisconnect
 from loguru import logger
 
 from dialog import DialogSession, default_questions, format_recommendations
@@ -66,12 +67,28 @@ def get_frames():
 
 
 @app.get("/dialog-graph")
-def dialog_graph() -> Dict[str, Any]:
+def dialog_graph(max_paths: int = Query(default=1000, description="Максимальное количество путей для построения"),
+                    max_multi_answer_iterations: int = Query(default=10, description="Ограничение на количество ветвлений на вопросах с возможностью выбора нескольких вариантов")) -> Dict[str, Any]:
     """
     Возвращает граф всех возможных путей диалога в виде списка смежности.
     Граф состояний диалога, где узлы переиспользуются.
     """
-    def make_powerset(s: List[str]):
+
+    
+    questions = default_questions()
+    max_path_limit = [max_paths]
+
+    powersets = dict()
+    
+    adj_map: Dict[str, Dict[str, Any]] = {}
+    session = DialogSession(labels)
+    total_path_count = session.calculate_total_paths(questions, labels)
+    logger.info(f"Поиск путей диалога... Максимальное возможное количество путей в системе: {total_path_count}. Ограничение:{max_paths}")
+
+    def get_powerset(s: List[str], question_id:str):
+
+        if question_id in powersets.keys():
+            return powersets[question_id].copy()
         n = len(s)
         result = []
         for i in range(1, 1 << n):  # от 1, исключая пустое
@@ -80,11 +97,15 @@ def dialog_graph() -> Dict[str, Any]:
                 if i & (1 << j):
                     subset.append(s[j])
             result.append(subset)
+
+        powersets[question_id] = result
         return result
     
     def make_recursion(session:DialogSession, graph_obj_id_counter:int, depth:int, adj_map: Dict[str, Any]) -> Tuple[str, int]:
         if session.is_done():
             recs = get_recomendations(EngineCls, frames, session.prefs, top_k=1)
+            max_path_limit[0] -= 1
+            logger.info(f" Осталось {max_path_limit[0]} из {max_paths} путей")
             return recs[0].id, graph_obj_id_counter
         
         question = session.get_question_message()
@@ -99,7 +120,9 @@ def dialog_graph() -> Dict[str, Any]:
         }
         
         if question.is_multiple_response_options:
-            powerset = make_powerset(question.avaliable_answers) 
+            powerset = get_powerset(question.avaliable_answers, question.field) 
+            random.shuffle(powerset)
+            powerset = powerset[:max_multi_answer_iterations]
             for multi_ans in powerset:
 
                 multi_ans = list(map(lambda x: x.lower(), multi_ans))
@@ -110,11 +133,16 @@ def dialog_graph() -> Dict[str, Any]:
                     "to": to_id,
                     "value": multi_ans
                 })
+
+                if(max_path_limit[0] == 0):
+                    break
                 
                 session.go_back()
 
         else:
-            for ans in question.avaliable_answers:
+            answers = question.avaliable_answers.copy()
+            random.shuffle(answers)
+            for ans in answers:
                 
                 session.add_answer(ClientAnswer(text_answer=ans.lower()))
                 to_id, graph_obj_id_counter = make_recursion(session, graph_obj_id_counter, depth, adj_map)
@@ -123,6 +151,8 @@ def dialog_graph() -> Dict[str, Any]:
                     "value": ans
                 })
                 
+                if(max_path_limit[0] == 0):
+                    break
                 session.go_back()
 
         return graph_id, graph_obj_id_counter
@@ -130,12 +160,6 @@ def dialog_graph() -> Dict[str, Any]:
 
 
     graph_obj_id_counter:int = 0
-    nodes_count = 0
-    edjes_count = 0
-    questions = default_questions()
-    adj_map: Dict[str, Dict[str, Any]] = {}
-    session = DialogSession(labels)
-
     # Создаем начальный узел
     start_node_id = "start"
     adj_map[start_node_id] = {
