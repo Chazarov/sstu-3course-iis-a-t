@@ -122,6 +122,34 @@ class DialogSession:
                 avaliable_answers=hints,
                 is_multiple_response_options=q.is_multi
             )
+    
+    @staticmethod
+    def calculate_total_paths(questions: List[Question], option_map: Mapping[str, Mapping[str, str]]) -> int:
+        """
+        Математически вычисляет общее количество возможных путей диалога.
+        
+        Args:
+            questions: Список вопросов диалога
+            option_map: Маппинг полей на доступные опции
+            
+        Returns:
+            Общее количество уникальных путей принятия решений
+        """
+        total_paths = 1
+        
+        for q in questions:
+            num_options = len(option_map.get(q.field, {}))
+            
+            if q.is_multi:
+                # Для multi-choice: 2^n - 1 (все непустые подмножества)
+                num_variants = (2 ** num_options) - 1
+            else:
+                # Для single-choice: просто количество опций
+                num_variants = num_options
+            
+            total_paths *= num_variants
+        
+        return total_paths
 
 
 

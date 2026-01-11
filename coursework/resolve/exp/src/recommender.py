@@ -115,16 +115,13 @@ def get_recomendations(
     """
     engine: KnowledgeEngine = engine_cls()
     engine.reset()
-    logger.info(" движок перезапущен")
     
     # Декларируем предпочтения
     for field, value in prefs:
         engine.declare(Pref(field=field, value=value))
-    logger.info(" предпочтения загружены")
     
     # Движок выполняет правила через forward chaining
     engine.run()
-    logger.info(" движок отработал")
     
     # Собираем результаты вручную из фактов
     candidates: List[Fact] = []
@@ -132,7 +129,6 @@ def get_recomendations(
         if isinstance(fact, BookCandidate) and fact['score'] > 0:
             candidates.append(fact)
     
-    logger.info(f" найдено {len(candidates)} кандидатов")
     
     # Сортируем по score
     sorted_results = sorted(candidates, key=lambda c: c['score'], reverse=True)
