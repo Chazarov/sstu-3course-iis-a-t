@@ -199,6 +199,15 @@ export default function App() {
           <div className="rec-list">
             {content.items.map((item, idx) => (
               <div key={idx} className="rec-item">
+                {item.image && (
+                  <div className="rec-image-container">
+                    <img 
+                      src={`/images/${item.image}`} 
+                      alt={item.title}
+                      className="rec-image"
+                    />
+                  </div>
+                )}
                 <div className="rec-title">{item.title}</div>
                 <div className="rec-score">Совпадений: {item.score}</div>
                 <div className="rec-details">
