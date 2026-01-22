@@ -148,6 +148,33 @@ body {
   color: var(--bone);
 }
 
+.option-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.option-btn:disabled:hover {
+  border-color: var(--steel);
+  color: var(--cream);
+  box-shadow: none;
+}
+
+.option-btn:disabled:hover::before {
+  left: -100%;
+}
+
+.option-btn.selected:disabled {
+  opacity: 1;
+  background: rgba(201, 169, 97, 0.15);
+  border-color: var(--gold);
+  color: var(--bone);
+}
+
+.option-btn.selected:disabled:hover {
+  border-color: var(--gold);
+  color: var(--bone);
+}
+
 .multi-submit {
   margin-top: 1rem;
   background: transparent;
@@ -171,6 +198,12 @@ body {
 .multi-submit:disabled {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+.multi-submit:disabled:hover {
+  background: transparent;
+  color: var(--gold);
+  box-shadow: none;
 }
 
 .info-message,

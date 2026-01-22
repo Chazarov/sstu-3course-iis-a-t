@@ -195,10 +195,10 @@ async def _recv_answer(ws: WebSocket) -> ClientAnswer:
     raw = await ws.receive_text()
     js_raw = json.loads(raw)
     serialized = ClientAnswer.model_validate(js_raw)
-    serialized.text_answer = serialized.text_answer.lower()
-    if(serialized.items_answer):
-        for i in serialized.items_answer:
-            i = i.lower()
+    if serialized.text_answer:
+        serialized.text_answer = serialized.text_answer.lower()
+    if serialized.items_answer:
+        serialized.items_answer = [i.lower() for i in serialized.items_answer]
     
     
     return serialized
