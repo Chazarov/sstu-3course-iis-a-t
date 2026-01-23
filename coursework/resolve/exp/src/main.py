@@ -66,6 +66,50 @@ def get_frames():
     return frames
 
 
+# Конфигурация весов для правил (должна совпадать с recommender.py)
+FIELD_WEIGHTS = {
+    "жанр": 10,
+    "эпоха": 2,
+    "настроение": 2,
+    "темы": 2,
+    "сложность": 1,
+    "объём": 1,
+}
+
+# Словарь для перевода полей на русский
+FIELD_NAMES_RU = {
+    "жанр": "жанр",
+    "эпоха": "эпоха",
+    "настроение": "настроение",
+    "темы": "темы",
+    "сложность": "сложность",
+    "объём": "объём",
+}
+
+
+def format_rule_description(rule_type: str, extra_info: Dict[str, Any]) -> str:
+    """
+    Форматирует словесное представление правила на русском языке.
+    """
+    if rule_type == "initialization":
+        book_name = extra_info.get("book", "неизвестная книга")
+        return f"Если система запускается, То создать кандидата для книги '{book_name}' с начальным счётом 0"
+    
+    elif rule_type == "matching":
+        book_name = extra_info.get("book", "неизвестная")
+        field = extra_info.get("field", "неизвестное поле")
+        value = extra_info.get("value", "неизвестное значение")
+        weight = FIELD_WEIGHTS.get(field, 1)
+        field_ru = FIELD_NAMES_RU.get(field, field)
+        
+        return (f"Если пользователь выбрал {field_ru}='{value}' И "
+                f"книга '{book_name}' имеет {field_ru}='{value}', "
+                f"То увеличить счёт книги на {weight} очко(а/ов)")
+    
+    else:
+        return "Неизвестное правило"
+
+
 @app.get("/rules")
 def get_rules(
     rule_type: str = Query(default=None, description="Фильтр по типу правила: 'init', 'match' или 'all'"),
@@ -73,26 +117,33 @@ def get_rules(
 ) -> Dict[str, Any]:
     """
     Возвращает все метапродукции (правила) экспертной системы.
-    Использует встроенный метод get_rules() из библиотеки experta.
+    Получает имена правил из атрибутов класса движка.
     """
     # Создаём экземпляр движка
     engine = EngineCls()
     engine.reset()
     
-    # Получаем все правила через встроенный метод experta
-    rules = engine.get_rules()
-    
-    # Форматируем информацию о правилах
+    # Получаем все правила из атрибутов класса
     rules_info = []
     init_count = 0
     match_count = 0
     other_count = 0
     
-    for rule in rules:
-        rule_name = rule.__name__ if hasattr(rule, '__name__') else str(rule)
-        
-        if rule_name in ("_init"):
+    # Проходим по всем атрибутам класса движка
+    for attr_name in dir(EngineCls):
+        # Проверяем только правила init__ и match__
+        if not (attr_name.startswith('init__') or attr_name.startswith('match__')):
             continue
+            
+        # Получаем атрибут
+        attr = getattr(EngineCls, attr_name, None)
+        
+        # Проверяем, является ли это методом
+        if not callable(attr):
+            continue
+            
+        rule_name = attr_name
+        
         # Определяем тип правила по имени
         current_rule_type = "other"
         if rule_name.startswith("init__"):
@@ -103,6 +154,7 @@ def get_rules(
             match_count += 1
         else:
             other_count += 1
+            continue  # Пропускаем неизвестные типы
         
         # Фильтрация по типу
         if rule_type:
@@ -112,7 +164,7 @@ def get_rules(
                 continue
         
         # Получаем информацию о салиенсе (приоритете)
-        salience = getattr(rule, 'salience', None)
+        salience = getattr(attr, 'salience', None)
         
         # Извлекаем дополнительную информацию из имени правила
         extra_info = {}
@@ -128,11 +180,15 @@ def get_rules(
                 extra_info["field"] = parts[1]
                 extra_info["value"] = parts[2]
         
+        # Создаём словесное представление правила
+        rule_description = format_rule_description(current_rule_type, extra_info)
+        
         rules_info.append({
             "name": rule_name,
             "type": current_rule_type,
             "salience": salience,
-            "rule_object": str(rule),
+            "rule_object": str(attr),
+            "description": rule_description,  # Словесное представление
             **extra_info
         })
     
@@ -140,8 +196,10 @@ def get_rules(
     if limit and limit > 0:
         rules_info = rules_info[:limit]
     
+    total_rules = init_count + match_count
+    
     return {
-        "total_rules": len(rules),
+        "total_rules": total_rules,
         "init_rules_count": init_count,
         "match_rules_count": match_count,
         "other_rules_count": other_count,
@@ -150,7 +208,7 @@ def get_rules(
         "statistics": {
             "total_books": len(frames),
             "questions": len(default_questions()),
-            "average_rules_per_book": len(rules) / len(frames) if len(frames) > 0 else 0
+            "average_rules_per_book": total_rules / len(frames) if len(frames) > 0 else 0
         }
     }
 
