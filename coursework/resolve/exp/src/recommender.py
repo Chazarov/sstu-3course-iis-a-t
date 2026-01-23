@@ -46,6 +46,25 @@ def build_engine_class(
     """
     attrs: Dict[str, Any] = {}
     
+    # Конфигурация весов и приоритетов для разных полей
+    FIELD_WEIGHTS = {
+        "жанр": 10,           # Жанр - самый важный (вес x3)
+        "эпоха": 2,          # Эпоха - важный (вес x2)
+        "настроение": 2,     # Настроение - важный (вес x2)
+        "темы": 2,           # Темы - важные (вес x2)
+        "сложность": 1,      # Обычный вес
+        "объём": 1,          # Обычный вес
+    }
+    
+    FIELD_SALIENCE = {
+        "жанр": 333,          # Самый высокий приоритет
+        "эпоха": 60,
+        "настроение": 60,
+        "темы": 55,
+        "сложность": 50,
+        "объём": 50,
+    }
+    
     # Правила для инициализации кандидатов (высокий приоритет)
     for book in frames:
         def _make_init_rule(b: BookFrame) -> Callable:
@@ -75,16 +94,20 @@ def build_engine_class(
                 seen.add(key)
                 
                 def _make_match_rule(b: BookFrame, f: str, val: str) -> Callable:
+                    # Получаем вес и приоритет для этого поля
+                    weight = FIELD_WEIGHTS.get(f, 1)
+                    rule_salience = FIELD_SALIENCE.get(f, 50)
+                    
                     @Rule(
                         Pref(field=f, value=val),
                         AS.candidate << BookCandidate(book_id=b.id, title=b.title),
                         ~MatchProcessed(book_id=b.id, field=f, value=val),  # Ещё НЕ обработано
-                        salience=50
+                        salience=rule_salience  # Динамический приоритет
                     )
                     def _match(self: KnowledgeEngine, candidate: Fact) -> None:
-                        # Модифицируем факт: увеличиваем score
+                        # Модифицируем факт: увеличиваем score с учетом веса
                         self.modify(candidate,
-                            score=candidate['score'] + 1,
+                            score=candidate['score'] + weight,  # Взвешенный score
                             matched=candidate['matched'] | {_human_match(f, val, label_map)}
                         )
                         # Отмечаем как обработанное

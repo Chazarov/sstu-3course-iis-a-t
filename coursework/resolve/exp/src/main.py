@@ -66,6 +66,97 @@ def get_frames():
     return frames
 
 
+@app.get("/rules")
+def get_rules(
+    rule_type: str = Query(default=None, description="Фильтр по типу правила: 'init', 'match' или 'all'"),
+    limit: int = Query(default=None, description="Ограничение количества возвращаемых правил")
+) -> Dict[str, Any]:
+    """
+    Возвращает все метапродукции (правила) экспертной системы.
+    Использует встроенный метод get_rules() из библиотеки experta.
+    """
+    # Создаём экземпляр движка
+    engine = EngineCls()
+    engine.reset()
+    
+    # Получаем все правила через встроенный метод experta
+    rules = engine.get_rules()
+    
+    # Форматируем информацию о правилах
+    rules_info = []
+    init_count = 0
+    match_count = 0
+    other_count = 0
+    
+    for rule in rules:
+        rule_name = rule.__name__ if hasattr(rule, '__name__') else str(rule)
+        
+        if rule_name in ("_init"):
+            continue
+        # Определяем тип правила по имени
+        current_rule_type = "other"
+        if rule_name.startswith("init__"):
+            current_rule_type = "initialization"
+            init_count += 1
+        elif rule_name.startswith("match__"):
+            current_rule_type = "matching"
+            match_count += 1
+        else:
+            other_count += 1
+        
+        # Фильтрация по типу
+        if rule_type:
+            if rule_type == "init" and current_rule_type != "initialization":
+                continue
+            elif rule_type == "match" and current_rule_type != "matching":
+                continue
+        
+        # Получаем информацию о салиенсе (приоритете)
+        salience = getattr(rule, 'salience', None)
+        
+        # Извлекаем дополнительную информацию из имени правила
+        extra_info = {}
+        if current_rule_type == "initialization":
+            # Для правил инициализации извлекаем название книги
+            book_name = rule_name.replace("init__", "")
+            extra_info["book"] = book_name
+        elif current_rule_type == "matching":
+            # Для правил сопоставления извлекаем книгу, поле и значение
+            parts = rule_name.replace("match__", "").split("__")
+            if len(parts) >= 3:
+                extra_info["book"] = parts[0]
+                extra_info["field"] = parts[1]
+                extra_info["value"] = parts[2]
+        
+        rules_info.append({
+            "name": rule_name,
+            "type": current_rule_type,
+            "salience": salience,
+            "rule_object": str(rule),
+            **extra_info
+        })
+    
+    # Применяем лимит если указан
+    if limit and limit > 0:
+        rules_info = rules_info[:limit]
+    
+    return {
+        "total_rules": len(rules),
+        "init_rules_count": init_count,
+        "match_rules_count": match_count,
+        "other_rules_count": other_count,
+        "filtered_rules_count": len(rules_info),
+        "rules": rules_info,
+        "statistics": {
+            "total_books": len(frames),
+            "questions": len(default_questions()),
+            "average_rules_per_book": len(rules) / len(frames) if len(frames) > 0 else 0
+        }
+    }
+
+
+
+
 @app.get("/dialog-graph")
 def dialog_graph(max_paths: int = Query(default=1000, description="Максимальное количество путей для построения"),
                     max_multi_answer_iterations: int = Query(default=10, description="Ограничение на количество ветвлений на вопросах с возможностью выбора нескольких вариантов")) -> Dict[str, Any]:

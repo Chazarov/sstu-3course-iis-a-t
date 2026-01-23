@@ -1,0 +1,2306 @@
+[
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='толстой'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='автор', value='толстой'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c81550>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='роман'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='жанр', value='роман'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c81430>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c81700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='драматическое'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='настроение', value='драматическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c818b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='длинное'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='объём', value='длинное'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c81820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='средняя'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='сложность', value='средняя'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c81790>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='любовь'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='темы', value='любовь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c81af0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='общество'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='темы', value='общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c81ca0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='семья'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='темы', value='семья'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c81b80>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='жертва'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='тип_героя', value='жертва'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c81a60>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='долг_vs_чувство'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='тип_конфликта', value='долг_vs_чувство'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c819d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='монологи'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='художественные_средства', value='монологи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c81f70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='психологизм'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='художественные_средства', value='психологизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c81dc0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='реализм'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='художественные_средства', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c81ee0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='символизм'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='художественные_средства', value='символизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92040>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='конец_xix'), BookCandidate(book_id='frame-0', title='Аннакаренина'), NOT(MatchProcessed(book_id='frame-0', field='эпоха', value='конец_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c815e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='достоевский'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='автор', value='достоевский'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c920d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='роман'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='жанр', value='роман'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92160>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='трагическое'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='настроение', value='трагическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92670>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='длинное'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='объём', value='длинное'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92550>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='высокая'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='сложность', value='высокая'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92430>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='вера'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='темы', value='вера'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c929d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='нигилизм'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='темы', value='нигилизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='революция'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='темы', value='революция'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='антигерой'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='тип_героя', value='антигерой'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92790>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='старое_vs_новое'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='тип_конфликта', value='старое_vs_новое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='гротеск'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='художественные_средства', value='гротеск'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92ca0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92c10>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='психологизм'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='художественные_средства', value='психологизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92af0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='символизм'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='художественные_средства', value='символизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92b80>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='конец_xix'), BookCandidate(book_id='frame-1', title='Бесы'), NOT(MatchProcessed(book_id='frame-1', field='эпоха', value='конец_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92280>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='пушкин'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='автор', value='пушкин'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92d30>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='пьеса'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='жанр', value='пьеса'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92e50>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c210d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='трагическое'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='настроение', value='трагическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21280>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='короткое'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='объём', value='короткое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c211f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='средняя'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='сложность', value='средняя'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21160>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='вера'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='темы', value='вера'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c215e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='власть'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='темы', value='власть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21430>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='честь'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='темы', value='честь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c214c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='антигерой'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='тип_героя', value='антигерой'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c213a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='добро_vs_зло'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='тип_конфликта', value='добро_vs_зло'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='монологи'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='художественные_средства', value='монологи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='реализм'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='художественные_средства', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c218b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='фольклор'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='художественные_средства', value='фольклор'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='начало_xix'), BookCandidate(book_id='frame-2', title='Борисгодунов'), NOT(MatchProcessed(book_id='frame-2', field='эпоха', value='начало_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c92f70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='достоевский'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='автор', value='достоевский'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c219d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='роман'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='жанр', value='роман'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21a60>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21b80>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='философское'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='настроение', value='философское'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21d30>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='длинное'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='объём', value='длинное'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21ca0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='высокая'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='сложность', value='высокая'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21c10>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='вера'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='темы', value='вера'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21ee0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='свобода'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='темы', value='свобода'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c350d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='семья'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='темы', value='семья'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21f70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='искатель'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='тип_героя', value='искатель'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21e50>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='добро_vs_зло'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='тип_конфликта', value='добро_vs_зло'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21dc0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c351f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='монологи'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='художественные_средства', value='монологи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35280>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='психологизм'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='художественные_средства', value='психологизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35160>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='символизм'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='художественные_средства', value='символизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='конец_xix'), BookCandidate(book_id='frame-3', title='Братьякарамазовы'), NOT(MatchProcessed(book_id='frame-3', field='эпоха', value='конец_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c21af0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='толстой'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='автор', value='толстой'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c353a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='эпопея'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='жанр', value='эпопея'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35430>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35670>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='философское'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='настроение', value='философское'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='длинное'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='объём', value='длинное'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35790>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='высокая'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='сложность', value='высокая'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='война'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='темы', value='война'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35a60>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='любовь'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='темы', value='любовь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35af0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='семья'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='темы', value='семья'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35c10>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='честь'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='темы', value='честь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35d30>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='искатель'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='тип_героя', value='искатель'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c359d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='долг_vs_чувство'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='тип_конфликта', value='долг_vs_чувство'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44160>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='метафоры'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='художественные_средства', value='метафоры'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c440d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='пейзажи'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='художественные_средства', value='пейзажи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44040>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='психологизм'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='художественные_средства', value='психологизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35e50>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='реализм'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='художественные_средства', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35f70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='середина_xix'), BookCandidate(book_id='frame-4', title='Войнаимир'), NOT(MatchProcessed(book_id='frame-4', field='эпоха', value='середина_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c35550>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='грибоедов'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='автор', value='грибоедов'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c441f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='пьеса'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='жанр', value='пьеса'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44280>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c444c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='сатирическое'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='настроение', value='сатирическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='короткое'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='объём', value='короткое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44670>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='средняя'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='сложность', value='средняя'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c445e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='любовь'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='темы', value='любовь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c449d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='общество'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='темы', value='общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='свобода'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='темы', value='свобода'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44af0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='бунтарь'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='тип_героя', value='бунтарь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c448b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='личность_vs_общество'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='тип_конфликта', value='личность_vs_общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44dc0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='ирония'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='художественные_средства', value='ирония'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44d30>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='монологи'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='художественные_средства', value='монологи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44e50>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='сатира'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='художественные_средства', value='сатира'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44c10>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='начало_xix'), BookCandidate(book_id='frame-5', title='Гореотума'), NOT(MatchProcessed(book_id='frame-5', field='эпоха', value='начало_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c443a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='салтыков-щедрин'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='автор', value='салтыков-щедрин'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44ee0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='роман'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='жанр', value='роман'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c44f70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='сатира'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='направление', value='сатира'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56160>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='трагическое'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='настроение', value='трагическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='среднее'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='объём', value='среднее'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56280>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='высокая'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='сложность', value='высокая'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c561f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='общество'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='темы', value='общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56670>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='семья'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='темы', value='семья'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c564c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='смерть'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='темы', value='смерть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56550>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='антигерой'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='тип_героя', value='антигерой'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56430>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='добро_vs_зло'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='тип_конфликта', value='добро_vs_зло'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c563a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='гротеск'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='художественные_средства', value='гротеск'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56790>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='ирония'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='художественные_средства', value='ирония'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='психологизм'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='художественные_средства', value='психологизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='сатира'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='художественные_средства', value='сатира'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='символизм'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='художественные_средства', value='символизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c568b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='конец_xix'), BookCandidate(book_id='frame-6', title='Господаголовлвы'), NOT(MatchProcessed(book_id='frame-6', field='эпоха', value='конец_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56040>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='пушкин'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='автор', value='пушкин'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c569d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='роман_в_стихах'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='жанр', value='роман_в_стихах'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56a60>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56c10>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='лирическое'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='настроение', value='лирическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56dc0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='среднее'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='объём', value='среднее'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56d30>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='средняя'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='сложность', value='средняя'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56ca0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='любовь'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='темы', value='любовь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56f70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='общество'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='темы', value='общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea040>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='свобода'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='темы', value='свобода'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea160>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='лишний_человек'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='тип_героя', value='лишний_человек'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56ee0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='личность_vs_общество'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='тип_конфликта', value='личность_vs_общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56e50>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea4c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='ирония'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='художественные_средства', value='ирония'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea1f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='лиризм'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='художественные_средства', value='лиризм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='метафоры'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='художественные_средства', value='метафоры'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea430>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='реализм'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='художественные_средства', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea3a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='начало_xix'), BookCandidate(book_id='frame-7', title='Евгенийонегин'), NOT(MatchProcessed(book_id='frame-7', field='эпоха', value='начало_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c56b80>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='бунин'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='автор', value='бунин'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea550>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='роман'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='жанр', value='роман'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea5e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='модернизм'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='направление', value='модернизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='лирическое'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='настроение', value='лирическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea9d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='среднее'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='объём', value='среднее'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='средняя'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='сложность', value='средняя'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea8b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='искусство'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='темы', value='искусство'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5beac10>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='любовь'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='темы', value='любовь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5beab80>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='природа'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='темы', value='природа'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5beadc0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='смерть'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='темы', value='смерть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bead30>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='искатель'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='тип_героя', value='искатель'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5beaaf0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='идеал_vs_реальность'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='тип_конфликта', value='идеал_vs_реальность'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5beaa60>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='автобиографизм'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='художественные_средства', value='автобиографизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5beaf70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='лиризм'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='художественные_средства', value='лиризм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5beaee0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='метафоры'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='художественные_средства', value='метафоры'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb160>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='пейзажи'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='художественные_средства', value='пейзажи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb0d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='психологизм'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='художественные_средства', value='психологизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb040>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='начало_xx'), BookCandidate(book_id='frame-8', title='Жизньарсеньева'), NOT(MatchProcessed(book_id='frame-8', field='эпоха', value='начало_xx'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bea700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='тургенев'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='автор', value='тургенев'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb1f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='рассказы'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='жанр', value='рассказы'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb280>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb3a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='лирическое'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='настроение', value='лирическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb550>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='среднее'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='объём', value='среднее'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb4c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='низкая'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='сложность', value='низкая'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb430>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='общество'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='темы', value='общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb790>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='природа'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='темы', value='природа'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='свобода'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='темы', value='свобода'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='искатель'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='тип_героя', value='искатель'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb670>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='свобода_vs_система'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='тип_конфликта', value='свобода_vs_система'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb5e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfba60>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='лиризм'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='художественные_средства', value='лиризм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb9d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='пейзажи'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='художественные_средства', value='пейзажи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='реализм'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='художественные_средства', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb8b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='середина_xix'), BookCandidate(book_id='frame-9', title='Запискиохотника'), NOT(MatchProcessed(book_id='frame-9', field='эпоха', value='середина_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfb310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='достоевский'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='автор', value='достоевский'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfbaf0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='роман'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='жанр', value='роман'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfbb80>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfbd30>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='философское'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='настроение', value='философское'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c110d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='длинное'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='объём', value='длинное'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfbf70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='высокая'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='сложность', value='высокая'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfbe50>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='вера'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='темы', value='вера'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c11310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='любовь'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='темы', value='любовь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c114c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='общество'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='темы', value='общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c11430>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='идеалист'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='тип_героя', value='идеалист'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c11280>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='идеал_vs_реальность'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='тип_конфликта', value='идеал_vs_реальность'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c111f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='аллюзии'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='художественные_средства', value='аллюзии'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c11700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c11790>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='психологизм'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='художественные_средства', value='психологизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c115e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='символизм'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='художественные_средства', value='символизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c11670>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='конец_xix'), BookCandidate(book_id='frame-10', title='Идиот'), NOT(MatchProcessed(book_id='frame-10', field='эпоха', value='конец_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bfbca0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='толстой'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='автор', value='толстой'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c11820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='повесть'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='жанр', value='повесть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c118b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c11af0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='лирическое'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='настроение', value='лирическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c11e50>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='среднее'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='объём', value='среднее'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c11d30>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='средняя'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='сложность', value='средняя'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c11c10>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='любовь'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='темы', value='любовь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f1f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='природа'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='темы', value='природа'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f0d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='свобода'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='темы', value='свобода'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='искатель'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='тип_героя', value='искатель'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f040>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='личность_vs_общество'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='тип_конфликта', value='личность_vs_общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c11f70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f5e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='лиризм'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='художественные_средства', value='лиризм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f550>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='пейзажи'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='художественные_средства', value='пейзажи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f4c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='психологизм'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='художественные_средства', value='психологизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f670>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='реализм'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='художественные_средства', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f3a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='середина_xix'), BookCandidate(book_id='frame-11', title='Казаки'), NOT(MatchProcessed(book_id='frame-11', field='эпоха', value='середина_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5c119d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='пушкин'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='автор', value='пушкин'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='повесть'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='жанр', value='повесть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f790>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f8b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='романтическое'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='настроение', value='романтическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9fa60>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='короткое'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='объём', value='короткое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f9d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='низкая'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='сложность', value='низкая'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='война'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='темы', value='война'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9fd30>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='любовь'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='темы', value='любовь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9fca0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='честь'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='темы', value='честь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9fc10>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='идеалист'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='тип_героя', value='идеалист'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9fb80>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='долг_vs_чувство'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='тип_конфликта', value='долг_vs_чувство'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9faf0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9fee0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='пейзажи'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='художественные_средства', value='пейзажи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9fe50>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='реализм'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='художественные_средства', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9fdc0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='фольклор'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='художественные_средства', value='фольклор'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9ff70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='начало_xix'), BookCandidate(book_id='frame-12', title='Капитанскаядочка'), NOT(MatchProcessed(book_id='frame-12', field='эпоха', value='начало_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b9f820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='булгаков'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='автор', value='булгаков'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3040>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='роман'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='жанр', value='роман'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb30d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='модернизм'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='направление', value='модернизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb31f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='философское'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='настроение', value='философское'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb33a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='среднее'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='объём', value='среднее'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='средняя'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='сложность', value='средняя'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3280>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='вера'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='темы', value='вера'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3670>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='власть'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='темы', value='власть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='искусство'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='темы', value='искусство'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb35e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='любовь'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='темы', value='любовь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3550>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='искатель'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='тип_героя', value='искатель'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb34c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='свобода_vs_система'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='тип_конфликта', value='свобода_vs_система'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3430>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='аллюзии'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='художественные_средства', value='аллюзии'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3a60>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='гротеск'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='художественные_средства', value='гротеск'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb38b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='ирония'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='художественные_средства', value='ирония'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='символизм'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='художественные_средства', value='символизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb39d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='фантастика'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='художественные_средства', value='фантастика'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='советский_период'), BookCandidate(book_id='frame-13', title='Мастеримаргарита'), NOT(MatchProcessed(book_id='frame-13', field='эпоха', value='советский_период'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3160>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='гоголь'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='автор', value='гоголь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3af0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='рассказы'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='жанр', value='рассказы'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3b80>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='сатира'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='направление', value='сатира'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3dc0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='сатирическое'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='настроение', value='сатирическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc60d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='короткое'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='объём', value='короткое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3f70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='низкая'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='сложность', value='низкая'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3ee0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='война'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='темы', value='война'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc64c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='любовь'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='темы', value='любовь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc63a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='общество'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='темы', value='общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc6310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='обыватель'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='тип_героя', value='обыватель'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc6280>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='старое_vs_новое'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='тип_конфликта', value='старое_vs_новое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc61f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='гротеск'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='художественные_средства', value='гротеск'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc68b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='ирония'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='художественные_средства', value='ирония'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc6700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='реализм'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='художественные_средства', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc6820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='сатира'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='художественные_средства', value='сатира'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc65e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='фантастика'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='художественные_средства', value='фантастика'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc6790>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='начало_xix'), BookCandidate(book_id='frame-14', title='Миргород'), NOT(MatchProcessed(book_id='frame-14', field='эпоха', value='начало_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bb3ca0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='гоголь'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='автор', value='гоголь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc6940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='поэма'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='жанр', value='поэма'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc69d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='сатира'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='направление', value='сатира'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc6c10>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='сатирическое'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='настроение', value='сатирическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc6dc0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='среднее'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='объём', value='среднее'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc6d30>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='средняя'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='сложность', value='средняя'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc6ca0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='вера'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='темы', value='вера'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd61f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='власть'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='темы', value='власть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd60d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='общество'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='темы', value='общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6040>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='антигерой'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='тип_героя', value='антигерой'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc6f70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='личность_vs_общество'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='тип_конфликта', value='личность_vs_общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc6ee0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='гротеск'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='художественные_средства', value='гротеск'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd64c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='ирония'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='художественные_средства', value='ирония'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6430>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='лиризм'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='художественные_средства', value='лиризм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6550>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='метафоры'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='художественные_средства', value='метафоры'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd65e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='сатира'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='художественные_средства', value='сатира'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='середина_xix'), BookCandidate(book_id='frame-15', title='Мртвыедуши'), NOT(MatchProcessed(book_id='frame-15', field='эпоха', value='середина_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bc6af0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='лермонтов'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='автор', value='лермонтов'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6670>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='поэма'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='жанр', value='поэма'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='романтизм'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='направление', value='романтизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd68b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='романтическое'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='настроение', value='романтическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6b80>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='короткое'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='объём', value='короткое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6a60>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='средняя'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='сложность', value='средняя'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd69d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='природа'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='темы', value='природа'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6ee0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='свобода'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='темы', value='свобода'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6dc0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='смерть'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='темы', value='смерть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6f70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='бунтарь'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='тип_героя', value='бунтарь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6d30>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='свобода_vs_система'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='тип_конфликта', value='свобода_vs_система'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6ca0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='лиризм'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='художественные_средства', value='лиризм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67040>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='метафоры'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='художественные_средства', value='метафоры'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b670d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='монологи'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='художественные_средства', value='монологи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b671f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='пейзажи'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='художественные_средства', value='пейзажи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67160>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='символизм'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='художественные_средства', value='символизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67280>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='начало_xix'), BookCandidate(book_id='frame-16', title='Мцыри'), NOT(MatchProcessed(book_id='frame-16', field='эпоха', value='начало_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5bd6820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='тургенев'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='автор', value='тургенев'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='роман'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='жанр', value='роман'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b673a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b675e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='драматическое'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='настроение', value='драматическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67790>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='среднее'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='объём', value='среднее'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='средняя'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='сложность', value='средняя'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67670>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='любовь'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='темы', value='любовь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67a60>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='нигилизм'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='темы', value='нигилизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b679d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='семья'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='темы', value='семья'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67b80>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='бунтарь'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='тип_героя', value='бунтарь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='старое_vs_новое'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='тип_конфликта', value='старое_vs_новое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b678b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67e50>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='пейзажи'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='художественные_средства', value='пейзажи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67ee0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='психологизм'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='художественные_средства', value='психологизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67ca0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='реализм'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='художественные_средства', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67dc0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='середина_xix'), BookCandidate(book_id='frame-17', title='Отцыидети'), NOT(MatchProcessed(book_id='frame-17', field='эпоха', value='середина_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b674c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='достоевский'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='автор', value='достоевский'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b67f70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='роман'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='жанр', value='роман'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77040>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77160>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='трагическое'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='настроение', value='трагическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='среднее'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='объём', value='среднее'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77280>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='высокая'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='сложность', value='высокая'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b771f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='вера'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='темы', value='вера'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b774c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='общество'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='темы', value='общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77550>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='смерть'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='темы', value='смерть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b775e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='антигерой'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='тип_героя', value='антигерой'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77430>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='добро_vs_зло'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='тип_конфликта', value='добро_vs_зло'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b773a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='аллюзии'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='художественные_средства', value='аллюзии'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b778b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='монологи'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='художественные_средства', value='монологи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77790>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='психологизм'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='художественные_средства', value='психологизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77670>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='символизм'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='художественные_средства', value='символизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='конец_xix'), BookCandidate(book_id='frame-18', title='Преступлениеинаказание'), NOT(MatchProcessed(book_id='frame-18', field='эпоха', value='конец_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b770d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='толстой'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='автор', value='толстой'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='повесть'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='жанр', value='повесть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b779d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77af0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='философское'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='настроение', value='философское'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77ca0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='короткое'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='объём', value='короткое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77c10>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='средняя'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='сложность', value='средняя'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77b80>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='вера'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='темы', value='вера'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77f70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='общество'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='темы', value='общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77ee0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='смерть'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='темы', value='смерть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77e50>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='обыватель'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='тип_героя', value='обыватель'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77dc0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='идеал_vs_реальность'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='тип_конфликта', value='идеал_vs_реальность'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77d30>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='монологи'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='художественные_средства', value='монологи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e160>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='психологизм'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='художественные_средства', value='психологизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e040>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='реализм'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='художественные_средства', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e0d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='символизм'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='художественные_средства', value='символизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e1f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='конец_xix'), BookCandidate(book_id='frame-19', title='Смертьиванаильича'), NOT(MatchProcessed(book_id='frame-19', field='эпоха', value='конец_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b77a60>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='булгаков'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='автор', value='булгаков'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e280>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='повесть'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='жанр', value='повесть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='сатира'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='направление', value='сатира'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e4c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='сатирическое'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='настроение', value='сатирическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e670>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='короткое'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='объём', value='короткое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e5e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='низкая'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='сложность', value='низкая'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e550>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='власть'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='темы', value='власть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='общество'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='темы', value='общество'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='революция'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='темы', value='революция'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e8b0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='обыватель'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='тип_героя', value='обыватель'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e790>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='старое_vs_новое'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='тип_конфликта', value='старое_vs_новое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='гротеск'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='художественные_средства', value='гротеск'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8eaf0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8eca0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='ирония'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='художественные_средства', value='ирония'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8eb80>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='сатира'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='художественные_средства', value='сатира'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8ec10>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='фантастика'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='художественные_средства', value='фантастика'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e9d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='советский_период'), BookCandidate(book_id='frame-20', title='Собачьесердце'), NOT(MatchProcessed(book_id='frame-20', field='эпоха', value='советский_период'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8e3a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='гоголь'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='автор', value='гоголь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8ed30>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='повесть'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='жанр', value='повесть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8edc0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='романтизм'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='направление', value='романтизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21040>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='драматическое'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='настроение', value='драматическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b211f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='короткое'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='объём', value='короткое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21160>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='средняя'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='сложность', value='средняя'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b210d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='война'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='темы', value='война'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21430>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='свобода'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='темы', value='свобода'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='семья'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='темы', value='семья'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b215e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='честь'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='темы', value='честь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b214c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='бунтарь'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='тип_героя', value='бунтарь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b213a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='долг_vs_чувство'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='тип_конфликта', value='долг_vs_чувство'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='гротеск'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='художественные_средства', value='гротеск'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21af0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='лиризм'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='художественные_средства', value='лиризм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21a60>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='метафоры'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='художественные_средства', value='метафоры'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='пейзажи'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='художественные_средства', value='пейзажи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21940>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='фольклор'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='художественные_средства', value='фольклор'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b219d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='начало_xix'), BookCandidate(book_id='frame-21', title='Тарасбульба'), NOT(MatchProcessed(book_id='frame-21', field='эпоха', value='начало_xix'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b8eee0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='автор', value='толстой'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='автор', value='толстой'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21b80>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='жанр', value='повесть'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='жанр', value='повесть'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21c10>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='направление', value='реализм'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='направление', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21e50>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='настроение', value='трагическое'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='настроение', value='трагическое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b320d0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='объём', value='короткое'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='объём', value='короткое'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b32040>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='сложность', value='средняя'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='сложность', value='средняя'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21f70>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='война'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='темы', value='война'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b32310>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='свобода'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='темы', value='свобода'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b323a0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='темы', value='честь'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='темы', value='честь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b324c0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_героя', value='бунтарь'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='тип_героя', value='бунтарь'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b32280>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='тип_конфликта', value='свобода_vs_система'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='тип_конфликта', value='свобода_vs_система'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b321f0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='диалоги'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='художественные_средства', value='диалоги'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b32820>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='пейзажи'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='художественные_средства', value='пейзажи'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b32790>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='реализм'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='художественные_средства', value='реализм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b325e0>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='художественные_средства', value='символизм'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='художественные_средства', value='символизм'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b32700>"
+        },
+        {
+            "name": "_match",
+            "type": "other",
+            "salience": 50,
+            "rule_object": "Rule(Pref(field='эпоха', value='начало_xx'), BookCandidate(book_id='frame-22', title='Хаджимурат'), NOT(MatchProcessed(book_id='frame-22', field='эпоха', value='начало_xx'),)) => <function build_engine_class.<locals>._make_match_rule.<locals>._match at 0x7359c5b21d30>"
+        }
+    ]
