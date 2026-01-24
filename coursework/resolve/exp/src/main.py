@@ -366,12 +366,12 @@ async def ws_endpoint(ws: WebSocket) -> None:
                 logger.info(" рекомендации получены")
                 if not recs:
                     await _send(ws, RecomendationsMessage(
-                            text="Не нашёл совпадений по выбранным критериям. Напишите restart чтобы начать заново.",
+                            text="Не нашёл совпадений по выбранным критериям.",
                             items=[]))
                 else:
                     items = format_recommendations(recs)
                     await _send(ws, RecomendationsMessage(
-                            text="Топ рекомендаций. Напишите restart чтобы начать заново.",
+                            text="Топ рекомендаций.",
                             items=items))
 
                 answer:ClientAnswer = await _recv_answer(ws)
