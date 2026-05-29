@@ -1,0 +1,137 @@
+(in-package :expert/json)
+
+;;; Минимальный JSON-кодек для обмена с Python.
+
+(defstruct json-reader (text "" :type string) (pos 0 :type fixnum) (len 0 :type fixnum))
+
+(defun make-reader (text)
+  (make-json-reader :text text :len (length text)))
+
+(defun jr-peek (r)
+  (when (< (json-reader-pos r) (json-reader-len r))
+    (char (json-reader-text r) (json-reader-pos r))))
+
+(defun jr-read (r)
+  (let ((c (jr-peek r))) (incf (json-reader-pos r)) c))
+
+(defun skip-ws (r)
+  (loop for c = (jr-peek r)
+        while (and c (member c '(#\space #\tab #\return #\newline)))
+        do (jr-read r)))
+
+(defun parse-literal (r lit value)
+  (loop for i from 0 below (length lit)
+        unless (char= (jr-read r) (char lit i))
+          do (error "Invalid JSON literal ~a" lit))
+  value)
+
+(defun parse-string (r)
+  (unless (char= (jr-read r) #\")
+    (error "Expected string"))
+  (with-output-to-string (out)
+    (loop for c = (jr-read r) until (char= c #\")
+          do (if (char= c #\\)
+                 (let ((e (jr-read r)))
+                   (write-char
+                    (case e
+                      (#\" #\")
+                      (#\\ #\\)
+                      (#\/ #\/)
+                      (#\b #\backspace)
+                      (#\f #\formfeed)
+                      (#\n #\newline)
+                      (#\r #\return)
+                      (#\t #\tab)
+                      (t (error "Invalid escape ~a" e)))
+                    out))
+                 (write-char c out)))))
+
+(defun parse-number (r)
+  (let ((start (json-reader-pos r)))
+    (when (char= (jr-peek r) #\-) (jr-read r))
+    (loop while (digit-char-p (jr-peek r)) do (jr-read r))
+    (when (char= (jr-peek r) #\.)
+      (jr-read r)
+      (loop while (digit-char-p (jr-peek r)) do (jr-read r)))
+    (read-from-string (subseq (json-reader-text r) start (json-reader-pos r)))))
+
+(defun plist-from-pairs (pairs)
+  (loop for i from 0 below (length pairs) by 2
+        append (list (intern (string-downcase (nth i pairs)) :keyword)
+                     (nth (1+ i) pairs))))
+
+(defun parse-value (r)
+  (skip-ws r)
+  (let ((c (jr-peek r)))
+    (cond
+      ((null c) (error "Unexpected end of JSON"))
+      ((char= c #\") (parse-string r))
+      ((char= c #\[)
+       (jr-read r) (skip-ws r)
+       (if (char= (jr-peek r) #\])
+           (progn (jr-read r) '())
+           (loop for val = (parse-value r) collect val
+                 do (skip-ws r)
+                    (case (jr-read r)
+                      (#\] (return))
+                      (#\, nil)
+                      (t (error "Expected , or ]"))))))
+      ((char= c #\{)
+       (jr-read r) (skip-ws r)
+       (if (char= (jr-peek r) #\})
+           (progn (jr-read r) '())
+           (loop with pairs = '()
+                 do (skip-ws r)
+                    (let ((key (parse-string r)))
+                      (skip-ws r)
+                      (unless (char= (jr-read r) #\:) (error "Expected :"))
+                      (skip-ws r)
+                      (push (parse-value r) pairs)
+                      (push key pairs)
+                      (skip-ws r)
+                      (case (jr-read r)
+                        (#\} (return (plist-from-pairs (reverse pairs))))
+                        (#\, nil)
+                        (t (error "Expected , or }")))))))
+      ((char= c #\-) (parse-number r))
+      ((char<= #\0 c #\9) (parse-number r))
+      ((char= c #\t) (parse-literal r "true" t))
+      ((char= c #\f) (parse-literal r "false" nil))
+      ((char= c #\n) (parse-literal r "null" nil))
+      (t (error "Unexpected token ~a" c)))))
+
+(defun json-decode (text)
+  (let ((r (make-reader text)))
+    (skip-ws r)
+    (parse-value r)))
+
+(defun json-escape (s)
+  (with-output-to-string (out)
+    (write-char #\" out)
+    (loop for c across s
+          do (case c
+               (#\" (write-string "\\\"" out))
+               (#\\ (write-string "\\\\" out))
+               (#\newline (write-string "\\n" out))
+               (#\return (write-string "\\r" out))
+               (#\tab (write-string "\\t" out))
+               (t (write-char c out))))
+    (write-char #\" out)))
+
+(defun plist-key (kw)
+  (string-downcase (subseq (symbol-name kw) 1)))
+
+(defun json-encode (val)
+  (cond
+    ((null val) "null")
+    ((eq val t) "true")
+    ((stringp val) (json-escape val))
+    ((or (integerp val) (floatp val)) (princ-to-string val))
+    ((and (consp val) (keywordp (car val)))
+     (format nil "{~{~a:~a~^,~}}"
+             (loop for i from 0 below (length val) by 2
+                   collect (list (json-escape (plist-key (nth i val)))
+                                 (json-encode (nth (1+ i) val))))))
+    ((consp val)
+     (format nil "[~{~a~^,~}]" (mapcar #'json-encode val)))
+    (t (json-escape (princ-to-string val)))))

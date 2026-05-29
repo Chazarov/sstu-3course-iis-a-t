@@ -1,0 +1,4 @@
+loguru
+fastapi
+uvicorn[standard]
+python-dotenv

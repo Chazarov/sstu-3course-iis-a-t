@@ -1,0 +1,13 @@
+services:
+  lisp-expert:
+    build:
+      context: ..
+      dockerfile: exp/Dockerfile
+    container_name: lisp-expert
+    volumes:
+      - ..:/app
+    ports:
+      - "8001:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - SBCL_PATH=sbcl
