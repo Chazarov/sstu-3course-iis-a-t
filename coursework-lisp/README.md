@@ -11,15 +11,16 @@ coursework-lisp/
 │   ├── frames.lisp    # Инициализация и опции
 │   ├── engine.lisp    # Продукционные правила, forward chaining
 │   ├── dialog.lisp    # Диалог с пользователем
-│   ├── server.lisp    # JSON-протокол для Python
-│   └── json.lisp      # JSON-кодек (только для обмена с Python)
+│   ├── server.lisp    # Команды через |, ответы JSON через format
 └── exp/src/           # Python-шлюз (FastAPI)
 ```
+
+Протокол: Python → Lisp: `init`, `dialog_question|session-1`. Lisp → Python: JSON-строки.
 
 ## Архитектура
 
 ```
-React UI  ──WebSocket──►  Python (exp)  ──JSON/stdin──►  SBCL (lisp/src)
+React UI  ──WebSocket──►  Python (exp)  ──текст|stdin, JSON|stdout──►  SBCL
 ```
 
 Все фреймы описаны в `lisp/src/books.lisp` — без загрузки JSON-файлов.

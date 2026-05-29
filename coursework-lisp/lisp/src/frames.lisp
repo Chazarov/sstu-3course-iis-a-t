@@ -15,7 +15,7 @@
    (substitute #\_ #\space (string-trim '(#\space) (princ-to-string value)))))
 
 (defun raw-get (raw key)
-  (getf raw (intern (string-downcase key) :keyword)))
+  (getf raw (intern (string-upcase key) :keyword)))
 
 (defun init-books ()
   (setf *books* (copy-list +books-data+))
@@ -39,7 +39,8 @@
                   (pushnew val bucket :test #'equal)))
             (setf (gethash field *options*) bucket))))))
   (maphash (lambda (k v)
-             (setf (gethash k *options*) (sort (copy-list v) #'string<)))
+             (when v
+               (setf (gethash k *options*) (sort (copy-list v) #'string<))))
            *options*))
 
 (defun build-label-map ()

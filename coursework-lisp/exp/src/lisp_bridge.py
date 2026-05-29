@@ -16,8 +16,6 @@ class LispBridgeError(RuntimeError):
 
 
 class LispBridge:
-    """Мост к ядру экспертной системы на Common Lisp (SBCL)."""
-
     def __init__(self, sbcl_path: str, main_lisp: Path) -> None:
         self.sbcl_path = sbcl_path
         self.main_lisp = main_lisp
@@ -27,23 +25,12 @@ class LispBridge:
 
     def _start(self) -> None:
         if not shutil.which(self.sbcl_path):
-            raise LispBridgeError(
-                f"SBCL не найден: {self.sbcl_path}. "
-                "Установите SBCL или задайте переменную SBCL_PATH."
-            )
+            raise LispBridgeError(f"SBCL не найден: {self.sbcl_path}")
         if not self.main_lisp.exists():
-            raise LispBridgeError(f"Не найден файл Lisp: {self.main_lisp}")
+            raise LispBridgeError(f"Не найден: {self.main_lisp}")
 
-        cmd = [
-            self.sbcl_path,
-            "--noinform",
-            "--disable-debugger",
-            "--load",
-            str(self.main_lisp),
-        ]
-        logger.info("Запуск Lisp-ядра: {}", " ".join(cmd))
         self._proc = subprocess.Popen(
-            cmd,
+            [self.sbcl_path, "--noinform", "--disable-debugger", "--load", str(self.main_lisp)],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -51,49 +38,32 @@ class LispBridge:
             encoding="utf-8",
             bufsize=1,
         )
-        ready = self._read_json()
-        if ready.get("status") != "ok":
-            raise LispBridgeError(f"Lisp-ядро не стартовало: {ready}")
+        if self._read_json().get("status") != "ok":
+            raise LispBridgeError("Lisp не стартовал")
 
-        init_resp = self.call("init")
-        if init_resp.get("status") != "ok":
-            raise LispBridgeError(f"Ошибка инициализации Lisp: {init_resp}")
-
-        logger.info(
-            "Lisp-ядро инициализировано: {} книг, {} правил",
-            init_resp.get("frames_count"),
-            init_resp.get("rules_count"),
-        )
-
-    def _read_line(self) -> str:
-        assert self._proc and self._proc.stdout
-        line = self._proc.stdout.readline()
-        if not line:
-            stderr = ""
-            if self._proc.stderr:
-                stderr = self._proc.stderr.read()
-            raise LispBridgeError(f"Lisp-процесс завершился неожиданно. stderr={stderr}")
-        return line.strip()
+        init = self.call("init")
+        logger.info("Lisp: {} книг", init.get("frames_count"))
 
     def _read_json(self) -> Dict[str, Any]:
+        assert self._proc and self._proc.stdout
         while True:
-            line = self._read_line()
+            line = self._proc.stdout.readline()
+            if not line:
+                stderr = self._proc.stderr.read() if self._proc.stderr else ""
+                raise LispBridgeError(f"Lisp завершился. stderr={stderr}")
+            line = line.strip()
             if line.startswith("{"):
                 return json.loads(line)
-            logger.debug("Пропуск строки SBCL: {}", line[:120])
 
-    def call(self, cmd: str, **payload: Any) -> Dict[str, Any]:
-        request = {"cmd": cmd, **payload}
-        line = json.dumps(request, ensure_ascii=False)
-
+    def call(self, cmd: str, *parts: str) -> Dict[str, Any]:
+        line = cmd if not parts else "|".join((cmd, *parts))
         with self._lock:
             assert self._proc and self._proc.stdin
             self._proc.stdin.write(line + "\n")
             self._proc.stdin.flush()
             response = self._read_json()
-
         if response.get("status") == "error":
-            raise LispBridgeError(response.get("message", "Unknown Lisp error"))
+            raise LispBridgeError(response.get("message", "Lisp error"))
         return response
 
     def close(self) -> None:
@@ -103,7 +73,5 @@ class LispBridge:
 
 
 def create_bridge() -> LispBridge:
-    project_root = Path(__file__).resolve().parents[2]
-    lisp_main = project_root / "lisp" / "src" / "main.lisp"
-    sbcl_path = os.getenv("SBCL_PATH", "sbcl")
-    return LispBridge(sbcl_path=sbcl_path, main_lisp=lisp_main)
+    root = Path(__file__).resolve().parents[2]
+    return LispBridge(os.getenv("SBCL_PATH", "sbcl"), root / "lisp" / "src" / "main.lisp")

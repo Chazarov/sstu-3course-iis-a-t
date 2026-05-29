@@ -2,155 +2,114 @@
 
 (defvar *initialized* nil)
 
-(defun response-ok (&rest pairs)
-  (list* :status "ok" pairs))
+(defun jq (s)
+  (format nil "\"~a\""
+          (with-output-to-string (o)
+            (loop for c across (princ-to-string s)
+                  do (case c
+                       (#\" (write-string "\\\"" o))
+                       (#\\ (write-string "\\\\" o))
+                       (t (write-char c o)))))))
 
-(defun response-error (message)
-  (list :status "error" :message message))
+(defun jbool (x) (if x "true" "false"))
 
-(defun ensure-initialized ()
-  (unless *initialized*
-    (error "Expert system is not initialized. Call init first.")))
+(defun out (json)
+  (format t "~a~%" json)
+  (force-output))
 
-(defun hash-table->alist (ht)
-  (let ((result '()))
-    (maphash (lambda (k v) (push (cons k v) result)) ht)
-    (sort result #'string< :key #'car)))
+(defun err (msg)
+  (out (format nil "{\"status\":\"error\",\"message\":~a}" (jq msg))))
 
-(defun nested-hash-table->alist (ht)
-  (let ((result '()))
-    (maphash
-     (lambda (k v)
-       (if (hash-table-p v)
-           (push (cons k (hash-table->alist v)) result)
-           (push (cons k v) result)))
-     ht)
-    (sort result #'string< :key #'car)))
+(defun split (line)
+  (loop with start = 0
+        for i from 0 to (length line)
+        when (or (= i (length line)) (char= (char line i) #\|))
+          collect (subseq line start i)
+          and do (setf start (1+ i))))
 
-(defun frames->json-list ()
-  (loop for book in *books*
-        collect (list :id (getf book :id)
-                      :title (getf book :title)
-                      :raw (getf book :raw)
-                      :match (getf book :match))))
+(defun ensure-init ()
+  (unless *initialized* (error "Система не инициализирована")))
 
-(defun handle-init (req)
-  (declare (ignore req))
+(defun json-init ()
   (let ((count (init-books)))
     (build-rules)
     (setf *initialized* t)
-    (response-ok :frames_count count :rules_count (length *rules*))))
+    (format nil "{\"status\":\"ok\",\"frames_count\":~d,\"books_count\":~d}"
+            count count)))
 
-(defun handle-health ()
-  (response-ok :initialized *initialized*
-               :books (length *books*)
-               :rules (length *rules*)))
+(defun json-health ()
+  (format nil "{\"status\":\"ok\",\"initialized\":~a,\"books\":~d}"
+          (jbool *initialized*) (length *books*)))
 
-(defun handle-get-labels ()
-  (ensure-initialized)
-  (response-ok :labels (hash-table->alist *options*)))
+(defun json-questions ()
+  (ensure-init)
+  (format nil "{\"status\":\"ok\",\"questions\":[~{~a~^,~}]}"
+          (loop for q in (default-questions)
+                for field = (qget q :field)
+                collect (format nil
+                                "{\"id\":~a,\"field\":~a,\"text\":~a,\"is_multi\":~a,\"available_answers\":~a}"
+                                (jq (qget q :id)) (jq field) (jq (qget q :prompt))
+                                (jbool (qget q :is-multi))
+                                (format nil "[~{~a~^,~}]" (mapcar #'jq (hints-for field)))))))
 
-(defun handle-get-options ()
-  (ensure-initialized)
-  (response-ok :options (nested-hash-table->alist *labels*)))
+(defun json-frames ()
+  (ensure-init)
+  (format nil "{\"status\":\"ok\",\"frames\":[~{~a~^,~}]}"
+          (loop for book in *books*
+                collect (format nil "{\"id\":~a,\"title\":~a}"
+                                (jq (getf book :id))
+                                (jq (getf book :title))))))
 
-(defun handle-get-frames ()
-  (ensure-initialized)
-  (response-ok :frames (frames->json-list)))
+(defun json-rules (rule-type limit)
+  (ensure-init)
+  (let* ((info (get-rules-info :rule-type rule-type :limit limit))
+         (rules (getf info :rules)))
+    (format nil
+            "{\"status\":\"ok\",\"total_rules\":~d,\"init_rules_count\":~d,\"match_rules_count\":~d,\"rules\":[~{~a~^,~}]}"
+            (getf info :total_rules) (getf info :init_rules_count) (getf info :match_rules_count)
+            (mapcar (lambda (r)
+                      (format nil "{\"name\":~a,\"type\":~a,\"description\":~a}"
+                              (jq (getf r :name)) (jq (getf r :type)) (jq (getf r :description))))
+                    rules))))
 
-(defun handle-get-rules (req)
-  (ensure-initialized)
-  (let ((info (get-rules-info :rule-type (getf req :rule_type)
-                              :limit (getf req :limit))))
-    (append (response-ok) info)))
+(defun json-items (items)
+  (format nil "[~{~a~^,~}]"
+          (mapcar (lambda (it)
+                    (format nil
+                            "{\"title\":~a,\"score\":~d,\"matched\":[~{~a~^,~}],\"author\":~a,\"genre\":~a,\"epoch\":~a,\"mood\":~a,\"difficulty\":~a,\"volume\":~a,\"image\":~a}"
+                            (jq (getf it :title)) (getf it :score)
+                            (mapcar #'jq (getf it :matched))
+                            (jq (or (getf it :author) ""))
+                            (jq (or (getf it :genre) ""))
+                            (jq (or (getf it :epoch) ""))
+                            (jq (or (getf it :mood) ""))
+                            (jq (or (getf it :difficulty) ""))
+                            (jq (or (getf it :volume) ""))
+                            (jq (or (getf it :image) ""))))
+                  items)))
 
-(defun handle-recommend (req)
-  (ensure-initialized)
-  (let* ((prefs-raw (getf req :prefs))
-         (top-k (or (getf req :top_k) 5))
-         (prefs (mapcar (lambda (p) (cons (first p) (second p))) prefs-raw)))
-    (response-ok :items (get-recommendations prefs :top-k top-k))))
+(defun json-submit-answers (top-k payload)
+  (ensure-init)
+  (format nil "{\"status\":\"ok\",\"items\":~a}"
+          (json-items (submit-answers payload (parse-integer top-k)))))
 
-(defun handle-get-all-recommendations ()
-  (ensure-initialized)
-  (response-ok :items (get-all-recommendations)))
-
-(defun handle-dialog-new ()
-  (ensure-initialized)
-  (response-ok :session_id (new-session)))
-
-(defun handle-dialog-is-done (req)
-  (ensure-initialized)
-  (response-ok :done (session-is-done (getf req :session_id))))
-
-(defun handle-dialog-can-go-back (req)
-  (ensure-initialized)
-  (response-ok :can_go_back (session-can-go-back (getf req :session_id))))
-
-(defun handle-dialog-go-back (req)
-  (ensure-initialized)
-  (handler-case
-      (progn
-        (session-go-back (getf req :session_id))
-        (response-ok))
-    (error (e) (response-error (format nil "~a" e)))))
-
-(defun handle-dialog-question (req)
-  (ensure-initialized)
-  (let ((question (session-question (getf req :session_id))))
-    (if question
-        (append (response-ok) question)
-        (response-ok :done t))))
-
-(defun handle-dialog-add-answer (req)
-  (ensure-initialized)
-  (handler-case
-      (progn
-        (session-add-answer (getf req :session_id)
-                            :text-answer (getf req :text_answer)
-                            :items-answer (getf req :items_answer))
-        (response-ok))
-    (error (e) (response-error (format nil "~a" e)))))
-
-(defun handle-dialog-recommend (req)
-  (ensure-initialized)
-  (let* ((session-id (getf req :session_id))
-         (top-k (or (getf req :top_k) 5))
-         (prefs (reverse (session-prefs session-id)))
-         (recs (get-recommendations prefs :top-k top-k)))
-    (response-ok :items (format-recommendations recs))))
-
-(defun handle-request (req)
-  (let ((cmd (string-downcase (getf req :cmd))))
+(defun handle-line (line)
+  (let* ((parts (split line))
+         (cmd (string-downcase (first parts))))
     (cond
-      ((string= cmd "init") (handle-init req))
-      ((string= cmd "health") (handle-health))
-      ((string= cmd "get_labels") (handle-get-labels))
-      ((string= cmd "get_options") (handle-get-options))
-      ((string= cmd "get_frames") (handle-get-frames))
-      ((string= cmd "get_rules") (handle-get-rules req))
-      ((string= cmd "recommend") (handle-recommend req))
-      ((string= cmd "get_all_recommendations") (handle-get-all-recommendations))
-      ((string= cmd "dialog_new") (handle-dialog-new))
-      ((string= cmd "dialog_is_done") (handle-dialog-is-done req))
-      ((string= cmd "dialog_can_go_back") (handle-dialog-can-go-back req))
-      ((string= cmd "dialog_go_back") (handle-dialog-go-back req))
-      ((string= cmd "dialog_question") (handle-dialog-question req))
-      ((string= cmd "dialog_add_answer") (handle-dialog-add-answer req))
-      ((string= cmd "dialog_recommend") (handle-dialog-recommend req))
-      (t (response-error (format nil "Unknown command: ~a" cmd))))))
+      ((string= cmd "init") (json-init))
+      ((string= cmd "health") (json-health))
+      ((string= cmd "get_questions") (json-questions))
+      ((string= cmd "get_frames") (json-frames))
+      ((string= cmd "get_rules")
+       (json-rules (second parts) (when (third parts) (parse-integer (third parts)))))
+      ((string= cmd "submit_answers")
+       (json-submit-answers (second parts) (third parts)))
+      (t (error "Unknown command: ~a" cmd)))))
 
 (defun run-server ()
-  (format t "~a~%" (json-encode (response-ok :message "Lisp expert system ready")))
-  (force-output)
-  (loop
-    (let ((line (read-line *standard-input* nil nil)))
-      (unless line (return))
-      (handler-case
-          (let* ((req (json-decode line))
-                 (resp (handle-request req)))
-            (format t "~a~%" (json-encode resp))
-            (force-output))
-        (error (e)
-          (format t "~a~%" (json-encode (response-error (format nil "~a" e))))
-          (force-output))))))
+  (out "{\"status\":\"ok\",\"message\":\"Lisp expert system ready\"}")
+  (loop for line = (read-line *standard-input* nil nil)
+        while line
+        do (handler-case (out (handle-line line))
+             (error (e) (err (format nil "~a" e))))))

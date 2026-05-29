@@ -1,10 +1,11 @@
 import json
-import glob
-import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 FRAMES = ROOT / "sourses" / "frames"
+FALLBACK = ROOT.parent / "coursework" / "resolve" / "sourses" / "frames"
+if not any(FRAMES.glob("*.json")) and FALLBACK.is_dir():
+    FRAMES = FALLBACK
 OUT = ROOT / "lisp" / "src" / "books.lisp"
 
 MATCH = [
@@ -30,11 +31,11 @@ def raw_plist(raw: dict) -> str:
     parts = []
     for k, v in raw.items():
         if isinstance(v, list):
-            parts.append(f"({kw(k)} ({' '.join(lisp_str(x) for x in v)}))")
+            parts.append(f"{kw(k)} ({' '.join(lisp_str(x) for x in v)})")
         elif isinstance(v, str):
-            parts.append(f"({kw(k)} {lisp_str(v)})")
+            parts.append(f"{kw(k)} {lisp_str(v)}")
         elif isinstance(v, (int, float)):
-            parts.append(f"({kw(k)} {v})")
+            parts.append(f"{kw(k)} {v}")
     return " ".join(parts)
 
 
@@ -62,12 +63,13 @@ def main() -> None:
                 match.append((k, [norm(str(x)) for x in v]))
             elif isinstance(v, str):
                 match.append((k, norm(v)))
-        lines.append(f"   (list :id {lisp_str(f'frame-{i}')} :title {lisp_str(title)}")
-        lines.append(f"         :raw (list {raw_plist(raw)})")
-        lines.append(f"         :match (list {match_lisp(match)}))")
+        lines.append(f"   (:id {lisp_str(f'frame-{i}')} :title {lisp_str(title)}")
+        lines.append(f"    :raw ({raw_plist(raw)})")
+        lines.append(f"    :match ({match_lisp(match)}))")
     lines.append("   ))")
+    count = len(list(FRAMES.glob("*.json")))
     OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"written {OUT} ({i + 1} books)")
+    print(f"written {OUT} ({count} books)")
 
 
 if __name__ == "__main__":
